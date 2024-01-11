@@ -5,10 +5,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppServiceService {
 
-  constructor(private http:HttpClient) 
+  constructor(private http:HttpClient)
   { }
+  //URL
 getData(){
 this.http.get('/products')
 }
-  
+
 }
