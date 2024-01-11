@@ -7,7 +7,7 @@ export class AppServiceService {
 
   constructor(private http:HttpClient)
   { }
-  //URL
+  //This is the URL path
 getData(){
 this.http.get('/products')
 }
