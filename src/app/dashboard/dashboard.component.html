@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Pharmacy-Stocks-Management-System</title>
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="">
+      <link rel="stylesheet" href="/src/assets/css/adminlte.min.css">
+            <link rel="stylesheet" href="/src/assets/css/style.css">
+
+   </head>
+   <body class="hold-transition sidebar-mini layout-fixed">
+      <div class="wrapper">
+         <!-- Navbar -->
+         <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: rgba(62,88,113);">
+                   <!-- Left navbar links -->
+         <ul class="navbar-nav">
+            <li class="nav-item">
+               <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+         </ul>
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+               <li class="nav-item">
+                  <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                  <i class="fas fa-expand-arrows-alt"></i>
+                  </a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" data-widget="fullscreen" href="../index.html">
+                  <i class="fas fa-power-off"></i>
+                  </a>
+               </li>
+            </ul>
+         </nav>
+         <!-- /.navbar -->
+         <!-- Main Sidebar Container -->
+         <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: rgba(44,62,80);">
+                        <!-- Brand Logo -->
+            <a href="index.html" class="brand-link animated swing">
+            <img src="/src/assets/img/logo.jpg" alt="DSMS Logo" width="200">
+            </a>
+            <!-- Sidebar -->
+            <div class="sidebar" style="margin-top: -65px">
+               <!-- Sidebar user panel (optional) -->
+               <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                  <div class="image">
+                     <img src="/src/assets/img/profile.png" class="img-circle elevation-2" alt="User Image">
+                  </div>
+                  <div class="info">
+                     <a href="#" class="d-block">John Doe</a>
+                  </div>
+               </div>
+               <!-- Sidebar Menu -->
+               <nav class="mt-2">
+                  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                     <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                           <i class="nav-icon fa fa-clinic-medical"></i>
+                           <p>
+                              Data Entry
+                           </p>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="medicine-type.html" class="nav-link">
+                           <i class="nav-icon fa fa-pills"></i>
+                           <p>
+                              Record Searching
+                           </p>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="medicine-category.html" class="nav-link">
+                           <i class="nav-icon fa fa-tablets"></i>
+                           <p>
+                          Change Password
+                           </p>
+                        </a>
+                     </li>
+
+                     <li class="nav-item">
+                        <a href="supplier.html" class="nav-link">
+                           <i class="nav-icon fa fa-truck"></i>
+                           <p>
+                              Supplier
+                           </p>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="#" class="nav-link">
+                           <i class="nav-icon fas fa-capsules"></i>
+                           <p>
+                              Medicine
+                           </p>
+                              <i class="right fas fa-angle-left"></i>
+                        </a>
+                        <ul class="nav nav-treeview">
+                           <li class="nav-item">
+                              <a href="add-medicine.html" class="nav-link">
+                                 <i class="nav-icon fa fa-plus"></i>
+                                 <p>Add</p>
+                              </a>
+                           </li>
+                           <li class="nav-item">
+                              <a href="manage-medicine.html" class="nav-link">
+                                 <i class="nav-icon fa fa-list"></i>
+                                 <p>Manage</p>
+                              </a>
+                           </li>
+                        </ul>
+                     </li>
+                    
+                     <li class="nav-item">
+                        <a href="database.html" class="nav-link">
+                           <i class="nav-icon fa fa-database"></i>
+                           <p>
+                              Database
+                           </p>
+                        </a>
+                     </li>
+                  
+                  </ul>
+               </nav>
+               <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+         </aside>
+         <!-- Content Wrapper. Contains page content -->
+         <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+               <div class="container-fluid">
+                  <div class="row mb-2">
+                     <div class="col-sm-6">
+                        <h1 class="m-0" style="color: rgb(242,175,88);"><span class="fa fa-tachometer-alt"></span> Dashboard</h1>
+                     </div>
+                     <!-- /.col -->
+                     <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                           <li class="breadcrumb-item"><a href="#">Home</a></li>
+                           <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                     </div>
+                     <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+               </div>
+               <!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+               <div class="container-fluid">
+                  <!-- Small boxes (Stat box) -->
+                  <div class="row">
+                     
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="info-box">
+              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-pills"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Medicines</span>
+                <span class="info-box-number">
+                  100
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-truck"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Suppliers</span>
+                <span class="info-box-number">10</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Requests</span>
+                <span class="info-box-number">20</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+        </div>
+                  </div>
+                  <!-- /.row -->
+                  <!-- /.row (main row) -->
+               
+               <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+         </div>
+         <!-- /.content-wrapper -->
+      </div>
+      <!-- ./wrapper -->
+      <!-- jQuery -->
+      <script src="/src/assets/jquery/jquery.min.js"></script>
+      <script src="/src/assets/js/adminlte.js"></script>
+   </body>
+</html>
