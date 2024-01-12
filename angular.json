@@ -27,8 +27,8 @@
             "styles": [
               "src/styles.css",
               "src/assets/css/adminlte.min.css",
-              "src/assets/css/style.css",
-              "node_modules/"
+              "src/assets/css/style.css"
+             
             ],
             "scripts": [
               "src/assets/jquery/jquery.min.js",
@@ -70,15 +70,19 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "RMSNodeJS:build"
+          },
           "configurations": {
             "production": {
-              "buildTarget": "RMSNodeJS:build:production"
+              "browserTarget": "RMSNodeJS:build:production"
             },
             "development": {
-              "buildTarget": "RMSNodeJS:build:development"
+              "browserTarget": "RMSNodeJS:build:development"
             }
           },
           "defaultConfiguration": "development"
+          
         },
 
         "test": {

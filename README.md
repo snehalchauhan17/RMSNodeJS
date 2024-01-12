@@ -36,3 +36,16 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
           "options": {
             "browserTarget": "NodeAngularUI:build"
           } -->
+ "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "RMSNodeJS:build:production"
+            },
+            "development": {
+              "buildTarget": "RMSNodeJS:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+          
+        },
