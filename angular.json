@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "RMSNodeJS:build:production"
+              "buildTarget": "RMSNodeJS:build:production"
             },
             "development": {
-              "browserTarget": "RMSNodeJS:build:development"
+              "buildTarget": "RMSNodeJS:build:development"
             }
           },
           "defaultConfiguration": "development"
