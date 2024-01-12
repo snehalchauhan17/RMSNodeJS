@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "NodeAngularUI": {
+    "RMSNodeJS": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -37,6 +37,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -52,7 +58,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
+              "buildOptimizer": true,
               "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
@@ -66,20 +72,15 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "NodeAngularUI:build:production"
+              "buildTarget": "RMSNodeJS:build:production"
             },
             "development": {
-              "browserTarget": "NodeAngularUI:build:development"
+              "buildTarget": "RMSNodeJS:build:development"
             }
           },
           "defaultConfiguration": "development"
         },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "NodeAngularUI:build"
-          }
-        },
+
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
