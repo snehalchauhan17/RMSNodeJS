@@ -7,6 +7,7 @@ import { Router, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DataEntryComponent } from './dashboard/data-entry/data-entry.component';
+
 @NgModule({
   declarations: [
     AppComponent,
