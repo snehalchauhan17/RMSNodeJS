@@ -7,7 +7,7 @@ import { AppServiceService } from 'src/app/app-service.service';
   styleUrls: ['./data-entry.component.css'],
 })
 export class DataEntryComponent {
-  posts: any[] | undefined;
+  posts: any[];
 id:number =1;
   constructor(private apiService: AppServiceService) {}
 
@@ -32,7 +32,7 @@ fetchDataById(id: number): void {
     (data) => {
       // Handle the response data
       console.log(data);
-this.id =data;  
+this.id =data;
       // You can perform any additional logic or update component properties here
     },
     (error) => {

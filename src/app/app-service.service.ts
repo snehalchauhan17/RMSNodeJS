@@ -12,14 +12,12 @@ export class AppServiceService {
   //This is the URL path
   apiUrl = environment.apiURL;
   getPosts(): Observable<any[]> {
-    return this.http
-      .get<any[]>(`${this.apiUrl}/products`)
-      .pipe(
-        catchError((error) => {
-          console.error('Error:', error);
-          return throwError(error);
-        })
-      );
+    return this.http.get<any[]>(`${this.apiUrl}/products`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
   }
 
   getPostById(id: number): Observable<any> {
@@ -29,6 +27,20 @@ export class AppServiceService {
         return throwError(error);
       })
     );
+  }
+
+
+  RegisterPost(user: any): Observable<any> {
+    return this.http
+      .post<any>(`${this.apiUrl}/api/MUserMaster`, user, {
+        withCredentials: true,
+      })
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
   }
 
   addPost(post: any): Observable<any> {
