@@ -11,6 +11,34 @@ export class AppServiceService {
   constructor(private http: HttpClient) {}
   //This is the URL path
   apiUrl = environment.apiURL;
+
+//To Register
+RegisterPost(user: any): Observable<any> {
+  return this.http
+    .post<any>(`${this.apiUrl}/api/MUserMaster`, user, {
+      withCredentials: true,
+    })
+    .pipe(
+      catchError((error) => {
+        console.error(error);
+        return throwError(error);
+      })
+    );
+}
+
+//To get Data of Registered User
+
+GetUserName(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.apiUrl}/api/MUserMaster`, {
+    withCredentials :true
+  }).pipe(
+    catchError((error) => {
+      console.error('Error:', error);
+      return throwError(error);
+    })
+  );
+}
+
   getPosts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/products`).pipe(
       catchError((error) => {
@@ -30,18 +58,7 @@ export class AppServiceService {
   }
 
 
-  RegisterPost(user: any): Observable<any> {
-    return this.http
-      .post<any>(`${this.apiUrl}/api/MUserMaster`, user, {
-        withCredentials: true,
-      })
-      .pipe(
-        catchError((error) => {
-          console.error(error);
-          return throwError(error);
-        })
-      );
-  }
+
 
   addPost(post: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/product`, post);

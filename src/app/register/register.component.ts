@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
       Swal.fire('Error', 'Please Enter all the Details', 'error');
     } else {
        console.log(user);
-       this.apiService.RegisterPost(user).subscribe(() => this.router.navigate(['/']),
+       this.apiService.RegisterPost(user).subscribe(() => this.router.navigate(['/dashboard']),
          (err) => {
            Swal.fire('Error', err.error.message, 'error');
          }
