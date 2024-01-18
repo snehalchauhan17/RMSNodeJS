@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppServiceService } from '../app-service.service';
-
+import { Emitters } from '../emitters/emitter';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,26 +11,39 @@ import { AppServiceService } from '../app-service.service';
 })
 export class DashboardComponent implements OnInit {
   showDataEntry = false;
-  message='';
-  constructor(private router: Router,
-    private http:HttpClient,
-    private apiService: AppServiceService) {
+  message = '';
+  authenticated = false;
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private apiService: AppServiceService
+  ) {
     this.showDataEntry = false;
   }
   ngOnInit() {
     this.getUserName();
-      
-      }
-  getUserName(){
+    this.Auth();
+  }
+  Auth() {
+    Emitters.authEmitter.subscribe((auth: boolean) => {
+      this.authenticated = auth;
+    });
+  }
+  LogOut(): void {
+    this.apiService.LogoutPost().subscribe(() => (this.authenticated = false));
+  }
+  getUserName() {
     this.apiService.GetUserName().subscribe(
-     (res:any)=>{
-      console.log(res)
-      this.message =`Hi ${res.name}`;
-     },
+      (res: any) => {
+        console.log(res);
+        this.message = `Hi ${res.name}`;
+        Emitters.authEmitter.emit(true);
+      },
       (error) => {
-        this.message ="You are not logged in"
+        this.message = 'You are not logged in';
+        Emitters.authEmitter.emit(false);
         // Handle error
-       // console.error('Error in component:', error);
+        // console.error('Error in component:', error);
       }
     );
   }

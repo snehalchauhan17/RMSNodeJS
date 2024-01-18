@@ -18,6 +18,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
     DashboardComponent,
     DataEntryComponent,
     RegisterComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

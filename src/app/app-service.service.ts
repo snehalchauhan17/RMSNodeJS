@@ -12,32 +12,63 @@ export class AppServiceService {
   //This is the URL path
   apiUrl = environment.apiURL;
 
-//To Register
-RegisterPost(user: any): Observable<any> {
-  return this.http
-    .post<any>(`${this.apiUrl}/api/MUserMaster`, user, {
-      withCredentials: true,
-    })
-    .pipe(
-      catchError((error) => {
-        console.error(error);
-        return throwError(error);
+  //To Register
+  RegisterPost(user: any): Observable<any> {
+    return this.http
+      .post<any>(`${this.apiUrl}/api/MUserMaster`, user, {
+        withCredentials: true,
       })
-    );
-}
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
 
-//To get Data of Registered User
+  LogoutPost() {
+    return this.http
+      .post<any>(`${this.apiUrl}/api/logout`,
+        {},
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
 
-GetUserName(): Observable<any[]> {
-  return this.http.get<any[]>(`${this.apiUrl}/api/MUserMaster`, {
-    withCredentials :true
-  }).pipe(
-    catchError((error) => {
-      console.error('Error:', error);
-      return throwError(error);
-    })
-  );
-}
+  LoginPost(user: any): Observable<any> {
+    return this.http
+      .post<any>(`${this.apiUrl}/api/login`, user, {
+        withCredentials: true,
+      })
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  //To get Data of Registered User
+
+  GetUserName(): Observable<any[]> {
+    return this.http
+      .get<any[]>(`${this.apiUrl}/api/MUserMaster`, {
+        withCredentials: true,
+      })
+      .pipe(
+        catchError((error) => {
+          console.error('Error:', error);
+          return throwError(error);
+        })
+      );
+  }
 
   getPosts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/products`).pipe(
@@ -56,9 +87,6 @@ GetUserName(): Observable<any[]> {
       })
     );
   }
-
-
-
 
   addPost(post: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/product`, post);
