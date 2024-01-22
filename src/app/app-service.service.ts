@@ -25,24 +25,8 @@ export class AppServiceService {
         })
       );
   }
-
-  LogoutPost() {
-    return this.http
-      .post<any>(`${this.apiUrl}/api/logout`,
-        {},
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(
-        catchError((error) => {
-          console.error(error);
-          return throwError(error);
-        })
-      );
-  }
-
   LoginPost(user: any): Observable<any> {
+    debugger;
     return this.http
       .post<any>(`${this.apiUrl}/api/login`, user, {
         withCredentials: true,
@@ -55,11 +39,30 @@ export class AppServiceService {
       );
   }
 
+
+  LogoutPost() {
+    return this.http
+      .post<any>(`${this.apiUrl}/api/logout`,
+        {},
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          console.log(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  
   //To get Data of Registered User
 
   GetUserName(): Observable<any[]> {
     return this.http
-      .get<any[]>(`${this.apiUrl}/api/MUserMaster`, {
+      .get<any[]>(`${this.apiUrl}/api/getName`, {
         withCredentials: true,
       })
       .pipe(

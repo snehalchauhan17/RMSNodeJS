@@ -25,8 +25,10 @@ export class DashboardComponent implements OnInit {
     this.Auth();
   }
   Auth() {
+debugger;
     Emitters.authEmitter.subscribe((auth: boolean) => {
       this.authenticated = auth;
+
     });
   }
   LogOut(): void {

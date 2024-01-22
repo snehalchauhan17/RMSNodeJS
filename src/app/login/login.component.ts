@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, afterNextRender } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder,FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -17,7 +17,12 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private apiService: AppServiceService,
     private formbuilder:FormBuilder
-  ) {}
+  ) {
+    this.form = this.formbuilder.group({
+      username: '',
+      password: '',
+    });
+  }
 
   ngOnInit(){
 //this.onSignInClick();
@@ -27,25 +32,24 @@ this.form = this.formbuilder.group({
 })
   }
   submit():void{
+    debugger;
     let user = this.form?.getRawValue();
 
     if (user.username == '' || user.password == '') {
     Swal.fire('Error', 'Please Enter all the Details', 'error');
   } else {
-    console.log(user);
-    this.apiService.LoginPost(user).subscribe(
-      () => this.router.navigate(['/dashboard']),
-      (err) => {
-        Swal.fire('Error', err.error.message, 'error');
-      }
+    console.log("submit",user);
+    this.apiService.LoginPost(user).subscribe(() => this.router.navigate(['/dashboard']),
+    (err) => {
+      console.log("login",user)
+      Swal.fire('Error', err.error.message, 'error');
+    }
     );
   }
 
 
 
   }
-  // onSignInClick(): void {
-  //   // Navigate to the dashboard page
-  //   this.router.navigate(['/dashboard']);
-  // }
+
+  
 }
