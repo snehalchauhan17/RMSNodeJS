@@ -23,49 +23,50 @@
     </form>
   </div>
 </nav>
-<form>
+<!-- <label  *ngIf="!authenticated"> Not authenticated </label> -->
+<form [formGroup]="DEForm" (ngSubmit)="onSubmit()">
   <div class="form-row">
     <div class="form-group col-md-4">
       <label for="inputEmail4">વર્ષ</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+      <input type="number" class="form-control" id="inputEmail4" placeholder="વર્ષ" formControlName="Year">
     </div>
     <div class="form-group col-md-4">
       <label for="inputPassword4">શાખા</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+      <input type="text" class="form-control" id="inputPassword4" placeholder="શાખા" formControlName="Branch">
     </div>
       </div>
    <div class="form-row"></div>
     <div class="form-group col-md-3">
       <label for="inputPassword4">કેટેગરી</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+      <input type="text" class="form-control" id="inputPassword4" placeholder="કેટેગરી" formControlName="Category">
     </div>
     <div class="form-group col-md-3">
       <label for="inputPassword4">પ્રકાર</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+      <input type="text" class="form-control" id="inputPassword4" placeholder="પ્રકાર" formControlName="Types">
     </div>
 
   <div class="form-group">
     <label for="inputAddress">વિષય</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <input type="text" class="form-control" id="inputAddress" placeholder="વિષય" formControlName="Subject">
   </div>
   <div class="form-group">
     <label for="inputAddress">નામ</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <input type="text" class="form-control" id="inputAddress" placeholder="નામ" formControlName="Name">
   </div>
 
   <div class="form-group">
     <label for="inputAddress">સરનામું</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <input type="text" class="form-control" id="inputAddress" placeholder="સરનામું" formControlName="Address">
   </div>
 
   <div class="form-row">
     <div class="form-group col-md-4">
       <label for="inputCity">ગામ</label>
-      <input type="text" class="form-control" id="inputCity">
+      <input type="text" class="form-control" id="inputCity" placeholder="ગામ" formControlName="Village">
     </div>
     <div class="form-group col-md-4">
       <label for="inputState">તાલુકો</label>
-      <select id="inputState" class="form-control">
+      <select id="inputState" class="form-control" formControlName="Taluka">
         <option selected>Choose...</option>
         <option>...</option>
       </select>
@@ -78,34 +79,34 @@
 
   <div class="form-group  col-md-4">
     <label for="inputAddress">હુકમનુ નામ </label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <input type="text" class="form-control" id="inputAddress" placeholder="હુકમનુ નામ" formControlName="OrderName">
   </div>
     <div class="form-group  col-md-4">
     <label for="inputAddress">કબાટ નંબર</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <input type="text" class="form-control" id="inputAddress" placeholder="કબાટ નંબર" formControlName="CupBoardNo">
   </div>
   <div class="form-row">
       <div class="form-group  col-md-4">
     <label for="inputAddress">દફતર નંબર </label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <input type="text" class="form-control" id="inputAddress" placeholder="દફતર નંબર " formControlName="PartitionNo">
   </div>
       <div class="form-group  col-md-4">
     <label for="inputAddress">ફાઇલ નંબર</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <input type="text" class="form-control" id="inputAddress" placeholder="ફાઇલ નંબર" formControlName="FileNo">
   </div>
 </div>
   <div class="form-row">
       <div class="form-group  col-md-4">
     <label for="inputAddress">નોંધના પેજ  </label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <input type="text" class="form-control" id="inputAddress" placeholder="નોંધના પેજ" formControlName="NotePage">
   </div>
       <div class="form-group  col-md-4">
     <label for="inputAddress">પત્ર વ્યવહારના પેજ</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <input type="text" class="form-control" id="inputAddress" placeholder="પત્ર વ્યવહારના પેજ" formControlName="PostPage">
   </div>
      <div class="form-group  col-md-4">
     <label for="inputAddress">કુલ પેજ</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <input type="text" class="form-control" id="inputAddress" placeholder="કુલ પેજ" formControlName="TotalPage">
   </div>
 </div>
   <!-- <div class="form-group">
@@ -119,7 +120,7 @@
   <div class="form-row">
   <div class="form-group  col-md-4">
     <label for="inputAddress">દસ્તાવેજ </label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <input type="text" class="form-control" id="inputAddress" placeholder="દસ્તાવેજ" formControlName="DocumentName">
   </div>
      <div class="form-group  col-md-0.5">
     <BR>
@@ -136,29 +137,30 @@
 
    <div class="form-group  col-md-4">
 <br>
-<input type="file" class="file-upload" onchange="console.log(event.target.files)">
+<input type="file" class="file-upload" onchange="console.log(event.target.files)" formControlName="DocumentID">
 </div>
 </div>
 
- <div class="form-row">
+<div class="form-row">
 
-  <div class="form-group  col-md-0.5">
+  <div class="form-group  col-md-2">
     <BR>
-   <button type="submit" class="btn btn-primary">જોવું</button>
+      <button type="submit" [disabled]="!DEForm.valid" class="btn btn-primary">ઉમેરો</button>
+    <!-- <button type="submit" class="btn btn-primary">ઉમેરો</button> -->
   </div>
-  <div class="form-group  col-md-0.5">
-   <BR>
+  <div class="form-group  col-md-2">
+    <BR>
+    <button type="submit" class="btn btn-primary">સુધારો</button>
+  </div>
+  <div class="form-group  col-md-2">
+    <BR>
     <button type="submit" class="btn btn-primary">રદ</button>
   </div>
-      <div class="form-group  col-md-0.5">
-  <BR>
-    <button type="submit" class="btn btn-primary">ઉમેરો</button>
-  </div>
 
-   <div class="form-group  col-md-4">
-<br>
-<input type="file" class="file-upload" onchange="console.log(event.target.files)">
-</div>
+  <div class="form-group  col-md-2">
+    <br>
+    <button type="submit" class="btn btn-primary">બેંક</button>
+  </div>
 </div>
 
 

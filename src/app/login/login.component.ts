@@ -17,7 +17,13 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private apiService: AppServiceService,
     private formbuilder:FormBuilder
-  ) {}
+  ) {
+     this.form = this.formbuilder.group({
+       name: '',
+       username: '',
+       password: '',
+     });
+  }
 
   ngOnInit(){
 //this.onSignInClick();

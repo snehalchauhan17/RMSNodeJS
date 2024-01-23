@@ -41,6 +41,7 @@ export class RegisterComponent implements OnInit {
 
 
   submit(): void {
+    debugger
     let user = this.form?.getRawValue();
     console.log(user);
 

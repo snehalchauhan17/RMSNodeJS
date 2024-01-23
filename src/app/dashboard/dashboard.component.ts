@@ -16,15 +16,20 @@ export class DashboardComponent implements OnInit {
   constructor(
     private router: Router,
     private http: HttpClient,
+
     private apiService: AppServiceService
   ) {
     this.showDataEntry = false;
   }
   ngOnInit() {
+    debugger;
     this.getUserName();
     this.Auth();
   }
+
+
   Auth() {
+    debugger;
     Emitters.authEmitter.subscribe((auth: boolean) => {
       this.authenticated = auth;
     });

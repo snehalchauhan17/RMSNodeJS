@@ -14,6 +14,7 @@ export class AppServiceService {
 
   //To Register
   RegisterPost(user: any): Observable<any> {
+    debugger;
     return this.http
       .post<any>(`${this.apiUrl}/api/MUserMaster`, user, {
         withCredentials: true,
@@ -28,7 +29,8 @@ export class AppServiceService {
 
   LogoutPost() {
     return this.http
-      .post<any>(`${this.apiUrl}/api/logout`,
+      .post<any>(
+        `${this.apiUrl}/api/logout`,
         {},
         {
           withCredentials: true,
@@ -59,7 +61,7 @@ export class AppServiceService {
 
   GetUserName(): Observable<any[]> {
     return this.http
-      .get<any[]>(`${this.apiUrl}/api/MUserMaster`, {
+      .get<any[]>(`${this.apiUrl}/api/getName`, {
         withCredentials: true,
       })
       .pipe(
@@ -90,6 +92,20 @@ export class AppServiceService {
 
   addPost(post: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/product`, post);
+  }
+
+  DataEntryPost(dataentry: any): Observable<any> {
+    debugger;
+    return this.http
+      .post<any>(`${this.apiUrl}/api/InsertRecord`, dataentry, {
+        withCredentials: true,
+      })
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
   }
 
   updatePost(id: number, post: any): Observable<any> {
