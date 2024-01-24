@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DataEntryComponent } from './dashboard/data-entry/data-entry.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { RecordListComponent } from './dashboard/record-list/record-list.component';
 
 const routes: Routes = [
   // { path: '', component: LoginComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       { path: 'dataentry', component: DataEntryComponent },
+      { path: 'recordlist', component: RecordListComponent },
       // Add other sub-routes as needed
     ],
   },

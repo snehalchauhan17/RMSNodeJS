@@ -20,6 +20,8 @@
     "@angular/router": "^17.0.9",
     "@syncfusion/ej2-angular-dropdowns": "^24.1.46-ngcc",
     "@types/bootstrap": "^5.2.10",
+    "angular-material-icons": "^0.7.1",
+    "material-icons": "^1.13.12",
     "ng-multiselect-dropdown": "^1.0.0",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.10.3",

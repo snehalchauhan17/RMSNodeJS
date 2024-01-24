@@ -84,11 +84,11 @@
                         </a>
                      </li>
                      <li class="nav-item">
-                        <a href="medicine-type.html" class="nav-link">
-                           <i class="nav-icon fa fa-pills"></i>
-                           <p>
-                              Record Searching
-                           </p>
+                        <a (click)="onNavigateToRecordList()" class="nav-link">
+                          <i class="nav-icon fa fa-clinic-medical"></i>
+                          <p>
+                           Record List
+                          </p>
                         </a>
                      </li>
                      <li class="nav-item">
@@ -176,10 +176,16 @@
                <div class="container-fluid">
                   <!-- Small boxes (Stat box) -->
              <div *ngIf="showDataEntry  && authenticated">
-
+<div *ngIf="showRecordList  && authenticated"></div>
        <app-data-entry></app-data-entry>
         </div>
+
+                      <div *ngIf="showRecordList  && authenticated">
+                      <app-record-list></app-record-list></div>
+
+
                   </div>
+
                   <!-- /.row -->
                   <!-- /.row (main row) -->
 

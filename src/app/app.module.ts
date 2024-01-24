@@ -11,7 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-
+import { RecordListComponent } from './dashboard/record-list/record-list.component';
 
 @NgModule({
   declarations: [
@@ -21,15 +21,16 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     DataEntryComponent,
     RegisterComponent,
     HomeComponent,
+    RecordListComponent
   ],
   imports: [
     BrowserModule,
-  NgMultiSelectDropDownModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

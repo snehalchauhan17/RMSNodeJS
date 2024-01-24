@@ -1,4 +1,4 @@
-
+<!-- <link href=”https://fonts.googleapis.com/icon?family=Material+Icons” rel=”stylesheet”> -->
 <!--
 <ul>
       <li *ngFor="let post of posts">{{ post.name }}</li>
@@ -24,7 +24,7 @@
   </div>
 </nav>
 <!-- <label  *ngIf="!authenticated"> Not authenticated </label> -->
-<form [formGroup]="DEForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="DEForm">
   <div class="form-row">
     <div class="form-group col-md-4">
       <label for="inputEmail4">વર્ષ</label>
@@ -135,19 +135,26 @@
     <button type="submit" class="btn btn-primary">ઉમેરો</button>
   </div>
 
-   <div class="form-group  col-md-4">
+   <div class="form-group  col-md-2">
 <br>
-<input type="file" class="file-upload" onchange="console.log(event.target.files)" formControlName="DocumentID">
+<input type="file" class="file-upload"  (change)="onFileSelected($event)" #fileUpload formControlName="DocumentID">
 </div>
+  <div class="form-group  col-md-2">
+<br>
+    <!-- {{fileName || "No file uploaded yet."}} -->
+
+    <button type="button" (click)="onUpload()">Upload File</button>
+  </div>
 </div>
 
 <div class="form-row">
 
   <div class="form-group  col-md-2">
     <BR>
-      <button type="submit" [disabled]="!DEForm.valid" class="btn btn-primary">ઉમેરો</button>
+      <button type="button" [disabled]="this.DEForm.invalid"  (click)="AddDataEntry(this.DEForm.value)"  class="btn btn-primary">ઉમેરો</button>
     <!-- <button type="submit" class="btn btn-primary">ઉમેરો</button> -->
   </div>
+
   <div class="form-group  col-md-2">
     <BR>
     <button type="submit" class="btn btn-primary">સુધારો</button>

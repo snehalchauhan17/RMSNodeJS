@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AppServiceService } from 'src/app/app-service.service';
 import { Emitters } from 'src/app/emitters/emitter';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup ,Validators} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { MaterialIcon } from 'material-icons';
 @Component({
   selector: 'app-data-entry',
   templateUrl: './data-entry.component.html',
@@ -13,84 +14,86 @@ import { Router } from '@angular/router';
 export class DataEntryComponent {
   posts: any[];
   id: number = 1;
-  DEForm: FormGroup;
+  DEForm!: FormGroup;
   authenticated = false;
-  constructor(private apiService: AppServiceService, private router: Router) {}
+
+  selectedFile: File | null = null;
+  constructor(
+    private apiService: AppServiceService,
+    private router: Router,
+    private formbuilder: FormBuilder
+  ) {}
 
   ngOnInit() {
-    this.getData();
+    //this.getData();
     this.Auth();
-    this.fetchDataById(this.id);
+    //  this.fetchDataById(this.id);
+    // this.AddDataEntry(this.data);
   }
   Auth() {
     Emitters.authEmitter.subscribe((auth: boolean) => {
       this.authenticated = auth;
     });
   }
-  getData() {
-    this.apiService.getPosts().subscribe(
-      (data: any[]) => {
-        console.log(data);
-        this.posts = data;
-      },
-      (error) => {
-        // Handle error
-        console.error('Error in component:', error);
-      }
-    );
-  }
-  fetchDataById(id: number): void {
-    this.apiService.getPostById(id).subscribe(
-      (data) => {
-        // Handle the response data
-        console.log(data);
-        this.id = data;
-        // You can perform any additional logic or update component properties here
-      },
-      (error) => {
-        // Handle errors
-        console.error(error);
-      }
-    );
-  }
 
-  onSubmit(): void {
+  AddDataEntry(dataentry: any) {
     debugger;
-    let dataentry = this.DEForm?.getRawValue();
-    console.log(dataentry);
+    //   debugger;
 
-    if (
-      dataentry.Year == '' ||
-      dataentry.Branch == ''
-      //||
-      // dataentry.Category == '' ||
-      // dataentry.Types == '' ||
-      // dataentry.Subject == '' ||
-      // dataentry.Name == '' ||
-      // dataentry.Address == '' ||
-      // dataentry.Village == '' ||
-      // dataentry.Taluka == '' ||
-      // dataentry.OrderName == '' ||
-      // dataentry.CupBoardNo == '' ||
-      // dataentry.PartitionNo == '' ||
-      // dataentry.FileNo == '' ||
-      // dataentry.NotePage == '' ||
-      // dataentry.PostPage == '' ||
-      // dataentry.TotalPage == '' ||
-      // dataentry.DocumentName == '' ||
-      // dataentry.DocumentID == ''
-    ) {
-      Swal.fire('Error', 'Please Enter all the Details', 'error');
-    } else {
-      console.log(dataentry);
-      this.apiService.DataEntryPost(dataentry).subscribe(
-        () => this.router.navigate(['/dashboard']),
-        (err) => {
-          Swal.fire('Error', err.error.message, 'error');
+    this.DEForm = this.formbuilder.group({
+      Year: ['', Validators.required],
+      Branch: ['', Validators.required],
+      Category: ['', Validators.required],
+      Types: ['', Validators.required],
+      Subject: ['', Validators.required],
+      Name: ['', Validators.required],
+      Address: ['', Validators.required],
+      Village: ['', Validators.required],
+      Taluka: ['', Validators.required],
+      OrderName: ['', Validators.required],
+      CupBoardNo: ['', Validators.required],
+      PartitionNo: ['', Validators.required],
+      FileNo: ['', Validators.required],
+      NotePage: ['', Validators.required],
+      PostPage: ['', Validators.required],
+      TotalPage: ['', Validators.required],
+      DocumentName: ['', Validators.required],
+      // DocumentID: ['', Validators.required],
+    });
+
+    console.log(dataentry);
+    this.apiService.DataEntryPost(dataentry).subscribe(
+      () => this.router.navigate(['/recordlist']),
+      (err) => {
+        Swal.fire('Error', err.error.message, 'error');
+      }
+    );
+    //}
+  }
+
+  onFileSelected(event: any) {
+     debugger;
+    this.selectedFile = event.target.files[0];
+  }
+
+  onUpload() {
+    debugger;
+    if (this.selectedFile) {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile);
+    this.apiService.UploadFile(formData).subscribe(
+       (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.error(error);
         }
       );
+
+
     }
   }
+
   title = environment.title;
   apiURL = environment.apiURL;
 }

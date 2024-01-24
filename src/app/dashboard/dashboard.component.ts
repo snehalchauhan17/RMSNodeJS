@@ -11,6 +11,7 @@ import { Emitters } from '../emitters/emitter';
 })
 export class DashboardComponent implements OnInit {
   showDataEntry = false;
+  showRecordList = false;
   message = '';
   authenticated = false;
   constructor(
@@ -26,7 +27,6 @@ export class DashboardComponent implements OnInit {
     this.getUserName();
     this.Auth();
   }
-
 
   Auth() {
     debugger;
@@ -55,5 +55,8 @@ export class DashboardComponent implements OnInit {
 
   onNavigateToNewComponent() {
     this.showDataEntry = !this.showDataEntry;
+  }
+  onNavigateToRecordList() {
+    this.showRecordList = !this.showRecordList;
   }
 }

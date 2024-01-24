@@ -1,0 +1,46 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+        <th scope="col">Year </th>
+        <th scope="col">Branch </th>
+        <th scope="col">Category </th>
+        <th scope="col">Types </th>
+        <th scope="col">Subject </th>
+        <th scope="col">Name </th>
+        <th scope="col">Address </th>
+        <th scope="col">Village </th>
+        <th scope="col">Taluka </th>
+        <th scope="col">OrderName </th>
+        <th scope="col">CupBoardNo </th>
+        <th scope="col">PartitionNo </th>
+        <th scope="col">FileNo </th>
+        <th scope="col">NotePage </th>
+        <th scope="col">PostPage </th>
+        <th scope="col">TotalPage </th>
+        <th scope="col">DocumentName</th>
+        <th scope="col">DocumentID </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of RecordList">
+  <td>{{item.Year }} </td>
+  <td>{{item.Branch }} </td>
+  <td>{{item.Category }} </td>
+  <td>{{item.Types }} </td>
+  <td>{{item.Subject }} </td>
+  <td>{{item.Name }} </td>
+  <td>{{item.Address }} </td>
+  <td>{{item.Village }} </td>
+  <td>{{item.Taluka }} </td>
+  <td>{{item.OrderName }} </td>
+  <td>{{item.CupBoardNo }} </td>
+  <td>{{item.PartitionNo }} </td>
+  <td>{{item.FileNo }} </td>
+  <td>{{item.NotePage }} </td>
+  <td>{{item.PostPage }} </td>
+  <td>{{item.TotalPage }} </td>
+  <td>{{item.DocumentName}} </td>
+  <td>{{item.DocumentID }} </td>
+    </tr>
+  </tbody>
+</table>

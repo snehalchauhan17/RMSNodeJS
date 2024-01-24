@@ -81,19 +81,14 @@ export class AppServiceService {
     );
   }
 
-  getPostById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/products/:${id}`).pipe(
+  getRecord(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiUrl}/RecordList`).pipe(
       catchError((error) => {
         console.error('Error:', error);
         return throwError(error);
       })
     );
   }
-
-  addPost(post: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/product`, post);
-  }
-
   DataEntryPost(dataentry: any): Observable<any> {
     debugger;
     return this.http
@@ -108,6 +103,31 @@ export class AppServiceService {
       );
   }
 
+  UploadFile(formData: any): Observable<any> {
+    debugger;
+    return this.http
+      .post<any>(`${this.apiUrl}/api/uploads`, formData, {
+        withCredentials: true,
+      })
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
+  getPostById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/products/:${id}`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  addPost(post: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/product`, post);
+  }
   updatePost(id: number, post: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/product/:${id}`, post);
   }
