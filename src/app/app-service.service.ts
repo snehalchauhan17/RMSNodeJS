@@ -82,7 +82,8 @@ export class AppServiceService {
   }
 
   getRecord(): Observable<any[]>{
-    return this.http.get<any[]>(`${this.apiUrl}/RecordList`).pipe(
+    debugger
+    return this.http.get<any[]>(`${this.apiUrl}/api/RecordList`).pipe(
       catchError((error) => {
         console.error('Error:', error);
         return throwError(error);

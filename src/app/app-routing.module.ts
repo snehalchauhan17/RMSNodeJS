@@ -15,9 +15,9 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     children: [
-      { path: 'dataentry', component: DataEntryComponent },
       { path: 'recordlist', component: RecordListComponent },
-      // Add other sub-routes as needed
+      { path: 'dataentry', component: DataEntryComponent },
+      // ... other child routes
     ],
   },
   { path: 'register', component: RegisterComponent },

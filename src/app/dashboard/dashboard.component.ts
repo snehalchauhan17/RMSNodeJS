@@ -55,8 +55,10 @@ export class DashboardComponent implements OnInit {
 
   onNavigateToNewComponent() {
     this.showDataEntry = !this.showDataEntry;
+        this.showRecordList = false;
   }
   onNavigateToRecordList() {
     this.showRecordList = !this.showRecordList;
+       this.showDataEntry = false;
   }
 }

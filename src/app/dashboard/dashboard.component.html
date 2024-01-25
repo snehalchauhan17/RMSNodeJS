@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -11,7 +12,10 @@
 
    </head>
    <body class="hold-transition sidebar-mini layout-fixed">
-      <div class="wrapper">
+    <div>
+      <!-- ... other content -->
+
+    <div class="wrapper">
 
          <!-- Navbar -->
          <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: rgba(62,88,113);">
@@ -175,16 +179,18 @@
             <section class="content">
                <div class="container-fluid">
                   <!-- Small boxes (Stat box) -->
-             <div *ngIf="showDataEntry  && authenticated">
-<div *ngIf="showRecordList  && authenticated"></div>
-       <app-data-entry></app-data-entry>
-        </div>
+            <div *ngIf="showDataEntry  && authenticated">
 
-                      <div *ngIf="showRecordList  && authenticated">
-                      <app-record-list></app-record-list></div>
+              <app-data-entry></app-data-entry>
+            </div>
+
+            <div *ngIf="showRecordList  && authenticated">
+              <app-record-list></app-record-list>
+
+            </div>
 
 
-                  </div>
+            </div>
 
                   <!-- /.row -->
                   <!-- /.row (main row) -->
@@ -197,6 +203,9 @@
       </div>
       <!-- ./wrapper -->
       <!-- jQuery -->
+
+      </div>
+
       <script src="/src/assets/jquery/jquery.min.js"></script>
       <script src="/src/assets/js/adminlte.js"></script>
    </body>

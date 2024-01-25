@@ -5,7 +5,8 @@ import { Emitters } from 'src/app/emitters/emitter';
 import { FormBuilder, FormGroup ,Validators} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { MaterialIcon } from 'material-icons';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-data-entry',
   templateUrl: './data-entry.component.html',
@@ -18,28 +19,18 @@ export class DataEntryComponent {
   authenticated = false;
 
   selectedFile: File | null = null;
+  dataentry: any;
   constructor(
     private apiService: AppServiceService,
     private router: Router,
-    private formbuilder: FormBuilder
+    private formbuilder: FormBuilder,
+    private toastr: ToastrService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     //this.getData();
     this.Auth();
     //  this.fetchDataById(this.id);
-    // this.AddDataEntry(this.data);
-  }
-  Auth() {
-    Emitters.authEmitter.subscribe((auth: boolean) => {
-      this.authenticated = auth;
-    });
-  }
-
-  AddDataEntry(dataentry: any) {
-    debugger;
-    //   debugger;
-
     this.DEForm = this.formbuilder.group({
       Year: ['', Validators.required],
       Branch: ['', Validators.required],
@@ -60,19 +51,37 @@ export class DataEntryComponent {
       DocumentName: ['', Validators.required],
       // DocumentID: ['', Validators.required],
     });
+  }
 
-    console.log(dataentry);
+  Auth() {
+    Emitters.authEmitter.subscribe((auth: boolean) => {
+      this.authenticated = auth;
+    });
+  }
+
+  AddDataEntry(dataentry: any) {
+    debugger;
+
+    console.log(this.DEForm);
     this.apiService.DataEntryPost(dataentry).subscribe(
-      () => this.router.navigate(['/recordlist']),
+      () => {
+        // Insert successful, clear the form
+        this.DEForm.reset();
+      alert('hello')
+        // Navigate to the record list component
+        this.router.navigate(['/dashboard/recordlist']);
+      },
       (err) => {
-        Swal.fire('Error', err.error.message, 'error');
+              alert('hello');
+         this.toastr.success('Hello World!', 'Custom Alert');
+        // Swal.fire('Error', err.error.message, 'error');
       }
     );
     //}
   }
 
   onFileSelected(event: any) {
-     debugger;
+    debugger;
     this.selectedFile = event.target.files[0];
   }
 
@@ -81,16 +90,14 @@ export class DataEntryComponent {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('file', this.selectedFile);
-    this.apiService.UploadFile(formData).subscribe(
-       (response) => {
+      this.apiService.UploadFile(formData).subscribe(
+        (response) => {
           console.log(response);
         },
         (error) => {
           console.error(error);
         }
       );
-
-
     }
   }
 

@@ -137,7 +137,7 @@
 
    <div class="form-group  col-md-2">
 <br>
-<input type="file" class="file-upload"  (change)="onFileSelected($event)" #fileUpload formControlName="DocumentID">
+<input type="file" class="file-upload"  (change)="onFileSelected($event)" #fileUpload>
 </div>
   <div class="form-group  col-md-2">
 <br>
@@ -147,29 +147,26 @@
   </div>
 </div>
 
-<div class="form-row">
 
-  <div class="form-group  col-md-2">
+<div class="form-row col-md-12">
+
+  <div class="form-group col-md-3">
     <BR>
-      <button type="button" [disabled]="this.DEForm.invalid"  (click)="AddDataEntry(this.DEForm.value)"  class="btn btn-primary">ઉમેરો</button>
+      <button type="button"  (click)="AddDataEntry(DEForm.value);  $event.preventDefault();"  class="btn btn-primary" style="width: -webkit-fill-available;">ઉમેરો</button>
     <!-- <button type="submit" class="btn btn-primary">ઉમેરો</button> -->
   </div>
 
-  <div class="form-group  col-md-2">
+  <div class="form-group col-md-3">
     <BR>
-    <button type="submit" class="btn btn-primary">સુધારો</button>
+    <button type="submit" class="btn btn-primary" style="width: -webkit-fill-available;">સુધારો</button>
   </div>
-  <div class="form-group  col-md-2">
+  <div class="form-group col-md-3">
     <BR>
-    <button type="submit" class="btn btn-primary">રદ</button>
+    <button type="submit" class="btn btn-primary" style="width: -webkit-fill-available;">રદ</button>
   </div>
-
-  <div class="form-group  col-md-2">
+  <div class="form-group col-md-3">
     <br>
-    <button type="submit" class="btn btn-primary">બેંક</button>
+    <button type="submit" class="btn btn-primary" style="width: -webkit-fill-available;">બેંક</button>
   </div>
 </div>
-
-
-  <button type="submit" class="btn btn-primary">ઉમેરો</button>
 </form>

@@ -12,7 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { RecordListComponent } from './dashboard/record-list/record-list.component';
-
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +21,7 @@ import { RecordListComponent } from './dashboard/record-list/record-list.compone
     DataEntryComponent,
     RegisterComponent,
     HomeComponent,
-    RecordListComponent
+    RecordListComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +31,7 @@ import { RecordListComponent } from './dashboard/record-list/record-list.compone
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

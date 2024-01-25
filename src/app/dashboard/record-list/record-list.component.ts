@@ -14,9 +14,10 @@ RecordList:any[]
 
   }
   ngOnInit(){
-
+this.getRecordList();
   }
   getRecordList(){
+    debugger;
     this.apiservice.getRecord().subscribe((res) => (this.RecordList = res));
   }
 }
