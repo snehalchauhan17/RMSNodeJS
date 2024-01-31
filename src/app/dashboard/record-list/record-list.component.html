@@ -26,7 +26,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of RecordList">
-  <TD>   <button type="button"  (click)="EditDataEntry();  $event.preventDefault();"  class="btn btn-primary" >Edit</button>
+  <TD>   <button type="button"  (click)="EditDataEntry(item._id);  $event.preventDefault();"  class="btn btn-primary" >Edit</button>
   </TD>
   <td>   <button type="button"  (click)="DeleteDataEntry(item._id);  $event.preventDefault();"  class="btn btn-primary">Delete</button>
   </td>      <td>{{item.Year }} </td>

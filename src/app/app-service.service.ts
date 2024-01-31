@@ -140,8 +140,8 @@ export class AppServiceService {
         })
       );
   }
-  getPostById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/products/:${id}`).pipe(
+  getPostById(_id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/FindRecordbyID/:${_id}`).pipe(
       catchError((error) => {
         console.error('Error:', error);
         return throwError(error);

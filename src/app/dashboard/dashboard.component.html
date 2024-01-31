@@ -62,7 +62,7 @@
          <!-- Main Sidebar Container -->
          <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: rgba(44,62,80);">
                         <!-- Brand Logo -->
-            <a href="index.html" class="brand-link animated swing">
+            <a [routerLink]="['/dashboard']" class="brand-link animated swing">
             <img src="../../assets/img/logorms.png" alt="DSMS Logo" width="100" height="100" style="margin-top: 60px;">
             </a>
             <!-- Sidebar -->
@@ -81,16 +81,18 @@
                   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                      <li class="nav-item">
                         <!-- <a (click)="onNavigateToNewComponent()" class="nav-link"> -->
-                           <a (click)="onNavigateToNewComponent()" class="nav-link">
-                           <i class="nav-icon fa fa-clinic-medical"></i>
+                          <a [routerLink]="['dataentry']"  class="nav-link">
+                           <!-- <a (click)="onNavigateToNewComponent()" class="nav-link"> -->
+                           <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
                            <p>
                               Data Entry
                            </p>
                         </a>
                      </li>
                      <li class="nav-item">
-                        <a (click)="onNavigateToRecordList()" class="nav-link">
-                          <i class="nav-icon fa fa-clinic-medical"></i>
+                        <!-- <a (click)="onNavigateToRecordList()" class="nav-link"> -->
+                     <a [routerLink]="['recordlist']"  class="nav-link">
+                          <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
                           <p>
                            Record List
                           </p>
@@ -180,7 +182,7 @@
             <section class="content">
                <div class="container-fluid">
                   <!-- Small boxes (Stat box) -->
-            <div *ngIf="showDataEntry  && authenticated">
+            <!-- <div *ngIf="showDataEntry  && authenticated">
 
               <app-data-entry></app-data-entry>
             </div>
@@ -188,8 +190,8 @@
             <div *ngIf="showRecordList  && authenticated">
               <app-record-list></app-record-list>
 
-            </div>
-
+            </div> -->
+<router-outlet></router-outlet>
 
             </div>
 

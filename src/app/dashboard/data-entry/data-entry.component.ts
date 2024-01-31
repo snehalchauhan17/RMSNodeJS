@@ -67,7 +67,7 @@ export class DataEntryComponent {
       () => {
         // Insert successful, clear the form
         this.DEForm.reset();
-      alert('hello')
+      alert('Record Save Successfully')
         // Navigate to the record list component
         this.router.navigate(['/dashboard/recordlist']);
       },
