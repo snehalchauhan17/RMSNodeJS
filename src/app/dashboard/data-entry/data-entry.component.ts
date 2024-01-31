@@ -5,7 +5,7 @@ import { Emitters } from 'src/app/emitters/emitter';
 import { FormBuilder, FormGroup ,Validators} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+//import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-data-entry',
@@ -24,7 +24,7 @@ export class DataEntryComponent {
     private apiService: AppServiceService,
     private router: Router,
     private formbuilder: FormBuilder,
-    private toastr: ToastrService
+  //  private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -73,7 +73,7 @@ export class DataEntryComponent {
       },
       (err) => {
               alert('hello');
-         this.toastr.success('Hello World!', 'Custom Alert');
+       //  this.toastr.success('Hello World!', 'Custom Alert');
         // Swal.fire('Error', err.error.message, 'error');
       }
     );

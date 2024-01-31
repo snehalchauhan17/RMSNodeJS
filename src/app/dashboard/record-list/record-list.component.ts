@@ -20,4 +20,20 @@ this.getRecordList();
     debugger;
     this.apiservice.getRecord().subscribe((res) => (this.RecordList = res));
   }
+  EditDataEntry(){
+
+  }
+  DeleteDataEntry(_id:string){
+    debugger
+    if(confirm("are sure you want to delete record?")){
+     // event.target.innerText = "Deleting..."
+      this.apiservice.deleteEntryById(_id).subscribe((res) => {
+        this.getRecordList();
+
+        alert(res.message)
+      });
+
+    }
+    
+  }
 }

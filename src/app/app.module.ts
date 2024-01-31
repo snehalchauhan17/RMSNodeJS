@@ -10,9 +10,9 @@ import { DataEntryComponent } from './dashboard/data-entry/data-entry.component'
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+//import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { RecordListComponent } from './dashboard/record-list/record-list.component';
-import { ToastrModule } from 'ngx-toastr';
+//import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,13 +25,13 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   imports: [
     BrowserModule,
-    NgMultiSelectDropDownModule.forRoot(),
+  //  NgMultiSelectDropDownModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot(),
+ //   ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -104,6 +104,29 @@ export class AppServiceService {
       );
   }
 
+  // deleteRecord(id: string): Observable<any> {
+  //   return this.http.delete<any>(`${this.apiUrl}`, { body: { _id: id } });
+  // }
+
+  // DeleteEntryById(_id:Number): Observable<any> {
+  //   debugger;
+  //   return this.http.delete<any>(`${this.apiUrl}/api/DeleteRecord/`).pipe(
+  //     catchError((error) => {
+  //       console.error('Error:', error);
+  //       return throwError(error);
+  //     })
+  //   );
+  // }
+
+  deleteEntryById(_id: string): Observable<any> {
+    const url = `${this.apiUrl}/api/DeleteRecord`;
+    return this.http.delete<any>(url, { params: { _id: _id.toString() } }).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
   UploadFile(formData: any): Observable<any> {
     debugger;
     return this.http
