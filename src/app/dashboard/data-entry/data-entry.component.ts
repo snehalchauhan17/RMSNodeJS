@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component ,ViewChild} from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AppServiceService } from 'src/app/app-service.service';
 import { Emitters } from 'src/app/emitters/emitter';
 import { FormBuilder, FormGroup ,Validators} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Observable, map } from 'rxjs';
 //import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -18,13 +19,13 @@ export class DataEntryComponent {
   DEForm!: FormGroup;
   authenticated = false;
 
+  @ViewChild('fileUpload') fileUpload: any;
   selectedFile: File | null = null;
   dataentry: any;
   constructor(
     private apiService: AppServiceService,
     private router: Router,
-    private formbuilder: FormBuilder,
-  //  private toastr: ToastrService
+    private formbuilder: FormBuilder //  private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -67,39 +68,57 @@ export class DataEntryComponent {
       () => {
         // Insert successful, clear the form
         this.DEForm.reset();
-      alert('Record Save Successfully')
+        alert('Record Save Successfully');
         // Navigate to the record list component
         this.router.navigate(['/dashboard/recordlist']);
       },
       (err) => {
-              alert('hello');
-       //  this.toastr.success('Hello World!', 'Custom Alert');
+        alert('Error');
+        //  this.toastr.success('Hello World!', 'Custom Alert');
         // Swal.fire('Error', err.error.message, 'error');
       }
     );
     //}
   }
 
-  onFileSelected(event: any) {
-    debugger;
+  getAllDocumentsForForm(_id: string): Observable<any[]> {
+    // You can use the DocumentService to get documents related to a form
+    return this.apiService
+      .getDocument(_id)
+      .pipe(
+        map((documents) =>
+          documents.filter((document) => document._id === _id)
+        )
+      );
+  }
+  onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
+    this.selectFile();
   }
 
-  onUpload() {
-    debugger;
+  onUpload(): void {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('file', this.selectedFile);
-      this.apiService.UploadFile(formData).subscribe(
+      this.apiService.UploadFile(this.selectedFile).subscribe(
         (response) => {
-          console.log(response);
+
+          alert('File uploaded successfully!');
+          console.log('File uploaded successfully!', response);
+          this.selectedFile = null;
         },
         (error) => {
-          console.error(error);
+          alert('Error uploading file');
+          console.error('Error uploading file:', error);
         }
       );
     }
   }
+
+  selectFile(): void {
+    this.fileUpload.nativeElement.click();
+  }
+
 
   title = environment.title;
   apiURL = environment.apiURL;

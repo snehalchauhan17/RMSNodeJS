@@ -130,22 +130,19 @@
    <BR>
     <button type="submit" class="btn btn-primary">રદ</button>
   </div>
-      <div class="form-group  col-md-0.5">
-  <BR>
-    <button type="submit" class="btn btn-primary">ઉમેરો</button>
-  </div>
 
-   <div class="form-group  col-md-2">
-<br>
-<input type="file" class="file-upload"  (change)="onFileSelected($event)" #fileUpload>
-</div>
+
   <div class="form-group  col-md-2">
-<br>
-    <!-- {{fileName || "No file uploaded yet."}} -->
+    <br>
+   <input type="file" #fileUpload (change)="onFileSelected($event)">
 
-    <button type="button" (click)="onUpload()">Upload File</button>
+     </div>
+  <div class="form-group  col-md-0.5">
+    <BR>
+    <button type="submit" (click)="onUpload()" class="btn btn-primary">અપલોડ કરો</button>
   </div>
-</div>
+
+  </div>
 
 
 <div class="form-row col-md-12">

@@ -81,8 +81,8 @@ export class AppServiceService {
     );
   }
 
-  getRecord(): Observable<any[]>{
-    debugger
+  getRecord(): Observable<any[]> {
+    debugger;
     return this.http.get<any[]>(`${this.apiUrl}/api/RecordList`).pipe(
       catchError((error) => {
         console.error('Error:', error);
@@ -92,6 +92,7 @@ export class AppServiceService {
   }
   DataEntryPost(dataentry: any): Observable<any> {
     debugger;
+
     return this.http
       .post<any>(`${this.apiUrl}/api/InsertRecord`, dataentry, {
         withCredentials: true,
@@ -127,10 +128,23 @@ export class AppServiceService {
       })
     );
   }
-  UploadFile(formData: any): Observable<any> {
+  getDocument(_id:string): Observable<any[]> {
     debugger;
+    return this.http.get<any[]>(`${this.apiUrl}/api/DocList`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  UploadFile(file: File): Observable<any> {
+    debugger;
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+
     return this.http
-      .post<any>(`${this.apiUrl}/api/uploads`, formData, {
+      .post<any>(`${this.apiUrl}/api/upload`, formData, {
         withCredentials: true,
       })
       .pipe(

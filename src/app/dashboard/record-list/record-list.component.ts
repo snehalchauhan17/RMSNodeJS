@@ -9,6 +9,7 @@ import { AppServiceService } from 'src/app/app-service.service';
 })
 export class RecordListComponent {
   RecordList: any[];
+  documents: any[];
   constructor(
     private apiservice: AppServiceService,
     private route: ActivatedRoute,
@@ -25,8 +26,13 @@ export class RecordListComponent {
       console.log(this.RecordList);
     });
   }
+  onSelectForm(_id: string): void {
+    this.apiservice.getDocument(_id).subscribe((documents) => {
+      this.documents = documents;
+    });
+  }
   EditDataEntry(_id: string) {
-    debugger
+    debugger;
     //_id = this.route.snapshot.params['_id'];
     this.apiservice.getPostById(_id).subscribe((res) => {
       this.router.navigate(['dashboard/dataentry']);
