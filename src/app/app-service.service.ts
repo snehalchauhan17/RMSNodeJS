@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
@@ -11,6 +11,8 @@ export class AppServiceService {
   constructor(private http: HttpClient) {}
   //This is the URL path
   apiUrl = environment.apiURL;
+  private formData = new BehaviorSubject<any>(null);
+  currentFormData = this.formData.asObservable();
 
   //To Register
   RegisterPost(user: any): Observable<any> {
@@ -141,9 +143,10 @@ export class AppServiceService {
   //   );
   // }
 
-  deleteEntryById(_id: string): Observable<any> {
-    const url = `${this.apiUrl}/api/DeleteRecord`;
-    return this.http.delete<any>(url, { params: { _id: _id.toString() } }).pipe(
+
+  deleteEntryById(_id: Object): Observable<any> {
+    debugger;
+    return this.http.delete<any>(`${this.apiUrl}/api/DeleteRecord/${_id}`).pipe(
       catchError((error) => {
         console.error('Error:', error);
         return throwError(error);
@@ -176,8 +179,11 @@ export class AppServiceService {
         })
       );
   }
-  getPostById(_id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/api/FindRecordbyID/:${_id}`).pipe(
+  setFormData(data: any) {
+    this.formData.next(data);
+  }
+  getRecordById(_id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/FindRecordbyID/${_id}`).pipe(
       catchError((error) => {
         console.error('Error:', error);
         return throwError(error);

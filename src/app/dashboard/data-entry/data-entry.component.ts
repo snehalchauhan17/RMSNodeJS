@@ -53,8 +53,41 @@ export class DataEntryComponent {
       documentId: ['', Validators.required],
       // DocumentID: ['', Validators.required],
     });
+   this.editForm();
   }
-
+  editForm(){
+    debugger;
+    this.apiService.currentFormData.subscribe(data => {
+      if (data && data._id) {
+        this.populateForm(data);
+      }
+    });
+  }
+  populateForm(data: any): void {
+    this.DEForm.patchValue({
+      // Populate your form controls with data
+       
+	 Id			:  data.Id           ,
+   Year        : data.Year         ,  
+   Branch      : data.Branch       ,
+   Category    : data.Category     ,
+   Types       : data.Types        ,
+   Subject     : data.Subject      ,
+   Name        : data.Name         ,
+   Address     : data.Address      ,
+   Village     : data.Village      ,
+   Taluka      : data.Taluka       ,
+   OrderName 	:  data.OrderName 	 ,
+   CupBoardNo  : data.CupBoardNo   ,
+   PartitionNo : data.PartitionNo  ,
+   FileNo     :  data.FileNo       ,
+   NotePage 	:  data.NotePage 	 ,
+   PostPage 	:  data.PostPage 	 ,
+   TotalPage   : data.TotalPage    ,
+   DocumentName: data.DocumentName ,
+   DocumentID  : data.DocumentID 
+    });
+  }
   Auth() {
     Emitters.authEmitter.subscribe((auth: boolean) => {
       this.authenticated = auth;
@@ -92,14 +125,14 @@ export class DataEntryComponent {
     //}
   }
 
-  getAllDocumentsForForm(_id: string): Observable<any[]> {
-    // You can use the DocumentService to get documents related to a form
-    return this.apiService
-      .getDocument(_id)
-      .pipe(
-        map((documents) => documents.filter((document) => document._id === _id))
-      );
-  }
+  // getAllDocumentsForForm(_id: string): Observable<any[]> {
+  //   // You can use the DocumentService to get documents related to a form
+  //   return this.apiService
+  //     .getDocument(_id)
+  //     .pipe(
+  //       map((documents) => documents.filter((document) => document._id === _id))
+  //     );
+  // }
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
     this.selectFile();

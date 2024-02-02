@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule ,ActivatedRoute, Router} from '@angular/router';
+import { FormGroup } from '@angular/forms';
+import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { AppServiceService } from 'src/app/app-service.service';
 
 @Component({
@@ -11,11 +12,12 @@ export class RecordListComponent {
   RecordList: any[];
   documents: any[];
   docList: any[];
+  DEForm!: FormGroup;
   constructor(
     private apiservice: AppServiceService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
   ngOnInit() {
     this.getRecordList();
   }
@@ -27,15 +29,9 @@ export class RecordListComponent {
       console.log(this.RecordList);
     });
   }
-  getDocList() {
-    this.apiservice.getDoc().subscribe((res) => {
-      this.docList = res;
-      console.log(this.docList);
-    });
-  }
 
   viewDocument(_id: Object): void {
-debugger;
+    debugger;
     this.apiservice.ViewDoc(_id).subscribe(
       (data: ArrayBuffer) => {
         // Handle viewing the document here
@@ -48,20 +44,22 @@ debugger;
       }
     );
   }
-  onSelectForm(_id: string): void {
-    this.apiservice.getDocument(_id).subscribe((documents) => {
-      this.documents = documents;
-    });
-  }
+  // onSelectForm(_id: string): void {
+  //   this.apiservice.getDocument(_id).subscribe((documents) => {
+  //     this.documents = documents;
+  //   });
+  // }
   EditDataEntry(_id: string) {
     debugger;
     //_id = this.route.snapshot.params['_id'];
-    this.apiservice.getPostById(_id).subscribe((res) => {
+    this.apiservice.getRecordById(_id).subscribe((res) => {
+      this.apiservice.setFormData(res); 
       this.router.navigate(['dashboard/dataentry']);
-      console.log(res._id);
+           console.log(res._id);
     });
   }
-  DeleteDataEntry(_id: string) {
+
+  DeleteDataEntry(_id: Object) {
     debugger;
     if (confirm('are sure you want to delete record?')) {
       // event.target.innerText = "Deleting..."
