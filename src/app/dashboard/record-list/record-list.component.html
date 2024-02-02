@@ -3,6 +3,7 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col"> </th>
+      <th scope="col"> </th>
         <th scope="col"> </th>
         <th scope="col">Year </th>
         <th scope="col">Branch </th>
@@ -26,10 +27,11 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of RecordList">
-  <TD>   <button type="button"  (click)="EditDataEntry(item._id);  $event.preventDefault();"  class="btn btn-primary" >Edit</button>
-  </TD>
-  <td>   <button type="button"  (click)="DeleteDataEntry(item._id);  $event.preventDefault();"  class="btn btn-primary">Delete</button>
-  </td>      <td>{{item.Year }} </td>
+      <TD> <button type="button" (click)="viewDocument(item.documentId);  $event.preventDefault();"   class="btn btn-primary">View</button></TD>
+
+  <TD>   <button type="button"  (click)="EditDataEntry(item._id);  $event.preventDefault();"  class="btn btn-primary" >Edit</button> </TD>
+  <td>   <button type="button"  (click)="DeleteDataEntry(item._id);  $event.preventDefault();"  class="btn btn-primary">Delete</button> </td>
+  <td>{{item.Year }} </td>
   <td>{{item.Branch }} </td>
   <td>{{item.Category }} </td>
   <td>{{item.Types }} </td>

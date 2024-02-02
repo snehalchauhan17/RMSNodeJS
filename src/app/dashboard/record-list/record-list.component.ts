@@ -10,6 +10,7 @@ import { AppServiceService } from 'src/app/app-service.service';
 export class RecordListComponent {
   RecordList: any[];
   documents: any[];
+  docList: any[];
   constructor(
     private apiservice: AppServiceService,
     private route: ActivatedRoute,
@@ -25,6 +26,27 @@ export class RecordListComponent {
       this.RecordList = res;
       console.log(this.RecordList);
     });
+  }
+  getDocList() {
+    this.apiservice.getDoc().subscribe((res) => {
+      this.docList = res;
+      console.log(this.docList);
+    });
+  }
+
+  viewDocument(_id: Object): void {
+debugger;
+    this.apiservice.ViewDoc(_id).subscribe(
+      (data: ArrayBuffer) => {
+        // Handle viewing the document here
+        const file = new Blob([data], { type: 'application/pdf' }); // Adjust the type based on your document type
+        const fileURL = URL.createObjectURL(file);
+        window.open(fileURL);
+      },
+      (error) => {
+        console.error('Error viewing document:', error);
+      }
+    );
   }
   onSelectForm(_id: string): void {
     this.apiservice.getDocument(_id).subscribe((documents) => {

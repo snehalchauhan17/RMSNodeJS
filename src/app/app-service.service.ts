@@ -90,6 +90,28 @@ export class AppServiceService {
       })
     );
   }
+  getDoc(): Observable<any[]> {
+    debugger;
+    return this.http.get<any[]>(`${this.apiUrl}/api/DocList`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
+  ViewDoc(_id: Object): Observable<ArrayBuffer> {
+ debugger;
+    return this.http
+      .get<ArrayBuffer>(`${this.apiUrl}/api/ViewDocument/${_id}`, {
+        responseType: 'arraybuffer' as 'json', // Cast to satisfy TypeScript
+      })
+      .pipe(
+        catchError((error) => {
+          console.error('Error:', error);
+          return throwError(error);
+        })
+      );
+  }
   DataEntryPost(dataentry: any): Observable<any> {
     debugger;
 
@@ -128,7 +150,7 @@ export class AppServiceService {
       })
     );
   }
-  getDocument(_id:string): Observable<any[]> {
+  getDocument(_id: string): Observable<any[]> {
     debugger;
     return this.http.get<any[]>(`${this.apiUrl}/api/DocList`).pipe(
       catchError((error) => {
