@@ -32,18 +32,37 @@
     </div>
     <div class="form-group col-md-4">
       <label for="inputPassword4">શાખા</label>
-      <input type="text" class="form-control" id="inputPassword4" placeholder="શાખા" formControlName="Branch">
+      <!-- <input type="text" class="form-control" id="inputPassword4" placeholder="શાખા" formControlName="Branch"> -->
+      <!-- <select [formControl]="DEForm.controls['_id']"  class="form-control"  formControlName="Branch"> -->
+      <select class="form-control"  placeholder="શાખા" formControlName="Branch">
+        <option value="0">--Select--</option>
+        <option *ngFor="let br of branchList" value={{br._id}}>
+          {{br.BRANCH}}
+        </option>
+      </select>
     </div>
-      </div>
-   <div class="form-row"></div>
-    <div class="form-group col-md-3">
-      <label for="inputPassword4">કેટેગરી</label>
-      <input type="text" class="form-control" id="inputPassword4" placeholder="કેટેગરી" formControlName="Category">
-    </div>
-    <div class="form-group col-md-3">
-      <label for="inputPassword4">પ્રકાર</label>
-      <input type="text" class="form-control" id="inputPassword4" placeholder="પ્રકાર" formControlName="Types">
-    </div>
+  </div>
+  <div class="form-row"></div>
+  <div class="form-group col-md-3">
+    <label for="inputPassword4">કેટેગરી</label>
+    <select id="inputState" class="form-control"placeholder="કેટેગરી"  formControlName="Category">
+      <option selected>Choose...</option>
+      <option>...</option>
+            <option>...</option>
+                  <option>...</option>
+    </select>
+    <!-- <input type="text" class="form-control" id="inputPassword4" placeholder="કેટેગરી" formControlName="Category"> -->
+    <!-- <select class="form-control" formControlName="Branch">
+      <option value="0">--Select--</option>
+      <option *ngFor="let ct of categoryList" value={{ct._id}}>
+        {{br.BRANCH}}
+      </option>
+    </select> -->
+  </div>
+  <div class="form-group col-md-3">
+    <label for="inputPassword4">પ્રકાર</label>
+    <input type="text" class="form-control" id="inputPassword4" placeholder="પ્રકાર" formControlName="Types">
+  </div>
 
   <div class="form-group">
     <label for="inputAddress">વિષય</label>
@@ -66,10 +85,8 @@
     </div>
     <div class="form-group col-md-4">
       <label for="inputState">તાલુકો</label>
-      <select id="inputState" class="form-control" formControlName="Taluka">
-        <option selected>Choose...</option>
-        <option>...</option>
-      </select>
+          <input type="text" class="form-control" id="inputCity" placeholder="તાલુકો" formControlName="Taluka">
+
     </div>
     <!-- <div class="form-group col-md-4">
       <label for="inputZip">Zip</label>
@@ -81,34 +98,35 @@
     <label for="inputAddress">હુકમનુ નામ </label>
     <input type="text" class="form-control" id="inputAddress" placeholder="હુકમનુ નામ" formControlName="OrderName">
   </div>
-    <div class="form-group  col-md-4">
+  <div class="form-group  col-md-4">
     <label for="inputAddress">કબાટ નંબર</label>
     <input type="text" class="form-control" id="inputAddress" placeholder="કબાટ નંબર" formControlName="CupBoardNo">
   </div>
   <div class="form-row">
-      <div class="form-group  col-md-4">
-    <label for="inputAddress">દફતર નંબર </label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="દફતર નંબર " formControlName="PartitionNo">
+    <div class="form-group  col-md-4">
+      <label for="inputAddress">દફતર નંબર </label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="દફતર નંબર " formControlName="PartitionNo">
+    </div>
+    <div class="form-group  col-md-4">
+      <label for="inputAddress">ફાઇલ નંબર</label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="ફાઇલ નંબર" formControlName="FileNo">
+    </div>
   </div>
-      <div class="form-group  col-md-4">
-    <label for="inputAddress">ફાઇલ નંબર</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="ફાઇલ નંબર" formControlName="FileNo">
-  </div>
-</div>
   <div class="form-row">
-      <div class="form-group  col-md-4">
-    <label for="inputAddress">નોંધના પેજ  </label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="નોંધના પેજ" formControlName="NotePage">
+    <div class="form-group  col-md-4">
+      <label for="inputAddress">નોંધના પેજ </label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="નોંધના પેજ" formControlName="NotePage">
+    </div>
+    <div class="form-group  col-md-4">
+      <label for="inputAddress">પત્ર વ્યવહારના પેજ</label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="પત્ર વ્યવહારના પેજ"
+        formControlName="PostPage">
+    </div>
+    <div class="form-group  col-md-4">
+      <label for="inputAddress">કુલ પેજ</label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="કુલ પેજ" formControlName="TotalPage">
+    </div>
   </div>
-      <div class="form-group  col-md-4">
-    <label for="inputAddress">પત્ર વ્યવહારના પેજ</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="પત્ર વ્યવહારના પેજ" formControlName="PostPage">
-  </div>
-     <div class="form-group  col-md-4">
-    <label for="inputAddress">કુલ પેજ</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="કુલ પેજ" formControlName="TotalPage">
-  </div>
-</div>
   <!-- <div class="form-group">
     <div class="form-check">
       <input class="form-check-input" type="checkbox" id="gridCheck">
@@ -118,54 +136,55 @@
     </div>
   </div> -->
   <div class="form-row">
-  <div class="form-group  col-md-4">
-    <label for="inputAddress">દસ્તાવેજ </label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="દસ્તાવેજ" formControlName="DocumentName">
-  </div>
-     <div class="form-group  col-md-0.5">
-    <BR>
-   <button type="submit" class="btn btn-primary">જોવું</button>
-  </div>
-      <div class="form-group  col-md-0.5">
-   <BR>
-    <button type="submit" class="btn btn-primary">રદ</button>
-  </div>
+    <div class="form-group  col-md-4">
+      <label for="inputAddress">દસ્તાવેજ </label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="દસ્તાવેજ" formControlName="DocumentName">
+    </div>
+    <div class="form-group  col-md-0.5">
+      <BR>
+      <button type="submit" class="btn btn-primary">જોવું</button>
+    </div>
+    <div class="form-group  col-md-0.5">
+      <BR>
+      <button type="submit" class="btn btn-primary">રદ</button>
+    </div>
 
 
-  <div class="form-group  col-md-2">
-    <br>
-   <input type="file" #fileUpload (change)="onFileSelected($event)"  >
+    <div class="form-group  col-md-2">
+      <br>
+      <input type="file" #fileUpload (change)="onFileSelected($event)">
 
-  <input type="text" class="form-control"    formControlName="docid">
+      <input type="text" class="form-control" formControlName="docid">
 
-     </div>
-  <div class="form-group  col-md-0.5">
-    <BR>
-    <button type="submit" (click)="onUpload()" class="btn btn-primary">અપલોડ કરો</button>
+    </div>
+    <div class="form-group  col-md-0.5">
+      <BR>
+      <button type="submit" (click)="onUpload()" class="btn btn-primary">અપલોડ કરો</button>
+    </div>
+
   </div>
 
-  </div>
 
+  <div class="form-row col-md-12">
 
-<div class="form-row col-md-12">
+    <div class="form-group col-md-3">
+      <BR>
+      <button type="button" (click)="AddDataEntry(DEForm.value);  $event.preventDefault();" class="btn btn-primary"
+        style="width: -webkit-fill-available;">ઉમેરો</button>
+      <!-- <button type="submit" class="btn btn-primary">ઉમેરો</button> -->
+    </div>
 
-  <div class="form-group col-md-3">
-    <BR>
-      <button type="button"  (click)="AddDataEntry(DEForm.value);  $event.preventDefault();"  class="btn btn-primary" style="width: -webkit-fill-available;">ઉમેરો</button>
-    <!-- <button type="submit" class="btn btn-primary">ઉમેરો</button> -->
+    <div class="form-group col-md-3">
+      <BR>
+      <button type="submit" class="btn btn-primary" style="width: -webkit-fill-available;">સુધારો</button>
+    </div>
+    <div class="form-group col-md-3">
+      <BR>
+      <button type="submit" class="btn btn-primary" style="width: -webkit-fill-available;">રદ</button>
+    </div>
+    <div class="form-group col-md-3">
+      <br>
+      <button type="submit" class="btn btn-primary" style="width: -webkit-fill-available;">બેંક</button>
+    </div>
   </div>
-
-  <div class="form-group col-md-3">
-    <BR>
-    <button type="submit" class="btn btn-primary" style="width: -webkit-fill-available;">સુધારો</button>
-  </div>
-  <div class="form-group col-md-3">
-    <BR>
-    <button type="submit" class="btn btn-primary" style="width: -webkit-fill-available;">રદ</button>
-  </div>
-  <div class="form-group col-md-3">
-    <br>
-    <button type="submit" class="btn btn-primary" style="width: -webkit-fill-available;">બેંક</button>
-  </div>
-</div>
 </form>

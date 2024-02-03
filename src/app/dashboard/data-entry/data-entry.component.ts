@@ -22,6 +22,7 @@ export class DataEntryComponent {
   @ViewChild('fileUpload') fileUpload: any;
   selectedFile: File | null = null;
   dataentry: any;
+  branchList: any[];
   constructor(
     private apiService: AppServiceService,
     private router: Router,
@@ -53,11 +54,12 @@ export class DataEntryComponent {
       documentId: ['', Validators.required],
       // DocumentID: ['', Validators.required],
     });
-   this.editForm();
+    this.editForm();
+    this.BranchList();
   }
-  editForm(){
+  editForm() {
     debugger;
-    this.apiService.currentFormData.subscribe(data => {
+    this.apiService.currentFormData.subscribe((data) => {
       if (data && data._id) {
         this.populateForm(data);
       }
@@ -66,31 +68,39 @@ export class DataEntryComponent {
   populateForm(data: any): void {
     this.DEForm.patchValue({
       // Populate your form controls with data
-       
-	 Id			:  data.Id           ,
-   Year        : data.Year         ,  
-   Branch      : data.Branch       ,
-   Category    : data.Category     ,
-   Types       : data.Types        ,
-   Subject     : data.Subject      ,
-   Name        : data.Name         ,
-   Address     : data.Address      ,
-   Village     : data.Village      ,
-   Taluka      : data.Taluka       ,
-   OrderName 	:  data.OrderName 	 ,
-   CupBoardNo  : data.CupBoardNo   ,
-   PartitionNo : data.PartitionNo  ,
-   FileNo     :  data.FileNo       ,
-   NotePage 	:  data.NotePage 	 ,
-   PostPage 	:  data.PostPage 	 ,
-   TotalPage   : data.TotalPage    ,
-   DocumentName: data.DocumentName ,
-   DocumentID  : data.DocumentID 
+
+      Id: data.Id,
+      Year: data.Year,
+      Branch: data.Branch,
+      Category: data.Category,
+      Types: data.Types,
+      Subject: data.Subject,
+      Name: data.Name,
+      Address: data.Address,
+      Village: data.Village,
+      Taluka: data.Taluka,
+      OrderName: data.OrderName,
+      CupBoardNo: data.CupBoardNo,
+      PartitionNo: data.PartitionNo,
+      FileNo: data.FileNo,
+      NotePage: data.NotePage,
+      PostPage: data.PostPage,
+      TotalPage: data.TotalPage,
+      DocumentName: data.DocumentName,
+      DocumentID: data.DocumentID,
     });
   }
   Auth() {
     Emitters.authEmitter.subscribe((auth: boolean) => {
       this.authenticated = auth;
+    });
+  }
+
+  BranchList() {
+    debugger;
+    this.apiService.getBranchList().subscribe((res) => {
+      this.branchList = res;
+      console.log(res);
     });
   }
 
@@ -125,14 +135,6 @@ export class DataEntryComponent {
     //}
   }
 
-  // getAllDocumentsForForm(_id: string): Observable<any[]> {
-  //   // You can use the DocumentService to get documents related to a form
-  //   return this.apiService
-  //     .getDocument(_id)
-  //     .pipe(
-  //       map((documents) => documents.filter((document) => document._id === _id))
-  //     );
-  // }
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
     this.selectFile();

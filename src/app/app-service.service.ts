@@ -153,15 +153,15 @@ export class AppServiceService {
       })
     );
   }
-  getDocument(_id: string): Observable<any[]> {
-    debugger;
-    return this.http.get<any[]>(`${this.apiUrl}/api/DocList`).pipe(
-      catchError((error) => {
-        console.error('Error:', error);
-        return throwError(error);
-      })
-    );
-  }
+  // getDocument(_id: string): Observable<any[]> {
+  //   debugger;
+  //   return this.http.get<any[]>(`${this.apiUrl}/api/DocList`).pipe(
+  //     catchError((error) => {
+  //       console.error('Error:', error);
+  //       return throwError(error);
+  //     })
+  //   );
+  // }
 
   UploadFile(file: File): Observable<any> {
     debugger;
@@ -184,6 +184,16 @@ export class AppServiceService {
   }
   getRecordById(_id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/api/FindRecordbyID/${_id}`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  getBranchList(): Observable<any[]> {
+    debugger;
+    return this.http.get<any[]>(`${this.apiUrl}/api/BranchList`).pipe(
       catchError((error) => {
         console.error('Error:', error);
         return throwError(error);
