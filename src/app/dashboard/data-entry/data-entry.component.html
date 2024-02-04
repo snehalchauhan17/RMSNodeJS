@@ -36,9 +36,12 @@
       <!-- <select [formControl]="DEForm.controls['_id']"  class="form-control"  formControlName="Branch"> -->
       <select class="form-control"  placeholder="શાખા" formControlName="Branch">
         <option value="0">--Select--</option>
-        <option *ngFor="let br of branchList" value={{br._id}}>
+        <!-- <option *ngFor="let br of branchList" value={{br._id}}>
           {{br.BRANCH}}
-        </option>
+        </option> -->
+        <option>...</option>
+            <option>...</option>
+                  <option>...</option>
       </select>
     </div>
   </div>
@@ -140,22 +143,17 @@
       <label for="inputAddress">દસ્તાવેજ </label>
       <input type="text" class="form-control" id="inputAddress" placeholder="દસ્તાવેજ" formControlName="DocumentName">
     </div>
-    <div class="form-group  col-md-0.5">
+    <!-- <div class="form-group  col-md-0.5">
       <BR>
       <button type="submit" class="btn btn-primary">જોવું</button>
     </div>
     <div class="form-group  col-md-0.5">
       <BR>
       <button type="submit" class="btn btn-primary">રદ</button>
-    </div>
-
-
+    </div> -->
     <div class="form-group  col-md-2">
       <br>
       <input type="file" #fileUpload (change)="onFileSelected($event)">
-
-      <input type="text" class="form-control" formControlName="docid">
-
     </div>
     <div class="form-group  col-md-0.5">
       <BR>
@@ -169,18 +167,19 @@
 
     <div class="form-group col-md-3">
       <BR>
-      <button type="button" (click)="AddDataEntry(DEForm.value);  $event.preventDefault();" class="btn btn-primary"
-        style="width: -webkit-fill-available;">ઉમેરો</button>
+        <button type="submit" (click)="AddDataEntry(DEForm.value); $event.preventDefault();" [disabled]="isEditMode" class="btn btn-primary" style="width: -webkit-fill-available;">ઉમેરો</button>
+
       <!-- <button type="submit" class="btn btn-primary">ઉમેરો</button> -->
     </div>
 
     <div class="form-group col-md-3">
       <BR>
-      <button type="submit" class="btn btn-primary" style="width: -webkit-fill-available;">સુધારો</button>
+      
+      <button type="submit" *ngIf="isEditMode" (click)="onUpdate();" class="btn btn-primary" style="width: -webkit-fill-available;">સુધારો</button>
     </div>
     <div class="form-group col-md-3">
       <BR>
-      <button type="submit" class="btn btn-primary" style="width: -webkit-fill-available;">રદ</button>
+      <button type="submit" class="btn btn-primary" (click)="onReset()" style="width: -webkit-fill-available;">રદ</button>
     </div>
     <div class="form-group col-md-3">
       <br>

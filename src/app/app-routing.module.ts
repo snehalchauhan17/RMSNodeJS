@@ -11,12 +11,15 @@ const routes: Routes = [
   // { path: '', component: LoginComponent },
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+ // { path: 'dashboard/dataentry/:_id', component: DataEntryComponent },
+
   {
     path: 'dashboard',
     component: DashboardComponent,
     children: [
       { path: 'recordlist', component: RecordListComponent },
       { path: 'dataentry', component: DataEntryComponent },
+      { path: 'dataentry/:_id', component: DataEntryComponent },
       // ... other child routes
     ],
   },
