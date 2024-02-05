@@ -1,85 +1,70 @@
+
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Pharmacy-Stocks-Management-System</title>
 
-      <link rel="stylesheet" href="">
-      <link rel="stylesheet" href="/src/assets/css/adminlte.min.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Record Management System</title>
             <link rel="stylesheet" href="/src/assets/css/style.css">
+</head>
 
-   </head>
+<body>
+  <header>
+    <div class="container" id="navbar-design">
+      <h1>Record Management System</h1>
+      <nav class="navbar navbar-expand " >
+        <!-- <ul>
 
-   <style>
-#bg-image[_ngcontent-ng-c1476932776] {
-    background-image: url(../../assets/img/RMS.jpg);
-
-    background-size: cover;
-    height: 94vh;
-    width: 100%;
-}
-   </style>
-   <body class="hold-transition sidebar-mini layout-fixed">
-      <div class="wrapper" >
+          <li><a class="nav-link" routerLink="/login" data-widget="pushmenu" role="button"><i class="fas fa-bars">Login</i></a></li>
+          <li><a href="#">Register</a></li>
+        </ul> -->
 
 
-         <nav class="navbar navbar-expand " style="background-color: rgba(62,88,113);">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+          </li>
+        </ul>
 
-         <ul class="navbar-nav">
-            <li class="nav-item">
-               <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-            </li>
-         </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="!authenticated">
+          <li class="nav-item">
+            <a class="nav-link btn btn-outline-primary me-2" routerLink="/login" data-widget="pushmenu" role="button"><i class="fas fa-bars">Login</i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-primary" routerLink="/register" data-widget="pushmenu" role="button"><i
+                class="fas fa-bars">Register</i></a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="authenticated">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register" data-widget="pushmenu" (click)="LogOut()" role="button"><i
+                class="fas fa-bars">Logout</i></a>
+          </li>
 
-           <ul class="navbar-nav ml-auto" *ngIf="!authenticated">
-            <li class="nav-item">
-               <a class="nav-link" routerLink="/login" data-widget="pushmenu"  role="button"><i class="fas fa-bars">Login</i></a>
-            </li>
-             <li class="nav-item">
-               <a class="nav-link" routerLink="/register" data-widget="pushmenu"  role="button"><i class="fas fa-bars">Register</i></a>
-            </li>
-         </ul>
-         <ul class="navbar-nav ml-auto" *ngIf="authenticated">
-            <li class="nav-item">
-               <a class="nav-link" routerLink="/register" data-widget="pushmenu" (click)="LogOut()"  role="button"><i class="fas fa-bars">Logout</i></a>
-            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-         </ul>
-
-         </nav>
-
+  <section id="hero">
+    <div class="container">
+      <div class="content-box">
+      <h2 style="color: rgb(0, 0, 136);"><b>Welcome to our Record Management System</b></h2>
+      <p  style="color: rgb(0, 0, 136);"><b>
+        Our system provides an efficient way to manage records securely.
+        It helps organizations to store, retrieve, and organize their data effectively.</b>
+      </p>
       </div>
+    </div>
+  </section>
 
+  <footer>
+    <div class="container">
+            <p><a href="https://guj.nic.in/" target="_blank" style="color: white;">&copy; 2024 National Informatics Centre (NIC). All Rights
+                Reserved.</a></p>
+    </div>
+  </footer>
+</body>
 
-      <script src="/src/assets/jquery/jquery.min.js"></script>
-      <script src="/src/assets/js/adminlte.js"></script>
-   </body>
-
-   <div id="bg-image" >
-
-   </div>
 </html>
-<!-- home.component.html -->
-<!-- <header>
-    <h1>Pharmacy Stocks Management System</h1>
-</header>
-
-<nav class="navbar">
-    <ul>
-        <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-        <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
-        <li><a routerLink="/register" routerLinkActive="active">Register</a></li>
-
-    </ul>
-</nav>
-
-<div class="content">
-
-    <img src="path_to_your_image.jpg" alt="Image">
-    <p>Welcome to the Pharmacy Stocks Management System. Here you can manage your pharmacy stocks efficiently.</p>
-</div>
-
-<footer>
-    <p>&copy; 2024 Pharmacy Stocks Management System</p>
-</footer> -->

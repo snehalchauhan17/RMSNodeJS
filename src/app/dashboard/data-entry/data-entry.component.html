@@ -1,20 +1,7 @@
-<!-- <link href=”https://fonts.googleapis.com/icon?family=Material+Icons” rel=”stylesheet”> -->
-<!--
-<ul>
-      <li *ngFor="let post of posts">{{ post.name }}</li>
-    </ul>
-    <ul>
-      <li *ngFor="let post of posts">{{ post.quantity }}</li>
-    </ul> -->
-<!-- <div class="input-group">
-  <mdb-form-control>
-    <input #input mdbInput type="search" id="form1" class="form-control" />
-    <label mdbLabel class="form-label" for="form1">Search</label>
-  </mdb-form-control>
-  <button type="button" class="btn btn-primary" (click)="fetchDataById(id)">
-    <i class="fas fa-search"></i>
-  </button>
-</div> -->
+
+<div class="text-center">
+  <h3> Data Entry Form </h3>
+</div>
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid center">
     <form class="d-flex" style="margin-left: 400px;">
@@ -36,12 +23,12 @@
       <!-- <select [formControl]="DEForm.controls['_id']"  class="form-control"  formControlName="Branch"> -->
       <select class="form-control"  placeholder="શાખા" formControlName="Branch">
         <option value="0">--Select--</option>
-        <!-- <option *ngFor="let br of branchList" value={{br._id}}>
+        <option *ngFor="let br of branchList" value={{br.BRANCH}}>
           {{br.BRANCH}}
-        </option> -->
-        <option>...</option>
+        </option>
+        <!-- <option>...</option>
             <option>...</option>
-                  <option>...</option>
+                  <option>...</option> -->
       </select>
     </div>
   </div>
@@ -50,9 +37,9 @@
     <label for="inputPassword4">કેટેગરી</label>
     <select id="inputState" class="form-control"placeholder="કેટેગરી"  formControlName="Category">
       <option selected>Choose...</option>
-      <option>...</option>
-            <option>...</option>
-                  <option>...</option>
+      <option>A</option>
+            <option>B</option>
+                  <option>C</option>
     </select>
     <!-- <input type="text" class="form-control" id="inputPassword4" placeholder="કેટેગરી" formControlName="Category"> -->
     <!-- <select class="form-control" formControlName="Branch">
@@ -174,16 +161,17 @@
 
     <div class="form-group col-md-3">
       <BR>
-      
-      <button type="submit" *ngIf="isEditMode" (click)="onUpdate();" class="btn btn-primary" style="width: -webkit-fill-available;">સુધારો</button>
-    </div>
-    <div class="form-group col-md-3">
-      <BR>
       <button type="submit" class="btn btn-primary" (click)="onReset()" style="width: -webkit-fill-available;">રદ</button>
     </div>
     <div class="form-group col-md-3">
+      <BR>
+
+      <button type="submit" *ngIf="isEditMode" (click)="onUpdate();" class="btn btn-primary"
+        style="width: -webkit-fill-available;">સુધારો</button>
+    </div>
+    <!-- <div class="form-group col-md-3">
       <br>
       <button type="submit" class="btn btn-primary" style="width: -webkit-fill-available;">બેંક</button>
-    </div>
+    </div> -->
   </div>
 </form>

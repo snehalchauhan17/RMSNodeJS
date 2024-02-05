@@ -15,11 +15,11 @@ import { Observable, map } from 'rxjs';
 })
 export class DataEntryComponent {
   posts: any[];
-  // id: number = 1;
   DEForm!: FormGroup;
   authenticated = false;
 
-  @ViewChild('fileUpload') fileUpload: any;
+  @ViewChild('fileUpload')
+   fileUpload: any;
   selectedFile: File | null = null;
   dataentry: any;
   branchList: any[];
@@ -46,14 +46,14 @@ export class DataEntryComponent {
   });
 
   }
-  
- 
+
+
   onReset(){
     this.DEForm.reset();
   }
   createForm() {
     this.DEForm = this.formbuilder.group({
-    //  _id: [''],
+      _id: [''],
       Year: ['', Validators.required],
       Branch: ['', Validators.required],
       Category: ['', Validators.required],
@@ -79,10 +79,10 @@ export class DataEntryComponent {
     if (this.DEForm.valid) {
       const formData = this.DEForm.value;
       const docid = sessionStorage.getItem('docid');
-  
+
       if (docid) {
         formData.documentId = docid;
-  
+
         if (this.isEditMode) {
           const _id = formData._id;
           console.log('update formdata:',formData)
@@ -97,7 +97,7 @@ export class DataEntryComponent {
       // Handle form validation errors
     }
   }
-  
+
 
   AddDataEntry(dataentry: any) {
     debugger;
@@ -129,7 +129,7 @@ export class DataEntryComponent {
     }
     //}
   }
-  
+
   updateRecord(_id: string, updatedData: any) {
     debugger;
     this.apiService.updateRecord(_id, updatedData).subscribe(
@@ -145,7 +145,7 @@ export class DataEntryComponent {
       }
     );
   }
-  
+
 
   editForm() {
     debugger;
@@ -159,7 +159,7 @@ export class DataEntryComponent {
       }
     });
   }
-  
+
   populateForm(data: any): void {
     this.DEForm.patchValue({
       _id: data._id,
@@ -183,8 +183,8 @@ export class DataEntryComponent {
       documentId: data.documentId,
     });
   }
-  
- 
+
+
   Auth() {
     Emitters.authEmitter.subscribe((auth: boolean) => {
       this.authenticated = auth;

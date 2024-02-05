@@ -13,13 +13,13 @@ export class RecordListComponent {
   documents: any[];
   docList: any[];
   DEForm!: FormGroup;
-  formList:any[];
+  formList: any[];
+  totalRecords:string =''
   constructor(
     private apiservice: AppServiceService,
     private route: ActivatedRoute,
-    private router: Router,
-    
-  ) { }
+    private router: Router
+  ) {}
   ngOnInit() {
     this.getRecordList();
   }
@@ -28,6 +28,7 @@ export class RecordListComponent {
 
     this.apiservice.getRecord().subscribe((res) => {
       this.RecordList = res;
+      const totalRecords = this.RecordList.length;
       console.log(this.RecordList);
     });
   }
@@ -49,11 +50,11 @@ export class RecordListComponent {
 
   EditDataEntry(_id: string) {
     this.apiservice.getRecordById(_id).subscribe((res) => {
-      this.formList =res
-      console.log('res is:', this.formList)
-      this.apiservice.setFormData( this.formList);
+      this.formList = res;
+      console.log('res is:', this.formList);
+      this.apiservice.setFormData(this.formList);
       this.router.navigate(['dashboard/dataentry', _id]);
-   //   this.router.navigate(['dashboard/dataentry',_id]);
+      //   this.router.navigate(['dashboard/dataentry',_id]);
     });
   }
 

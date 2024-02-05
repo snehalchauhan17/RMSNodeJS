@@ -40,7 +40,8 @@ this.form = this.formbuilder.group({
   } else {
     console.log(user);
     this.apiService.LoginPost(user).subscribe(
-      () => this.router.navigate(['/dashboard']),
+      () =>{ this.router.navigate(['/dashboard'])},
+
       (err) => {
         Swal.fire('Error', err.error.message, 'error');
       }

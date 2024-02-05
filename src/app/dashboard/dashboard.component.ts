@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
   ) {
     this.showDataEntry = false;
   }
+
   ngOnInit() {
     debugger;
     this.getUserName();

@@ -1,51 +1,56 @@
-
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Pharmacy-Stocks-Management-System</title>
-      <!-- Font Awesome -->
-      <link rel="stylesheet" href="">
-      <link rel="stylesheet" href="/src/assets/css/adminlte.min.css">
-            <link rel="stylesheet" href="/src/assets/css/style.css">
 
-   </head>
-   <body class="hold-transition sidebar-mini layout-fixed">
-    <div>
-      <!-- ... other content -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pharmacy-Stocks-Management-System</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="">
+  <link rel="stylesheet" href="/src/assets/css/adminlte.min.css">
+  <link rel="stylesheet" href="/src/assets/css/style.css">
+
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div>
+    <!-- ... other content -->
 
     <div class="wrapper">
 
-         <!-- Navbar -->
-         <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: rgba(62,88,113);">
-            <div>
-               <h3> {{message}}</h3>
-            </div>     <!-- Left navbar links -->
-         <ul class="navbar-nav">
-            <li class="nav-item">
-               <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-            </li>
-         </ul>
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand navbar-white navbar-light"
+        style="background-color: rgba(62,88,113);">
+        <div>
+          <h3> {{message}}</h3>
+        </div> <!-- Left navbar links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+          </li>
+        </ul>
 
-          <!-- <a routerLink="/dashboard" class="navbar-brand"> Home  </a> -->
-           <ul class="navbar-nav ml-auto" *ngIf="!authenticated">
-            <li class="nav-item">
-               <a class="nav-link" routerLink="/login" data-widget="pushmenu"  role="button"><i class="fas fa-bars">Login</i></a>
-            </li>
-             <li class="nav-item">
-               <a class="nav-link" routerLink="/register" data-widget="pushmenu"  role="button"><i class="fas fa-bars">Register</i></a>
-            </li>
-         </ul>
-       <ul class="navbar-nav ml-auto" *ngIf="authenticated">
-            <li class="nav-item">
-               <a class="nav-link" routerLink="" data-widget="pushmenu" (click)="LogOut()"  role="button"><i class="fas fa-bars">Logout</i></a>
-            </li>
+        <!-- <a routerLink="/dashboard" class="navbar-brand"> Home  </a> -->
+        <ul class="navbar-nav ml-auto" *ngIf="!authenticated">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login" data-widget="pushmenu" role="button"><i
+                class="fas fa-bars">Login</i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register" data-widget="pushmenu" role="button"><i
+                class="fas fa-bars">Register</i></a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="authenticated">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="" data-widget="pushmenu" (click)="LogOut()" role="button"><i
+                class="fas fa-bars">Logout</i></a>
+          </li>
 
-         </ul>
+        </ul>
 
-            <!-- Right navbar links -->
-            <!-- <ul class="navbar-nav ml-auto">
+        <!-- Right navbar links -->
+        <!-- <ul class="navbar-nav ml-auto">
                <li class="nav-item">
                   <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                   <i class="fas fa-expand-arrows-alt"></i>
@@ -57,65 +62,78 @@
                   </a>
                </li>
             </ul> -->
-         </nav>
-         <!-- /.navbar -->
-         <!-- Main Sidebar Container -->
-         <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: rgba(44,62,80);">
-                        <!-- Brand Logo -->
-            <a [routerLink]="['/dashboard']" class="brand-link animated swing">
-            <img src="../../assets/img/logorms.png" alt="DSMS Logo" width="100" height="100" style="margin-top: 60px;">
-            </a>
-            <!-- Sidebar -->
-            <div class="sidebar" style="margin-top: -65px">
-               <!-- Sidebar user panel (optional) -->
-               <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                  <div class="image">
-                     <img src="../../assets/img/profile.png" class="img-circle elevation-2" alt="User Image">
-                  </div>
-                  <div class="info">
-                     <a href="#" class="d-block">{{message}}</a>
-                  </div>
-               </div>
-               <!-- Sidebar Menu -->
-               <nav class="mt-2">
-                  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                     <li class="nav-item">
-                        <!-- <a (click)="onNavigateToNewComponent()" class="nav-link"> -->
-                          <a [routerLink]="['dataentry']"  class="nav-link">
-                           <!-- <a (click)="onNavigateToNewComponent()" class="nav-link"> -->
-                           <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
-                           <p>
-                              Data Entry
-                           </p>
-                        </a>
-                     </li>
-                     <li class="nav-item">
-                        <!-- <a (click)="onNavigateToRecordList()" class="nav-link"> -->
-                     <a [routerLink]="['recordlist']"  class="nav-link">
-                          <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
-                          <p>
-                           Record List
-                          </p>
-                        </a>
-                     </li>
-                     <li class="nav-item">
+      </nav>
+      <!-- /.navbar -->
+      <!-- Main Sidebar Container -->
+      <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: rgba(44,62,80);">
+        <!-- Brand Logo -->
+        <a [routerLink]="['/dashboard']" class="brand-link animated swing">
+          <img src="../../assets/img/logorms.png" alt="DSMS Logo" width="100" height="100" style="margin-top: 60px;">
+        </a>
+        <!-- Sidebar -->
+        <div class="sidebar" style="margin-top: -65px">
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="../../assets/img/profile.png" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+              <a href="#" class="d-block">{{message}}</a>
+            </div>
+          </div>
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <li class="nav-item">
+                <!-- <a (click)="onNavigateToNewComponent()" class="nav-link"> -->
+                <a [routerLink]="['dataentry']" class="nav-link ">
+                  <!-- <a (click)="onNavigateToNewComponent()" class="nav-link"> -->
+                  <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
+                  <p><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-file-earmark-plus-fill"
+                    viewBox="0 0 16 16">
+                    <path
+                      d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0" />
+                  </svg>
+                    Data Entry
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <!-- <a (click)="onNavigateToRecordList()" class="nav-link"> -->
+                <a [routerLink]="['recordlist']" class="nav-link bi bi-card-checklist">
+                  <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
+                  <p><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-card-checklist"
+                    viewBox="0 0 16 16">
+                    <path
+                      d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
+                    <path
+                      d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0M7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0" />
+                  </svg>
+                    Record List
+                     <span class="badge badge-light ">9+</span>
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <!-- <a (click)="onNavigateToRecordList()" class="nav-link"> -->
+                <a [routerLink]="['changepassword']" class="nav-link">
+                  <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
+                  <p>
+                    Change Password
+                  </p>
+                </a>
+              </li>
+              <!-- <li class="nav-item">
                         <a href="medicine-category.html" class="nav-link">
                            <i class="nav-icon fa fa-tablets"></i>
                            <p>
-                          Change Password
-                           </p>
-                        </a>
-                     </li>
 
-                     <li class="nav-item">
-                        <a href="supplier.html" class="nav-link">
-                           <i class="nav-icon fa fa-truck"></i>
-                           <p>
-                              Supplier
                            </p>
                         </a>
-                     </li>
-                     <li class="nav-item">
+                     </li> -->
+
+
+              <!-- <li class="nav-item">
                         <a href="#" class="nav-link">
                            <i class="nav-icon fas fa-capsules"></i>
                            <p>
@@ -137,51 +155,52 @@
                               </a>
                            </li>
                         </ul>
-                     </li>
+                     </li> -->
 
-                     <li class="nav-item">
+              <!-- <li class="nav-item">
                         <a href="database.html" class="nav-link">
                            <i class="nav-icon fa fa-database"></i>
                            <p>
                               Database
                            </p>
                         </a>
-                     </li>
+                     </li> -->
 
-                  </ul>
-               </nav>
-               <!-- /.sidebar-menu -->
-            </div>
-            <!-- /.sidebar -->
-         </aside>
-         <!-- Content Wrapper. Contains page content -->
-         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-               <div class="container-fluid">
-                  <div class="row mb-2">
-                     <div class="col-sm-6">
-                        <h1 class="m-0" style="color: rgb(242,175,88);"><span class="fa fa-tachometer-alt"></span> Dashboard</h1>
-                     </div>
-                     <!-- /.col -->
-                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                           <li class="breadcrumb-item"><a href="#">Home</a></li>
-                           <li class="breadcrumb-item active">Dashboard</li>
+            </ul>
+          </nav>
+          <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+      </aside>
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0" style="color: rgb(242,175,88);"><span class="fa fa-tachometer-alt"></span> Dashboard
+                </h1>
+              </div>
+              <!-- /.col -->
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active">Dashboard</li>
 
-                        </ol>
-                     </div>
-                     <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-               </div>
-               <!-- /.container-fluid -->
+                </ol>
+              </div>
+              <!-- /.col -->
             </div>
-            <!-- /.content-header -->
-            <!-- Main content -->
-            <section class="content">
-               <div class="container-fluid">
-                  <!-- Small boxes (Stat box) -->
+            <!-- /.row -->
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
             <!-- <div *ngIf="showDataEntry  && authenticated">
 
               <app-data-entry></app-data-entry>
@@ -191,25 +210,26 @@
               <app-record-list></app-record-list>
 
             </div> -->
-<router-outlet></router-outlet>
+            <router-outlet></router-outlet>
 
-            </div>
+          </div>
 
-                  <!-- /.row -->
-                  <!-- /.row (main row) -->
+          <!-- /.row -->
+          <!-- /.row (main row) -->
 
-               <!-- /.container-fluid -->
-            </section>
-            <!-- /.content -->
-         </div>
-         <!-- /.content-wrapper -->
+          <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
       </div>
-      <!-- ./wrapper -->
-      <!-- jQuery -->
+      <!-- /.content-wrapper -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
 
-      </div>
+  </div>
 
-      <script src="/src/assets/jquery/jquery.min.js"></script>
-      <script src="/src/assets/js/adminlte.js"></script>
-   </body>
+  <script src="/src/assets/jquery/jquery.min.js"></script>
+  <script src="/src/assets/js/adminlte.js"></script>
+</body>
+
 </html>

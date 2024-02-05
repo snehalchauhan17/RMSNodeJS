@@ -13,6 +13,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 //import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { RecordListComponent } from './dashboard/record-list/record-list.component';
 //import { ToastrModule } from 'ngx-toastr';
+import { ChangePasswordComponent } from './dashboard/change-password/change-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,16 +23,17 @@ import { RecordListComponent } from './dashboard/record-list/record-list.compone
     RegisterComponent,
     HomeComponent,
     RecordListComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
-  //  NgMultiSelectDropDownModule.forRoot(),
+    //  NgMultiSelectDropDownModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
- //   ToastrModule.forRoot(),
+    //   ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
