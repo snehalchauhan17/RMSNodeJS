@@ -18,7 +18,7 @@ export class DataEntryComponent {
   DEForm!: FormGroup;
   authenticated = false;
 
-  @ViewChild('fileUpload')
+  // @ViewChild('fileUpload')
    fileUpload: any;
   selectedFile: File | null = null;
   dataentry: any;

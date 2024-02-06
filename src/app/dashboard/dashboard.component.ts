@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
     this.apiService.GetUserName().subscribe(
       (res: any) => {
         console.log(res);
-        this.message = `Hi ${res.name}`;
+        this.message = `${res.name}`;
         Emitters.authEmitter.emit(true);
       },
       (error) => {
