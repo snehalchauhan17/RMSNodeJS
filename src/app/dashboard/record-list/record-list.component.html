@@ -3,24 +3,49 @@
 </div>
 <br>
 <form >
-<div class="row">
-  <div> <label><input type="checkbox" name="Year"> Year </label> </div>
-  <div> <label><input type="checkbox" name="Branch"> Branch </label> </div>
-  <div> <label><input type="checkbox" name="Category"> Category </label> </div>
-  <div> <label><input type="checkbox" name="Types"> Types </label> </div>
-  <div> <label><input type="checkbox" name="Subject"> Subject </label> </div>
-  <div> <label><input type="checkbox" name="Name"> Name </label> </div>
-  <div> <label><input type="checkbox" name="Address"> Address </label> </div>
-  <div> <label><input type="checkbox" name="Village"> Village </label> </div>
-  <div> <label><input type="checkbox" name="Taluka"> Taluka </label> </div>
-  <div> <label><input type="checkbox" name="OrderName"> OrderName </label> </div>
-  <div> <label><input type="checkbox" name="CupBoardNo"> CupBoardNo </label> </div>
-  <div> <label><input type="checkbox" name="PartitionNo"> PartitionNo </label> </div>
-  <div> <label><input type="checkbox" name="FileNo"> FileNo </label> </div>
-  <button type="button"  class="btn btn-primary">Search</button>
-</div>
 
+<div class="table-responsive">
+<table class="table">
+  <thead class="thead">
+    <tr>
+      <th scope="col"><input type="checkbox" name="Year">       વર્ષ           </th>
+      <th scope="col"><input type="checkbox" name="Branch">     શાખા        </th>
+      <th scope="col"><input type="checkbox" name="Category">   કેટેગરી    </th>
+      <th scope="col"><input type="checkbox" name="Types">      પ્રકાર        </th>
+      <th scope="col"><input type="checkbox" name="Subject">    વિષય        </th>
+      <th scope="col"><input type="checkbox" name="Name">       નામ            </th>
+      <th scope="col"><input type="checkbox" name="Address">    સરનામું       </th>
+      <th scope="col"><input type="checkbox" name="Village">    ગામ         </th>
+      <th scope="col"><input type="checkbox" name="Taluka">     તાલુકો           </th>
+      <th scope="col"><input type="checkbox" name="OrderName">  હુકમનુ નામ    </th>
+      <th scope="col"><input type="checkbox" name="CupBoardNo"> કબાટ નંબર   </th>
+      <th scope="col"><input type="checkbox" name="PartitionNo"> દફતર નંબર   </th>
+      <th scope="col"><input type="checkbox" name="FileNo">     ફાઇલ નંબર         </th>
+        <button type="button" style="width: 72px;" class="btn btn-primary">Back</button>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> <input type="text" name="txtYear" class="spacebox"> </td>
+      <td> <input type="text" name="txtBranch" class="spacebox"> </td>
+      <td> <input type="text" name="txtCategory" class="spacebox"> </td>
+      <td> <input type="text" name="txtTypes" class="spacebox"> </td>
+      <td> <input type="text" name="txtSubject" class="spacebox"> </td>
+      <td> <input type="text" name="txtName" class="spacebox"> </td>
+      <td> <input type="text" name="txtAddress" class="spacebox"> </td>
+      <td> <input type="text" name="txtVillage" class="spacebox"> </td>
+      <td> <input type="text" name="txtTaluka" class="spacebox"> </td>
+      <td> <input type="text" name="txtOrderName" class="spacebox"> </td>
+      <td> <input type="text" name="txtCupBoardNo" class="spacebox"> </td>
+      <td> <input type="text" name="txtPartitionNo" class="spacebox"> </td>
+      <td> <input type="text" name="txtFileNo" class="spacebox"> </td>
+      <button type="button" style="width: 72px;" class="btn btn-primary">Search</button>
+    </tr>
+  </tbody>
+</table>
+</div>
 </form>
+<br>
 <div class="table-responsive">
 <table class="table">
   <thead class="thead-dark">
@@ -28,23 +53,23 @@
       <th scope="col"> </th>
       <th scope="col"> </th>
         <th scope="col"> </th>
-        <th scope="col">Year </th>
-        <th scope="col">Branch </th>
-        <th scope="col">Category </th>
-        <th scope="col">Types </th>
-        <th scope="col">Subject </th>
-        <th scope="col">Name </th>
-        <th scope="col">Address </th>
-        <th scope="col">Village </th>
-        <th scope="col">Taluka </th>
-        <th scope="col">OrderName </th>
-        <th scope="col">CupBoardNo </th>
-        <th scope="col">PartitionNo </th>
-        <th scope="col">FileNo </th>
-        <th scope="col">NotePage </th>
-        <th scope="col">PostPage </th>
-        <th scope="col">TotalPage </th>
-        <th scope="col">DocumentName</th>
+        <th scope="col">વર્ષ          </th>
+        <th scope="col">શાખા          </th>
+        <th scope="col">કેટેગરી       </th>
+        <th scope="col">પ્રકાર        </th>
+        <th scope="col">વિષય         </th>
+        <th scope="col">નામ          </th>
+        <th scope="col">સરનામું          </th>
+        <th scope="col">ગામ          </th>
+        <th scope="col">તાલુકો         </th>
+        <th scope="col">હુકમનુ નામ       </th>
+        <th scope="col">કબાટ નંબર       </th>
+        <th scope="col"> દફતર નંબર       </th>
+        <th scope="col">ફાઇલ નંબર       </th>
+        <th scope="col">નોંધના પેજ      </th>
+        <th scope="col">પત્ર વ્યવહારના પેજ        </th>
+        <th scope="col">કુલ પેજ           </th>
+        <th scope="col">દસ્તાવેજ</th>
         <!-- <th scope="col">DocumentID </th> -->
     </tr>
   </thead>

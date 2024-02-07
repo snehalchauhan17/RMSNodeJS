@@ -149,7 +149,7 @@ export class AppServiceService {
   }
   setFormData(data: any[]) {
     debugger
-    
+
     this.formData.next(data);
   }
   getRecordById(_id: string): Observable<any[]> {
@@ -181,8 +181,17 @@ export class AppServiceService {
       })
     );
   }
-  
-  
+
+  GetRecordList(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/api/searchRecordList`).pipe(
+      catchError((error) => {
+        console.error('Error', error);
+        return throwError(error);
+      })
+    );
+  }
+
+
   getPosts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/products`).pipe(
       catchError((error) => {
