@@ -14,7 +14,21 @@ export class RecordListComponent {
   docList: any[];
   DEForm!: FormGroup;
   formList: any[];
-  totalRecords:string =''
+  totalRecords: string = '';
+  IsDisableYear: boolean = false;
+  IsDisableBranch: boolean = false;
+  IsDisableCategory: boolean = false;
+  IsDisableTypes: boolean = false;
+  IsDisableSubject: boolean = false;
+  IsDisableName: boolean = false;
+  IsDisableAddress: boolean = false;
+  IsDisableVillage: boolean = false;
+  IsDisableTaluka: boolean = false;
+  IsDisableOrderName: boolean = false;
+  IsDisableCupBoardNo: boolean = false;
+  IsDisablePartitionNo: boolean = false;
+  IsDisableFileNo: boolean = false;
+
   constructor(
     private apiservice: AppServiceService,
     private route: ActivatedRoute,
@@ -22,6 +36,12 @@ export class RecordListComponent {
   ) {}
   ngOnInit() {
     this.getRecordList();
+  }
+
+  search() {
+    this.apiservice.GetSearchRecordList().subscribe((res)=>{
+console.log(res);
+    })
   }
   getRecordList() {
     debugger;

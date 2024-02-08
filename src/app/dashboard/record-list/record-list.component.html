@@ -8,38 +8,38 @@
 <table class="table">
   <thead class="thead">
     <tr>
-      <th scope="col"><input type="checkbox" name="Year">       વર્ષ           </th>
-      <th scope="col"><input type="checkbox" name="Branch">     શાખા        </th>
-      <th scope="col"><input type="checkbox" name="Category">   કેટેગરી    </th>
-      <th scope="col"><input type="checkbox" name="Types">      પ્રકાર        </th>
-      <th scope="col"><input type="checkbox" name="Subject">    વિષય        </th>
-      <th scope="col"><input type="checkbox" name="Name">       નામ            </th>
-      <th scope="col"><input type="checkbox" name="Address">    સરનામું       </th>
-      <th scope="col"><input type="checkbox" name="Village">    ગામ         </th>
-      <th scope="col"><input type="checkbox" name="Taluka">     તાલુકો           </th>
-      <th scope="col"><input type="checkbox" name="OrderName">  હુકમનુ નામ    </th>
-      <th scope="col"><input type="checkbox" name="CupBoardNo"> કબાટ નંબર   </th>
-      <th scope="col"><input type="checkbox" name="PartitionNo"> દફતર નંબર   </th>
-      <th scope="col"><input type="checkbox" name="FileNo">     ફાઇલ નંબર         </th>
-        <button type="button" style="width: 72px;" class="btn btn-primary">Back</button>
+      <th scope="col"><input type="checkbox" name="Year" [(ngModel)]="IsDisableYear">       વર્ષ           </th>
+      <th scope="col"><input type="checkbox" name="Branch"  [(ngModel)]="IsDisableBranch">     શાખા        </th>
+      <th scope="col"><input type="checkbox" name="Category"  [(ngModel)]="IsDisableCategory">   કેટેગરી    </th>
+      <th scope="col"><input type="checkbox" name="Types"  [(ngModel)]="IsDisableTypes">      પ્રકાર        </th>
+      <th scope="col"><input type="checkbox" name="Subject"  [(ngModel)]="IsDisableSubject">    વિષય        </th>
+      <th scope="col"><input type="checkbox" name="Name"  [(ngModel)]="IsDisableName">       નામ            </th>
+      <th scope="col"><input type="checkbox" name="Address"  [(ngModel)]="IsDisableAddress">    સરનામું       </th>
+      <th scope="col"><input type="checkbox" name="Village"  [(ngModel)]="IsDisableVillage">     ગામ         </th>
+      <th scope="col"><input type="checkbox" name="Taluka"  [(ngModel)]="IsDisableTaluka">     તાલુકો           </th>
+      <th scope="col"><input type="checkbox" name="OrderName"  [(ngModel)]="IsDisableOrderName">  હુકમનુ નામ    </th>
+      <th scope="col"><input type="checkbox" name="CupBoardNo"  [(ngModel)]="IsDisableCupBoardNo"> કબાટ નંબર   </th>
+      <th scope="col"><input type="checkbox" name="PartitionNo"  [(ngModel)]="IsDisablePartitionNo"> દફતર નંબર   </th>
+      <th scope="col"><input type="checkbox" name="FileNo"  [(ngModel)]="IsDisableFileNo">     ફાઇલ નંબર         </th>
+        <button type="button" style="width: 72px;" class="btn btn-primary" [routerLink]="['/dashboard']" >Back</button>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td> <input type="text" name="txtYear" class="spacebox"> </td>
-      <td> <input type="text" name="txtBranch" class="spacebox"> </td>
-      <td> <input type="text" name="txtCategory" class="spacebox"> </td>
-      <td> <input type="text" name="txtTypes" class="spacebox"> </td>
-      <td> <input type="text" name="txtSubject" class="spacebox"> </td>
-      <td> <input type="text" name="txtName" class="spacebox"> </td>
-      <td> <input type="text" name="txtAddress" class="spacebox"> </td>
-      <td> <input type="text" name="txtVillage" class="spacebox"> </td>
-      <td> <input type="text" name="txtTaluka" class="spacebox"> </td>
-      <td> <input type="text" name="txtOrderName" class="spacebox"> </td>
-      <td> <input type="text" name="txtCupBoardNo" class="spacebox"> </td>
-      <td> <input type="text" name="txtPartitionNo" class="spacebox"> </td>
-      <td> <input type="text" name="txtFileNo" class="spacebox"> </td>
-      <button type="button" style="width: 72px;" class="btn btn-primary">Search</button>
+      <td> <input type="text" name="txtYear" [disabled]="!IsDisableYear" class="spacebox"> </td>
+      <td> <input type="text" name="txtBranch" [disabled]="!IsDisableBranch" class="spacebox"> </td>
+      <td> <input type="text" name="txtCategory" [disabled]="!IsDisableCategory" class="spacebox"> </td>
+      <td> <input type="text" name="txtTypes" [disabled]="!IsDisableTypes" class="spacebox"> </td>
+      <td> <input type="text" name="txtSubject" [disabled]="!IsDisableSubject" class="spacebox"> </td>
+      <td> <input type="text" name="txtName" [disabled]="!IsDisableName" class="spacebox"> </td>
+      <td> <input type="text" name="txtAddress" [disabled]="!IsDisableAddress" class="spacebox"> </td>
+      <td> <input type="text" name="txtVillage" [disabled]="!IsDisableVillage" class="spacebox"> </td>
+      <td> <input type="text" name="txtTaluka" [disabled]="!IsDisableTaluka" class="spacebox"> </td>
+      <td> <input type="text" name="txtOrderName" [disabled]="!IsDisableOrderName" class="spacebox"> </td>
+      <td> <input type="text" name="txtCupBoardNo" [disabled]="!IsDisableCupBoardNo" class="spacebox"> </td>
+      <td> <input type="text" name="txtPartitionNo" [disabled]="!IsDisablePartitionNo" class="spacebox"> </td>
+      <td> <input type="text" name="txtFileNo" [disabled]="!IsDisableFileNo" class="spacebox"> </td>
+      <button type="button" style="width: 72px;" class="btn btn-primary" onclick="search()">Search</button>
     </tr>
   </tbody>
 </table>
@@ -75,8 +75,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of RecordList">
-      <TD> <button type="button" (click)="viewDocument(item.documentId);  $event.preventDefault();"   class="btn btn-primary">View</button></TD>
-
+  <TD> <button type="button" (click)="viewDocument(item.documentId);  $event.preventDefault();"   class="btn btn-primary">View</button></TD>
   <TD>   <button type="button"  (click)="EditDataEntry(item._id);  $event.preventDefault();"  class="btn btn-primary" >Edit</button> </TD>
   <td>   <button type="button"  (click)="DeleteDataEntry(item._id);  $event.preventDefault();"  class="btn btn-primary">Delete</button> </td>
   <td>{{item.Year }} </td>

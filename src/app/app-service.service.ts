@@ -182,7 +182,8 @@ export class AppServiceService {
     );
   }
 
-  GetRecordList(): Observable<any>{
+  GetSearchRecordList(): Observable<any>{
+    debugger
     return this.http.get<any>(`${this.apiUrl}/api/searchRecordList`).pipe(
       catchError((error) => {
         console.error('Error', error);
