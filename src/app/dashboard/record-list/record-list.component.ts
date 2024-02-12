@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { AppServiceService } from 'src/app/app-service.service';
 
@@ -14,35 +14,69 @@ export class RecordListComponent {
   docList: any[];
   DEForm!: FormGroup;
   formList: any[];
+  searchForm!: FormGroup;
+  searchPayload: any;
   totalRecords: string = '';
-  IsDisableYear: boolean = false;
-  IsDisableBranch: boolean = false;
-  IsDisableCategory: boolean = false;
-  IsDisableTypes: boolean = false;
-  IsDisableSubject: boolean = false;
-  IsDisableName: boolean = false;
-  IsDisableAddress: boolean = false;
-  IsDisableVillage: boolean = false;
-  IsDisableTaluka: boolean = false;
-  IsDisableOrderName: boolean = false;
-  IsDisableCupBoardNo: boolean = false;
-  IsDisablePartitionNo: boolean = false;
-  IsDisableFileNo: boolean = false;
+  // IsDisableYear: boolean = false;
+  // IsDisableBranch: boolean = false;
+  // IsDisableCategory: boolean = false;
+  // IsDisableTypes: boolean = false;
+  // IsDisableSubject: boolean = false;
+  // IsDisableName: boolean = false;
+  // IsDisableAddress: boolean = false;
+  // IsDisableVillage: boolean = false;
+  // IsDisableTaluka: boolean = false;
+  // IsDisableOrderName: boolean = false;
+  // IsDisableCupBoardNo: boolean = false;
+  // IsDisablePartitionNo: boolean = false;
+  // IsDisableFileNo: boolean = false;
 
   constructor(
     private apiservice: AppServiceService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) {}
   ngOnInit() {
     this.getRecordList();
+    this.SearchForm();
+    console.log("searchform",this.searchForm)
   }
 
-  search() {
-    this.apiservice.GetSearchRecordList().subscribe((res)=>{
-console.log(res);
-    })
+  SearchForm() {
+    this.searchForm = this.fb.group({
+
+      txtYear: [''],
+      txtBranch: [''],
+      txtCategory: [''],
+      txtTypes: [''],
+      txtSubject: [''],
+      txtName: [''],
+      txtAddress: [''],
+      txtVillage: [''],
+      txtTaluka: [''],
+      txtOrderName: [''],
+      txtCupBoardNo: [''],
+      txtPartitionNo: [''],
+      txtFileNo: [''],
+    });
   }
+  search(): void {
+    // Make the HTTP request to your service
+     this.searchPayload = this.searchForm.value;
+    this.apiservice.GetSearchRecordList(this.searchPayload).subscribe(
+      (response) => {
+
+        // Handle the API response here
+        console.log('Search Results:', response);
+      },
+      (error) => {
+        // Handle errors
+        console.error('Error:', error);
+      }
+    );
+  }
+
   getRecordList() {
     debugger;
 

@@ -2,49 +2,51 @@
   <h3> Record List </h3>
 </div>
 <br>
-<form >
+<form [formGroup]="searchForm">
 
 <div class="table-responsive">
 <table class="table">
   <thead class="thead">
     <tr>
-      <th scope="col"><input type="checkbox" name="Year" [(ngModel)]="IsDisableYear">       વર્ષ           </th>
-      <th scope="col"><input type="checkbox" name="Branch"  [(ngModel)]="IsDisableBranch">     શાખા        </th>
-      <th scope="col"><input type="checkbox" name="Category"  [(ngModel)]="IsDisableCategory">   કેટેગરી    </th>
-      <th scope="col"><input type="checkbox" name="Types"  [(ngModel)]="IsDisableTypes">      પ્રકાર        </th>
-      <th scope="col"><input type="checkbox" name="Subject"  [(ngModel)]="IsDisableSubject">    વિષય        </th>
-      <th scope="col"><input type="checkbox" name="Name"  [(ngModel)]="IsDisableName">       નામ            </th>
-      <th scope="col"><input type="checkbox" name="Address"  [(ngModel)]="IsDisableAddress">    સરનામું       </th>
-      <th scope="col"><input type="checkbox" name="Village"  [(ngModel)]="IsDisableVillage">     ગામ         </th>
-      <th scope="col"><input type="checkbox" name="Taluka"  [(ngModel)]="IsDisableTaluka">     તાલુકો           </th>
-      <th scope="col"><input type="checkbox" name="OrderName"  [(ngModel)]="IsDisableOrderName">  હુકમનુ નામ    </th>
-      <th scope="col"><input type="checkbox" name="CupBoardNo"  [(ngModel)]="IsDisableCupBoardNo"> કબાટ નંબર   </th>
-      <th scope="col"><input type="checkbox" name="PartitionNo"  [(ngModel)]="IsDisablePartitionNo"> દફતર નંબર   </th>
-      <th scope="col"><input type="checkbox" name="FileNo"  [(ngModel)]="IsDisableFileNo">     ફાઇલ નંબર         </th>
-        <button type="button" style="width: 72px;" class="btn btn-primary" [routerLink]="['/dashboard']" >Back</button>
+      <th scope="col"><input type="checkbox" >       વર્ષ           </th>
+      <th scope="col"><input type="checkbox" >     શાખા        </th>
+      <th scope="col"><input type="checkbox" >   કેટેગરી    </th>
+      <th scope="col"><input type="checkbox" >      પ્રકાર        </th>
+      <th scope="col"><input type="checkbox" >    વિષય        </th>
+      <th scope="col"><input type="checkbox" >       નામ            </th>
+      <th scope="col"><input type="checkbox" >    સરનામું       </th>
+      <th scope="col"><input type="checkbox" >     ગામ         </th>
+      <th scope="col"><input type="checkbox" >     તાલુકો           </th>
+      <th scope="col"><input type="checkbox" >  હુકમનુ નામ    </th>
+      <th scope="col"><input type="checkbox"  > કબાટ નંબર   </th>
+      <th scope="col"><input type="checkbox"   > દફતર નંબર   </th>
+      <th scope="col"><input type="checkbox"  >     ફાઇલ નંબર         </th>
+
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td> <input type="text" name="txtYear" [disabled]="!IsDisableYear" class="spacebox"> </td>
-      <td> <input type="text" name="txtBranch" [disabled]="!IsDisableBranch" class="spacebox"> </td>
-      <td> <input type="text" name="txtCategory" [disabled]="!IsDisableCategory" class="spacebox"> </td>
-      <td> <input type="text" name="txtTypes" [disabled]="!IsDisableTypes" class="spacebox"> </td>
-      <td> <input type="text" name="txtSubject" [disabled]="!IsDisableSubject" class="spacebox"> </td>
-      <td> <input type="text" name="txtName" [disabled]="!IsDisableName" class="spacebox"> </td>
-      <td> <input type="text" name="txtAddress" [disabled]="!IsDisableAddress" class="spacebox"> </td>
-      <td> <input type="text" name="txtVillage" [disabled]="!IsDisableVillage" class="spacebox"> </td>
-      <td> <input type="text" name="txtTaluka" [disabled]="!IsDisableTaluka" class="spacebox"> </td>
-      <td> <input type="text" name="txtOrderName" [disabled]="!IsDisableOrderName" class="spacebox"> </td>
-      <td> <input type="text" name="txtCupBoardNo" [disabled]="!IsDisableCupBoardNo" class="spacebox"> </td>
-      <td> <input type="text" name="txtPartitionNo" [disabled]="!IsDisablePartitionNo" class="spacebox"> </td>
-      <td> <input type="text" name="txtFileNo" [disabled]="!IsDisableFileNo" class="spacebox"> </td>
-      <button type="button" style="width: 72px;" class="btn btn-primary" onclick="search()">Search</button>
+      <td> <input type="text" formControlName="txtYear"  class="spacebox"> </td>
+      <td> <input type="text" formControlName="txtBranch"  class="spacebox"> </td>
+      <td> <input type="text" formControlName="txtCategory" class="spacebox"> </td>
+      <td> <input type="text" formControlName="txtTypes" class="spacebox"> </td>
+      <td> <input type="text" formControlName="txtSubject" class="spacebox"> </td>
+      <td> <input type="text" formControlName="txtName" class="spacebox"> </td>
+      <td> <input type="text" formControlName="txtAddress"  class="spacebox"> </td>
+      <td> <input type="text" formControlName="txtVillage"class="spacebox"> </td>
+      <td> <input type="text" formControlName="txtTaluka"  class="spacebox"> </td>
+      <td> <input type="text" formControlName="txtOrderName" class="spacebox"> </td>
+      <td> <input type="text" formControlName="txtCupBoardNo"  class="spacebox"> </td>
+      <td> <input type="text" formControlName="txtPartitionNo"  class="spacebox"> </td>
+      <td> <input type="text" formControlName="txtFileNo" class="spacebox"> </td>
+
     </tr>
   </tbody>
 </table>
 </div>
+       <button type="button" style="width: 72px;" class="btn btn-primary" (click)="search()">Search</button>
 </form>
+<button type="button" style="width: 72px;" class="btn btn-primary" [routerLink]="['/dashboard']">Back</button>
 <br>
 <div class="table-responsive">
 <table class="table">

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -74,7 +74,6 @@ export class AppServiceService {
       );
   }
 
-
   getRecord(): Observable<any[]> {
     debugger;
     return this.http.get<any[]>(`${this.apiUrl}/api/RecordList`).pipe(
@@ -94,7 +93,7 @@ export class AppServiceService {
     );
   }
   ViewDoc(_id: Object): Observable<ArrayBuffer> {
- debugger;
+    debugger;
     return this.http
       .get<ArrayBuffer>(`${this.apiUrl}/api/ViewDocument/${_id}`, {
         responseType: 'arraybuffer' as 'json', // Cast to satisfy TypeScript
@@ -130,7 +129,6 @@ export class AppServiceService {
     );
   }
 
-
   UploadFile(file: File): Observable<any> {
     debugger;
     const formData: FormData = new FormData();
@@ -148,18 +146,20 @@ export class AppServiceService {
       );
   }
   setFormData(data: any[]) {
-    debugger
+    debugger;
 
     this.formData.next(data);
   }
   getRecordById(_id: string): Observable<any[]> {
     debugger;
-    return this.http.get<any[]>(`${this.apiUrl}/api/FindRecordbyID/${_id}`).pipe(
-      catchError((error) => {
-        console.error('Error:', error);
-        return throwError(error);
-      })
-    );
+    return this.http
+      .get<any[]>(`${this.apiUrl}/api/FindRecordbyID/${_id}`)
+      .pipe(
+        catchError((error) => {
+          console.error('Error:', error);
+          return throwError(error);
+        })
+      );
   }
 
   getBranchList(): Observable<any[]> {
@@ -174,24 +174,43 @@ export class AppServiceService {
 
   updateRecord(_id: string, updatedData: any): Observable<any> {
     debugger;
-    return this.http.put<any>(`${this.apiUrl}/api/UpdateRecord/${_id}`, updatedData).pipe(
-      catchError((error) => {
-        console.error('Error:', error);
-        return throwError(error);
-      })
-    );
+    return this.http
+      .put<any>(`${this.apiUrl}/api/UpdateRecord/${_id}`, updatedData)
+      .pipe(
+        catchError((error) => {
+          console.error('Error:', error);
+          return throwError(error);
+        })
+      );
   }
 
-  GetSearchRecordList(): Observable<any>{
-    debugger
-    return this.http.get<any>(`${this.apiUrl}/api/searchRecordList`).pipe(
+  // searchRecords(searchPayload: any): Observable<any> {
+  //   return this.http.post<any>('your-api-endpoint', searchPayload);
+  // }
+
+  // GetSearchRecordList(searchPayload: any): Observable<any> {
+  //   debugger;
+  //   return this.http
+  //     .post<any>(`${this.apiUrl}/api/searchRecordList`, searchPayload)
+  //     .pipe(
+  //       catchError((error) => {
+  //         console.error('Error', error);
+  //         return throwError(error);
+  //       })
+  //     );
+  // }
+
+  GetSearchRecordList(searchPayload: any): Observable<any> {
+    const queryParams = new HttpParams({ fromObject: searchPayload });
+    const url = `${this.apiUrl}/api/searchRecordList`;
+
+    return this.http.get<any>(url, { params: queryParams }).pipe(
       catchError((error) => {
         console.error('Error', error);
         return throwError(error);
       })
     );
   }
-
 
   getPosts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/products`).pipe(
