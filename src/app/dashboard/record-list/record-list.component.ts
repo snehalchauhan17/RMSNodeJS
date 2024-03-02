@@ -39,34 +39,60 @@ export class RecordListComponent {
   ) {}
   ngOnInit() {
     this.getRecordList();
-    this.SearchForm();
-    console.log("searchform",this.searchForm)
-  }
-
-  SearchForm() {
+    // this.SearchForm();
+    console.log('searchform', this.searchForm);
     this.searchForm = this.fb.group({
-
-      txtYear: [''],
-      txtBranch: [''],
-      txtCategory: [''],
-      txtTypes: [''],
-      txtSubject: [''],
-      txtName: [''],
-      txtAddress: [''],
-      txtVillage: [''],
-      txtTaluka: [''],
-      txtOrderName: [''],
-      txtCupBoardNo: [''],
-      txtPartitionNo: [''],
-      txtFileNo: [''],
+      checkYear: [false],
+      checkBranch: [false],
+      checkCategory: [false],
+      checkTypes: [false],
+      checkSubject: [false],
+      checkName: [false],
+      checkAddress: [false],
+      checkVillage: [false],
+      checkTaluka: [false],
+      checkOrName: [false],
+      checkCBNo: [false],
+      checkParNo: [false],
+      checkFileNo: [false],
+      // Add similar form controls for other checkboxes
+      txtYear: [{ value: '', disabled: true }],
+      txtBranch: [{ value: '', disabled: true }],
+      txtCategory: [{ value: '', disabled: true }],
+      txtTypes: [{ value: '', disabled: true }],
+      txtSubject: [{ value: '', disabled: true }],
+      txtName: [{ value: '', disabled: true }],
+      txtAddress: [{ value: '', disabled: true }],
+      txtVillage: [{ value: '', disabled: true }],
+      txtTaluka: [{ value: '', disabled: true }],
+      txtOrderName: [{ value: '', disabled: true }],
+      txtCupBoardNo: [{ value: '', disabled: true }],
+      txtPartitionNo: [{ value: '', disabled: true }],
+      txtFileNo: [{ value: '', disabled: true }],
+      // Add similar form controls for other textboxes
     });
   }
+
+  toggleTextBox(textBoxName: string, checkBoxName: string): void {
+    const textBox = this.searchForm.get(textBoxName);
+    const checkBox = this.searchForm.get(checkBoxName);
+    // Check if checkBox is not null before accessing its value
+    if (textBox && checkBox?.value) {
+      if (checkBox.value) {
+        textBox.enable();
+      } else {
+        textBox.disable();
+      }
+    }
+  }
+
+  SearchForm() {}
   search(): void {
+    debugger;
     // Make the HTTP request to your service
-     this.searchPayload = this.searchForm.value;
+    this.searchPayload = this.searchForm.value;
     this.apiservice.GetSearchRecordList(this.searchPayload).subscribe(
       (response) => {
-
         // Handle the API response here
         console.log('Search Results:', response);
       },

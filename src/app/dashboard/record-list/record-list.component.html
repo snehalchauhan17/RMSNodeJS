@@ -2,52 +2,61 @@
   <h3> Record List </h3>
 </div>
 <br>
-<form [formGroup]="searchForm">
+<div class="row">
+  <div>
+    <form [formGroup]="searchForm">
 
-<div class="table-responsive">
-<table class="table">
-  <thead class="thead">
-    <tr>
-      <th scope="col"><input type="checkbox" >       વર્ષ           </th>
-      <th scope="col"><input type="checkbox" >     શાખા        </th>
-      <th scope="col"><input type="checkbox" >   કેટેગરી    </th>
-      <th scope="col"><input type="checkbox" >      પ્રકાર        </th>
-      <th scope="col"><input type="checkbox" >    વિષય        </th>
-      <th scope="col"><input type="checkbox" >       નામ            </th>
-      <th scope="col"><input type="checkbox" >    સરનામું       </th>
-      <th scope="col"><input type="checkbox" >     ગામ         </th>
-      <th scope="col"><input type="checkbox" >     તાલુકો           </th>
-      <th scope="col"><input type="checkbox" >  હુકમનુ નામ    </th>
-      <th scope="col"><input type="checkbox"  > કબાટ નંબર   </th>
-      <th scope="col"><input type="checkbox"   > દફતર નંબર   </th>
-      <th scope="col"><input type="checkbox"  >     ફાઇલ નંબર         </th>
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="thead">
+            <tr>
+              <th scope="col"><input type="checkbox" formControlName="checkYear" (change)="toggleTextBox('txtYear', 'checkYear')"> વર્ષ </th>
+              <th scope="col"><input type="checkbox" formControlName="checkBranch" (change)="toggleTextBox('txtBranch', 'checkBranch')"> શાખા </th>
+              <th scope="col"><input type="checkbox" formControlName="checkCategory"   (change)="toggleTextBox('txtCategory', 'checkCategory')"> કેટેગરી </th>
+              <th scope="col"><input type="checkbox" formControlName="checkTypes"  (change)="toggleTextBox('txtTypes', 'checkTypes')"> પ્રકાર </th>
+              <th scope="col"><input type="checkbox" formControlName="checkSubject"   (change)="toggleTextBox('txtSubject', 'checkSubject')"> વિષય </th>
+              <th scope="col"><input type="checkbox" formControlName="checkName"   (change)="toggleTextBox('txtName', 'checkName')"> નામ </th>
+              <th scope="col"><input type="checkbox" formControlName="checkAddress"  (change)="toggleTextBox('txtAddress', 'checkAddress')"> સરનામું </th>
+              <th scope="col"><input type="checkbox" formControlName="checkVillage"   (change)="toggleTextBox('txtVillage', 'checkVillage')"> ગામ </th>
+              <th scope="col"><input type="checkbox" formControlName="checkTaluka"  (change)="toggleTextBox('txtTaluka', 'checkTaluka')"> તાલુકો </th>
+              <th scope="col"><input type="checkbox" formControlName="checkOrName"  (change)="toggleTextBox('txtOrderName', 'checkOrName')"> હુકમનુ નામ </th>
+              <th scope="col"><input type="checkbox" formControlName="checkCBNo"  (change)="toggleTextBox('txtCupBoardNo', 'checkCBNo')"> કબાટ નંબર </th>
+              <th scope="col"><input type="checkbox" formControlName="checkParNo"  (change)="toggleTextBox('txtPartitionNo', 'checkParNo')"> દફતર નંબર </th>
+              <th scope="col"><input type="checkbox" formControlName="checkFileNo"  (change)="toggleTextBox('txtFileNo', 'checkFileNo')"> ફાઇલ નંબર </th>
 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td> <input type="text" formControlName="txtYear"  class="spacebox"> </td>
-      <td> <input type="text" formControlName="txtBranch"  class="spacebox"> </td>
-      <td> <input type="text" formControlName="txtCategory" class="spacebox"> </td>
-      <td> <input type="text" formControlName="txtTypes" class="spacebox"> </td>
-      <td> <input type="text" formControlName="txtSubject" class="spacebox"> </td>
-      <td> <input type="text" formControlName="txtName" class="spacebox"> </td>
-      <td> <input type="text" formControlName="txtAddress"  class="spacebox"> </td>
-      <td> <input type="text" formControlName="txtVillage"class="spacebox"> </td>
-      <td> <input type="text" formControlName="txtTaluka"  class="spacebox"> </td>
-      <td> <input type="text" formControlName="txtOrderName" class="spacebox"> </td>
-      <td> <input type="text" formControlName="txtCupBoardNo"  class="spacebox"> </td>
-      <td> <input type="text" formControlName="txtPartitionNo"  class="spacebox"> </td>
-      <td> <input type="text" formControlName="txtFileNo" class="spacebox"> </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td> <input type="text" formControlName="txtYear" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtBranch" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtCategory" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtTypes" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtSubject" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtName" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtAddress" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtVillage" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtTaluka" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtOrderName" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtCupBoardNo" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtPartitionNo" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtFileNo" class="spacebox"> </td>
 
-    </tr>
-  </tbody>
-</table>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </form>
+  </div>
+  <div>
+    <button type="button" style="width: 72px;" class="btn btn-primary" style="margin-left: 10px;margin-top: 5px;" (click)="search()">Search</button>
+    <br><br>
+    &nbsp;&nbsp;
+    <button type="button" style="width: 72px;" class="btn btn-primary" style="margin-top: -10px;" [routerLink]="['/dashboard']">Back</button>
+  </div>
 </div>
-       <button type="button" style="width: 72px;" class="btn btn-primary" (click)="search()">Search</button>
-</form>
-<button type="button" style="width: 72px;" class="btn btn-primary" [routerLink]="['/dashboard']">Back</button>
-<br>
+      <br>
 <div class="table-responsive">
 <table class="table">
   <thead class="thead-dark">
