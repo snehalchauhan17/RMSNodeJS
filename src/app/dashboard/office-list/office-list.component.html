@@ -1,0 +1,37 @@
+<div class="text-center">
+  <h3> ઓફિસ લિસ્ટ</h3>
+</div>
+<br>
+<div class="table-responsive">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+        <th scope="col">ઓફિસ </th>
+        <th scope="col">આઈડી </th>
+        <th scope="col">ઓફિસ ટાઈપ </th>
+        <th scope="col">ડિસ્ટ્રિક્ટ કોડ </th>
+
+
+        <!-- <th scope="col">DocumentID </th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of OfficeList">
+
+        <td> </td>
+        <td>  <button type="button"  (click)="EditOfficeEntry(item._id);  $event.preventDefault();"  class="btn btn-primary" >Edit</button> </td>
+        <td>  <button type="button"  (click)="DeleteOfficeEntry(item._id.trim());  $event.preventDefault();"  class="btn btn-primary">Delete</button> </td>
+
+        <td>{{item.office }} </td>
+        <td>{{item.id }} </td>
+        <td>{{item.officetype }} </td>
+        <td>{{item.dcode }} </td>
+
+
+      </tr>
+    </tbody>
+  </table>
+</div>

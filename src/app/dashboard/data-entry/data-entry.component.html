@@ -1,6 +1,6 @@
 
 <div class="text-center">
-  <h3> Data Entry Form </h3>
+  <h3> ડેટા એન્ટ્રી ફોર્મ</h3>
 </div>
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid center">
@@ -10,7 +10,6 @@
     </form>
   </div>
 </nav>
-<!-- <label  *ngIf="!authenticated"> Not authenticated </label> -->
 <form [formGroup]="DEForm">
   <div class="form-row">
     <div class="form-group col-md-4">
@@ -19,16 +18,12 @@
     </div>
     <div class="form-group col-md-4">
       <label for="inputPassword4">શાખા</label>
-      <!-- <input type="text" class="form-control" id="inputPassword4" placeholder="શાખા" formControlName="Branch"> -->
-      <!-- <select [formControl]="DEForm.controls['_id']"  class="form-control"  formControlName="Branch"> -->
       <select class="form-control"  placeholder="શાખા" formControlName="Branch">
-        <option value="0">--Select--</option>
+    <option value="" selected>-- બ્રાન્ચ સિલેક્ટ કરો --</option>
         <option *ngFor="let br of branchList" value={{br.BRANCH}}>
           {{br.BRANCH}}
         </option>
-        <!-- <option>...</option>
-            <option>...</option>
-                  <option>...</option> -->
+
       </select>
     </div>
   </div>
@@ -36,18 +31,12 @@
   <div class="form-group col-md-3">
     <label for="inputPassword4">કેટેગરી</label>
     <select id="inputState" class="form-control"placeholder="કેટેગરી"  formControlName="Category">
-      <option selected>Choose...</option>
+  <option value="" selected>-- કેટેગરી સિલેક્ટ કરો --</option>
       <option>A</option>
             <option>B</option>
                   <option>C</option>
     </select>
-    <!-- <input type="text" class="form-control" id="inputPassword4" placeholder="કેટેગરી" formControlName="Category"> -->
-    <!-- <select class="form-control" formControlName="Branch">
-      <option value="0">--Select--</option>
-      <option *ngFor="let ct of categoryList" value={{ct._id}}>
-        {{br.BRANCH}}
-      </option>
-    </select> -->
+
   </div>
   <div class="form-group col-md-3">
     <label for="inputPassword4">પ્રકાર</label>
@@ -78,10 +67,7 @@
           <input type="text" class="form-control" id="inputCity" placeholder="તાલુકો" formControlName="Taluka">
 
     </div>
-    <!-- <div class="form-group col-md-4">
-      <label for="inputZip">Zip</label>
-      <input type="text" class="form-control" id="inputZip">
-    </div> -->
+
   </div>
 
   <div class="form-group  col-md-4">
@@ -117,27 +103,13 @@
       <input type="text" class="form-control" id="inputAddress" placeholder="કુલ પેજ" formControlName="TotalPage">
     </div>
   </div>
-  <!-- <div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Check me out
-      </label>
-    </div>
-  </div> -->
+
   <div class="form-row">
     <div class="form-group  col-md-4">
       <label for="inputAddress">દસ્તાવેજ </label>
       <input type="text" class="form-control" id="inputAddress" placeholder="દસ્તાવેજ" formControlName="DocumentName">
     </div>
-    <!-- <div class="form-group  col-md-0.5">
-      <BR>
-      <button type="submit" class="btn btn-primary">જોવું</button>
-    </div>
-    <div class="form-group  col-md-0.5">
-      <BR>
-      <button type="submit" class="btn btn-primary">રદ</button>
-    </div> -->
+
     <div class="form-group  col-md-2">
       <br>
       <input type="file"  (change)="onFileSelected($event)">
@@ -154,10 +126,7 @@
 
     <div class="form-group col-md-3">
       <BR>
-        <button type="submit" (click)="AddDataEntry(DEForm.value); $event.preventDefault();" [disabled]="isEditMode" class="btn btn-primary" style="width: -webkit-fill-available;">ઉમેરો</button>
-
-      <!-- <button type="submit" class="btn btn-primary">ઉમેરો</button> -->
-    </div>
+        <button type="submit" (click)="AddDataEntry(DEForm.value); $event.preventDefault();" [disabled]="isEditMode" class="btn btn-primary" style="width: -webkit-fill-available;">ઉમેરો</button>    </div>
 
     <div class="form-group col-md-3">
       <BR>
@@ -169,9 +138,6 @@
       <button type="submit" *ngIf="isEditMode" (click)="onUpdate();" class="btn btn-primary"
         style="width: -webkit-fill-available;">સુધારો</button>
     </div>
-    <!-- <div class="form-group col-md-3">
-      <br>
-      <button type="submit" class="btn btn-primary" style="width: -webkit-fill-available;">બેંક</button>
-    </div> -->
+
   </div>
 </form>

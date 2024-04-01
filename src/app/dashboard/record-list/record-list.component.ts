@@ -9,13 +9,14 @@ import { AppServiceService } from 'src/app/app-service.service';
   styleUrl: './record-list.component.css',
 })
 export class RecordListComponent {
-  RecordList: any[];
+  RecordList: any[] = [];
   documents: any[];
   docList: any[];
   DEForm!: FormGroup;
   formList: any[];
   searchForm!: FormGroup;
-  searchPayload: any;
+  searchPayload: any = {};
+
   totalRecords: string = '';
   // IsDisableYear: boolean = false;
   // IsDisableBranch: boolean = false;
@@ -73,39 +74,40 @@ export class RecordListComponent {
     });
   }
 
-  toggleTextBox(textBoxName: string, checkBoxName: string): void {
-    const textBox = this.searchForm.get(textBoxName);
-    const checkBox = this.searchForm.get(checkBoxName);
-    // Check if checkBox is not null before accessing its value
-    if (textBox && checkBox?.value) {
-      if (checkBox.value) {
-        textBox.enable();
-      } else {
-        textBox.disable();
-      }
+  toggleTextBox(textBoxName: string, checkboxName: string): void {
+    const isChecked = this.searchForm.get(checkboxName)?.value;
+    if (isChecked) {
+      this.searchForm.get(textBoxName)?.enable();
+    } else {
+      this.searchForm.get(textBoxName)?.disable();
     }
   }
-
-  SearchForm() {}
   search(): void {
-    debugger;
-    // Make the HTTP request to your service
-    this.searchPayload = this.searchForm.value;
+    this.searchPayload = {};
+    Object.keys(this.searchForm.controls).forEach((controlName) => {
+      if (
+        controlName.startsWith('txt') &&
+        this.searchForm.get(controlName)?.enabled
+      ) {
+        this.searchPayload[controlName.substring(3)] =
+          this.searchForm.get(controlName)?.value;
+      }
+    });
+
     this.apiservice.GetSearchRecordList(this.searchPayload).subscribe(
       (response) => {
-        // Handle the API response here
         console.log('Search Results:', response);
+
+        // Update the records after the search operation completes
+        this.RecordList = response;
       },
       (error) => {
-        // Handle errors
         console.error('Error:', error);
       }
     );
   }
 
-  getRecordList() {
-    debugger;
-
+  getRecordList(): void {
     this.apiservice.getRecord().subscribe((res) => {
       this.RecordList = res;
       const totalRecords = this.RecordList.length;
@@ -113,6 +115,9 @@ export class RecordListComponent {
     });
   }
 
+  exit() {
+    location.reload();
+  }
   viewDocument(_id: Object): void {
     debugger;
     this.apiservice.ViewDoc(_id).subscribe(

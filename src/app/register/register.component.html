@@ -1,89 +1,159 @@
-
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Record-Management-System</title>
-      <!-- Google Font: Source Sans Pro -->
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-      <!-- Font Awesome -->
-      <link rel="stylesheet" href="/src/assets/fontawesome/css/all.min.css">
-      <!-- Theme style -->
-      <link rel="stylesheet" href="/src/assets/css/adminlte.min.css">
-   </head>
-   <body class="hold-transition login-page">
-      <div class="login-box">
-        <div class="text-center">
-        <h3> REGISTER  </h3>
-        </div>
-         <!-- /.login-logo -->
-         <div class="card card-outline card-warning">
-            <div class="card-header text-center">
-               <a href="index.html" class="brand-link">
-                            <img src="../../assets/img/logorms.png" alt="DSMS Logo" width="100" style="margin-top: 50px;">
-               </a>
-            </div>
-            <div class="card-body" >
-               <!-- <form [formGroup]="form" (submit)="submit()"> -->
-              <form [formGroup]="form" (submit)="submit()">
-                <div class="input-group mb-3">
-                  <input type="text" formControlName="name" class="form-control" placeholder="Name" required>
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-user"></span>
-                    </div>
-                  </div>
-                </div>
 
-                <div class="input-group mb-3">
-                  <input formControlName="username" type="text" class="form-control" placeholder="Username" required>
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-user"></span>
-                    </div>
-                  </div>
-                </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Record-Management-System</title>
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/src/assets/fontawesome/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/src/assets/css/adminlte.min.css">
+</head>
 
-                <div class="input-group mb-3">
-                  <input formControlName="password" type="password" class="form-control" placeholder="Password" required>
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-lock"></span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- <div class="input-group mb-3">
-                  <select formControlName="role" class="form-control">
-                    <option>Admin</option>
-                    <option>Encoder</option>
-                  </select>
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-users"></span>
-                    </div>
-                  </div>
-                </div> -->
-
-                <div class="row">
-                  <!-- <div class="col-12">
-                    <div class="icheck-primary">
-                      <input type="checkbox" id="remember">
-                      <label for="remember">Remember Me</label>
-                    </div>
-                  </div> -->
-
-                  <div class="col-6 offset-3">
-                    <button class="btn btn-block btn-bg" type="submit" style="background-color: rgba(0, 0, 0, 0.5); color: white;">Submit</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <!-- /.card-body -->
-         </div>
-         <!-- /.card -->
+<body class="hold-transition login-page">
+  <div class="login-box">
+    <div class="text-center">
+      <h3>રજિસ્ટર</h3>
+    </div>
+    <div class="card card-outline card-warning">
+      <div class="card-header text-center">
+        <a href="index.html" class="brand-link">
+          <img src="../../assets/img/logorms.png" alt="DSMS Logo" width="100" style="margin-top: 50px;">
+        </a>
       </div>
-      <!-- /.login-box -->
-   </body>
+      <div class="card-body" [@fadeInOut]  style="max-width: 100%; padding: 20px;">
+        <form [formGroup]="form" (submit)="submit()">
+          <div class="form-group row">
+            <label for="district" class="col-sm-3 col-form-label">જિલ્લા</label>
+            <div class="col-sm-9">
+              <div class="input-group mb-3">
+                <select class="form-control" id="district" formControlName="dcode">
+                  <option value="" selected>-- Select District --</option>
+                  <option *ngFor="let dr of districtList" [value]="dr.dcode">{{ dr.name_g }}</option>
+                </select>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="office" class="col-sm-3 col-form-label">ઓફિસ</label>
+            <div class="col-sm-9">
+              <div class="input-group mb-3">
+                <select class="form-control" id="office" formControlName="officeId">
+                    <option value="" selected>-- Select Office --</option>
+                  <option *ngFor="let ofc of officeList" [value]="ofc.idno">{{ ofc.name }}</option>
+                </select>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="form-group row">
+            <label for="branch" class="col-sm-3 col-form-label">બ્રાન્ચ</label>
+            <div class="col-sm-9">
+              <div class="input-group mb-3">
+                <select class="form-control" id="branch" formControlName="branchId">
+                <option value="" selected>-- Select Branch --</option>
+                  <option *ngFor="let br of branchList" [value]="br.oid">{{ br.BRANCH }}</option>
+                </select>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--
+
+          <div class="form-group">
+            <label for="name">બ્રાન્ચ</label>
+            <div class="input-group mb-3">
+              <select class="form-control" id="branch" formControlName="branch">
+                <option value="0">--Select--</option>
+                <option *ngFor="let br of branchList" [value]="br.oid">{{ br.BRANCH }}</option>
+              </select>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="form-group row">
+            <label for="name" class="col-sm-3 col-form-label">નામ</label>
+            <div class="col-sm-9">
+              <div class="input-group mb-3">
+                <input type="text" id="name" formControlName="name" class="form-control" placeholder="નામ" required>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label for="username" class="col-sm-3 col-form-label">યુઝરનેમ</label>
+            <div class="col-sm-9">
+              <div class="input-group mb-3">
+                <input type="text" id="username" formControlName="username" class="form-control" placeholder="યુઝરનેમ"
+                  required>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="password" class="col-sm-3 col-form-label">પાસવર્ડ</label>
+            <div class="col-sm-9">
+              <div class="input-group mb-3">
+                <input type="password" id="password" formControlName="password" class="form-control"
+                  placeholder="પાસવર્ડ" required>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-12">
+              <div class="col-6 offset-3">
+                <button class="btn btn-block btn-bg" type="submit"
+                  style="background-color: rgba(0, 0, 0, 0.5); color: white;">સબમિટ</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>

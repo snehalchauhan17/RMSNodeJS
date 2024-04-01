@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="text-center">
+    <h3>બ્રાન્ચ એન્ટ્રી</h3>
+  </div>
+  <br>
+  <form [formGroup]="BranchForm" (ngSubmit)="AddBranch(BranchForm.value)">
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label for="district">જિલ્લાનું નામ</label>
+      </div>
+      <div class="form-group col-md-4">
+        <select class="form-control" id="district" formControlName="districtId" #districtSelect
+          (change)="onDistrictSelected(districtSelect.value)">
+          <option value="" selected>-- Select District --</option>
+          <option *ngFor="let dr of districtList" [value]="dr.did">{{ dr.dname }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label for="office">ઓફિસનું નામ</label>
+      </div>
+      <div class="form-group col-md-4">
+        <select class="form-control" id="office" formControlName="officeId">
+          <option value="" selected>-- Select Office --</option>
+          <option *ngFor="let ofc of filteredOfficeList" [value]="ofc.idno">{{ ofc.name }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label for="branchName">બ્રાન્ચનું નામ</label>
+      </div>
+      <div class="form-group col-md-4">
+        <input type="text" class="form-control" id="branchName" placeholder="Branch Name" formControlName="BranchName">
+      </div>
+    </div>
+    <br>
+    <div class="row justify-content-center">
+      <div class="form-group col-md-2">
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+      </div>
+    </div>
+  </form>
+  <hR>
+  <div class="mat-elevation-z8">
+  <div class="text-center">
+    <h3>બ્રાન્ચ લિસ્ટ</h3>
+  </div><BR>
+    <section class="example-container mat-elevation-z8">
+      <table class="table table-bordered" *ngIf="branchList && branchList.length > 0">
+        <thead class="TABLE thead-dark">
+          <tr>
+            <!-- <th> </th>
+            <th> </th> -->
+            <th>જિલ્લા</th>
+            <th>ઓફિસ</th>
+            <th>બ્રાન્ચ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let branch of branchList">
+              <!-- <td> <button type="button" (click)="EditOfficeEntry(item._id);  $event.preventDefault();"
+                  class="btn btn-primary">Edit</button> </td>
+              <td> <button type="button" (click)="DeleteOfficeEntry(item._id.trim());  $event.preventDefault();"
+                  class="btn btn-primary">Delete</button> </td> -->
+            <td>{{ branch.districtName }}</td>
+            <td>{{ branch.officeName }}</td>
+            <td>{{ branch.BranchName }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <div *ngIf="!branchList || branchList.length === 0">
+      No data available.
+    </div>
+  </div>
+</div>

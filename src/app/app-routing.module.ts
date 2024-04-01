@@ -7,6 +7,9 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { RecordListComponent } from './dashboard/record-list/record-list.component';
 import { ChangePasswordComponent } from './dashboard/change-password/change-password.component';
+import {BranchmasterComponent} from './dashboard/branchmaster/branchmaster.component';
+import { OfficeMasterComponent } from './dashboard/office-master/office-master.component';
+import { OfficeListComponent } from './dashboard/office-list/office-list.component';
 
 const routes: Routes = [
   // { path: '', component: LoginComponent },
@@ -22,8 +25,12 @@ const routes: Routes = [
       { path: 'recordlist', component: RecordListComponent },
       { path: 'dataentry', component: DataEntryComponent },
       { path: 'changepassword', component: ChangePasswordComponent },
+      { path: 'branchmaster', component: BranchmasterComponent },
 
       { path: 'dataentry/:_id', component: DataEntryComponent },
+      { path: 'OfficeList', component: OfficeListComponent },
+      { path: 'OfficeMaster', component: OfficeMasterComponent },
+      { path: 'OfficeMaster/:_id', component: OfficeMasterComponent },
       // ... other child routes
     ],
   },

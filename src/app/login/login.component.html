@@ -15,7 +15,7 @@
    <body class="hold-transition login-page">
       <div class="login-box">
         <div class="text-center">
-        <h3> Login  </h3>
+        <h3> લોગીન  </h3>
         </div>
          <!-- /.login-logo -->
          <div class="card card-outline card-warning">
@@ -28,23 +28,34 @@
                <!-- <form [formGroup]="form" (submit)="submit()"> -->
               <form [formGroup]="form" (submit)="submit()">
 
-                <div class="input-group mb-3">
-                  <input formControlName="username" type="text" class="form-control" placeholder="Username" required>
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-user"></span>
+              <div class="form-group row">
+                <label for="username" class="col-sm-3 col-form-label">યુઝરનેમ</label>
+                <div class="col-sm-9">
+                  <div class="input-group mb-3">
+                    <input type="text" id="username" formControlName="username" class="form-control" placeholder="યુઝરનેમ" required>
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                      </div>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <div class="input-group mb-3">
-                  <input formControlName="password" type="password" class="form-control" placeholder="Password" required>
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-lock"></span>
+              <div class="form-group row">
+                <label for="password" class="col-sm-3 col-form-label">પાસવર્ડ</label>
+                <div class="col-sm-9">
+                  <div class="input-group mb-3">
+                    <input type="password" id="password" formControlName="password" class="form-control" placeholder="પાસવર્ડ"
+                      required>
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                      </div>
                     </div>
                   </div>
                 </div>
+              </div>
 
                 <!-- <div class="input-group mb-3">
                   <select formControlName="role" class="form-control">
@@ -67,7 +78,7 @@
                   </div> -->
 
                   <div class="col-6 offset-3">
-                    <button class="btn btn-block btn-bg" type="submit" style="background-color:  rgba(0, 0, 0, 0.5); color: white;">Submit</button>
+                    <button class="btn btn-block btn-bg" type="submit" style="background-color:  rgba(0, 0, 0, 0.5); color: white;">સબમિટ</button>
                   </div>
                 </div>
               </form>

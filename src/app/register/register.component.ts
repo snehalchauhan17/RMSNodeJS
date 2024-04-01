@@ -6,25 +6,44 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { AppServiceService } from 'src/app/app-service.service';
 import Swal from 'sweetalert2';
+import { trigger, transition, style, animate } from '@angular/animations';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [animate('500ms', style({ opacity: 0 }))]),
+    ]),
+  ],
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
 
+  districtList: any[];
+  officeList: any[];
+  branchList: any[];
   constructor(
     private formBuilder: FormBuilder,
     private apiService: AppServiceService,
     private http: HttpClient,
     private router: Router
   ) {
+    this.fetchDistricts();
+    this.fetchBranch();
+    this.fetchOffice();
     // initialize your form in the constructor
     this.form = this.formBuilder.group({
       name: '',
       username: '',
       password: '',
+      dcode:'',
+      officeId:'',
+      branchId:''
     });
   }
 
@@ -33,32 +52,56 @@ export class RegisterComponent implements OnInit {
       name: '',
       username: '',
       password: '',
+      dcode: '',
+      officeId: '',
+      branchId: '',
     });
   }
   // Register(user:any):void {
 
   // }
 
+  fetchDistricts(): void {
+    this.apiService.getDistrictList().subscribe((res) => {
+      this.districtList = res;
+      console.log(res);
+    });
+  }
+
+  fetchBranch(): void {
+    this.apiService.getBranchList().subscribe((res) => {
+      this.branchList = res;
+      console.log(res);
+    });
+  }
+
+  fetchOffice(): void {
+    this.apiService.getOfficeList().subscribe((res) => {
+      this.officeList = res;
+      console.log(res);
+    });
+  }
 
   submit(): void {
-    debugger
+    debugger;
     let user = this.form?.getRawValue();
     console.log(user);
 
-    if (user.name == '' || user.username == '' || user.password == '') {
+    if (user.dcode =='' || user.officeId=='' || user.branchId =='' || user.name == '' || user.username == '' || user.password == '') {
       Swal.fire('Error', 'Please Enter all the Details', 'error');
     } else {
-       console.log(user);
-       this.apiService.RegisterPost(user).subscribe( () =>{ this.router.navigate(['/dashboard']).then(()=>{
-        window.location.reload();
-      });
-    },
+      console.log(user);
+      this.apiService.RegisterPost(user).subscribe(
+        () => {
+          this.router.navigate(['/dashboard']).then(() => {
+            window.location.reload();
+          });
+        },
 
-      (err) => {
-        Swal.fire('Error', err.error.message, 'error');
-      }
-    );
+        (err) => {
+          Swal.fire('Error', err.error.message, 'error');
+        }
+      );
     }
-
   }
 }

@@ -1,0 +1,68 @@
+
+  <!-- <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid center">
+      <form class="d-flex" style="margin-left: 400px;">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </nav> -->
+<div class="text-center">
+  <h3> ઓફિસ એન્ટ્રી</h3>
+</div><BR><BR>
+  <form [formGroup]="officemasterForm">
+    <div class="form-row">
+        <div class="form-grouinputPassword4p col-md-4">
+            <label for="">ઓફિસ</label>
+                <select class="form-control"  placeholder="ઓફિસ" formControlName="office" >
+                    <option value="0">--Select--</option>
+                    <option *ngFor="let br of officemasterlist" value={{br.name}}>
+                    {{br.name}}
+                    </option>
+
+                </select>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="inputPassword5">આઈડી</label>
+            <input type="text" class="form-control" id="inputPassword5" placeholder="આઈડી" formControlName="id">
+        </div>
+
+
+        <div class="form-grouinput col-md-4">
+          <label for="">ઓફિસ ટાઈપ</label>
+              <select class="form-control"  placeholder="ઓફિસ ટાઈપ પસંદ કરો" formControlName="officetype">
+
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+              </select>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="inputPassword4">ડિસ્ટ્રિક્ટ કોડ</label>
+        <input type="text" class="form-control" id="inputPassword4" placeholder="ડિસ્ટ્રિક્ટ કોડ" formControlName="dcode">
+    </div>
+
+    <div class="form-group col-md-3">
+      <BR>
+        <button type="submit" (click)="Addofficemasterlist(officemasterForm.value); $event.preventDefault();" [disabled]="isEditMode" class="btn btn-primary" style="width: -webkit-fill-available;">ઉમેરો</button>
+
+      <!-- <button type="submit" class="btn btn-primary">ઉમેરો</button> -->
+    </div>
+
+    <br/>
+
+    <div>
+    <div>
+
+      <button type="submit" *ngIf="isEditMode" (click)="onUpdateOffice();" class="btn btn-primary"
+        style="width: -webkit-fill-available;">સુધારો</button>
+    </div>
+  </div>
+
+
+    </div>
+
+</form>

@@ -34,17 +34,17 @@
         <ul class="navbar-nav ml-auto" *ngIf="!authenticated">
           <li class="nav-item">
             <a class="nav-link" routerLink="/login" data-widget="pushmenu" role="button"><i
-                class="fas fa-bars">Login</i></a>
+                class="fas fa-bars">લોગીન</i></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/register" data-widget="pushmenu" role="button"><i
-                class="fas fa-bars">Register</i></a>
+                class="fas fa-bars">રેજિસ્ટર</i></a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto" *ngIf="authenticated">
           <li class="nav-item">
             <a class="nav-link" routerLink="" data-widget="pushmenu" (click)="LogOut()" role="button"><i
-                class="fas fa-bars">Logout</i></a>
+                class="fas fa-bars">લોગઆઉટ</i></a>
           </li>
 
         </ul>
@@ -96,7 +96,7 @@
                     <path
                       d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0" />
                   </svg>
-                    Data Entry
+                  ડેટા એન્ટ્રી
                   </p>
                 </a>
               </li>
@@ -111,17 +111,67 @@
                     <path
                       d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0M7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0" />
                   </svg>
-                    Record List
+                રેકોર્ડ લિસ્ટ
                      <!-- <span class="badge badge-light ">9+</span> -->
                   </p>
                 </a>
               </li>
+              <li>
+                <a [routerLink]="['OfficeMaster']" class="nav-link">
+                  <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
+                <p><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                    class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0" />
+                  </svg>
+            ઓફિસ એન્ટ્રી
+                  </p>
+                </a>
+
+              </li>
+
+
+              <li>
+                <a [routerLink]="['OfficeList']" class="nav-link">
+                  <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
+
+                    <p><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-card-checklist"
+                        viewBox="0 0 16 16">
+                        <path
+                          d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
+                        <path
+                          d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0M7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0" />
+                      </svg>
+                ઓફિસ લિસ્ટ
+                  </p>
+                </a>
+
+              </li>
+                <li class="nav-item">
+                  <!-- <a (click)="onNavigateToNewComponent()" class="nav-link"> -->
+                  <a [routerLink]="['branchmaster']" class="nav-link ">
+                    <!-- <a (click)="onNavigateToNewComponent()" class="nav-link"> -->
+                    <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
+                    <p><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                        class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16">
+                        <path
+                          d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0" />
+                      </svg>
+                  બ્રાન્ચ એન્ટ્રી
+                    </p>
+                  </a>
+                </li>
               <li class="nav-item">
                 <!-- <a (click)="onNavigateToRecordList()" class="nav-link"> -->
                 <a [routerLink]="['changepassword']" class="nav-link">
                   <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
                   <p>
-                    Change Password
+                          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-key"
+                            viewBox="0 0 16 16">
+                            <path
+                              d="M8.68 1.293a.5.5 0 0 1 .707 0l6.25 6.25a.5.5 0 0 1 0 .707l-1.4 1.4a.5.5 0 0 1-.707 0L12.5 8.707a.5.5 0 0 0-.707 0l-1.4 1.4a.5.5 0 0 1-.707 0L8.5 9.914V14.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5V9.914l-1.293 1.293a.5.5 0 0 1-.707 0l-1.4-1.4a.5.5 0 0 1 0-.707l6.25-6.25a.5.5 0 0 1 .707 0zM6 9.914V6.5a2 2 0 1 1 4 0v3.414l.293.293a.5.5 0 0 1 0 .707l-1.4 1.4a.5.5 0 0 1-.707 0L8.5 12.707a.5.5 0 0 0-.707 0l-1.4 1.4a.5.5 0 0 1-.707 0l-.293-.293a.5.5 0 0 1 0-.707l1.293-1.293zM7 5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                          </svg>
+                    ચેન્જ પાસવર્ડ
                   </p>
                 </a>
               </li>
@@ -181,14 +231,14 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0" style="color: rgb(242,175,88);"><span class="fa fa-tachometer-alt"></span> Dashboard
+                <h1 class="m-0" style="color: rgb(242,175,88);"><span class="fa fa-tachometer-alt"></span> ડેશબોર્ડ
                 </h1>
               </div>
               <!-- /.col -->
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Dashboard</li>
+                  <li class="breadcrumb-item"><a href="#">હોમ</a></li>
+                  <li class="breadcrumb-item active">ડેશબોર્ડ</li>
 
                 </ol>
               </div>

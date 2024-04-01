@@ -29,16 +29,14 @@ export class DataEntryComponent {
     private apiService: AppServiceService,
     private router: Router,
     private route:ActivatedRoute,
-    private formbuilder: FormBuilder //  private toastr: ToastrService
+    private formbuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
 
     this.Auth();
     this.createForm();
-   // this.editForm();
     this.BranchList();
-  // Check if the route parameters indicate edit mode
   this.route.params.subscribe(params => {
     if (params['_id']) {
       this.editForm();
@@ -101,11 +99,9 @@ export class DataEntryComponent {
 
   AddDataEntry(dataentry: any) {
     debugger;
-    //let docid = dataentry.documentId
     const docid = sessionStorage.getItem('docid');
     console.log(this.DEForm);
     if (docid) {
-      // Add docid to the dataentry object
       dataentry.documentId = docid;
 
       console.log(this.DEForm);
@@ -121,7 +117,7 @@ export class DataEntryComponent {
           alert('Error');
           // Handle error
           //  this.toastr.success('Hello World!', 'Custom Alert');
-          // Swal.fire('Error', err.error.message, 'error');
+          Swal.fire('Error', err.error.message, 'error');
         }
       );
     } else {

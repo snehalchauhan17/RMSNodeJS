@@ -39,6 +39,7 @@ this.form = this.formbuilder.group({
     Swal.fire('Error', 'Please Enter all the Details', 'error');
   } else {
     console.log(user);
+    sessionStorage.setItem('username',user.username);
     this.apiService.LoginPost(user).subscribe(
       () =>{ this.router.navigate(['/dashboard']).then(()=>{
         window.location.reload();

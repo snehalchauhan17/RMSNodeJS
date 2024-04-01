@@ -59,6 +59,18 @@ export class AppServiceService {
       );
   }
 
+  ChangePawd(username: any, newPassword: any): Observable<any> {
+    debugger;
+    return this.http
+      .put<any>(`${this.apiUrl}/api/ChangePassword/${username}`, newPassword)
+      .pipe(
+        catchError((error) => {
+          console.error('Error:', error);
+          return throwError(error);
+        })
+      );
+  }
+
   //To get Data of Registered User
 
   GetUserName(): Observable<any[]> {
@@ -92,6 +104,7 @@ export class AppServiceService {
       })
     );
   }
+
   ViewDoc(_id: Object): Observable<ArrayBuffer> {
     debugger;
     return this.http
@@ -172,6 +185,120 @@ export class AppServiceService {
     );
   }
 
+  BranchEntryPost(branchmaster: any): Observable<any> {
+    debugger;
+
+    return this.http
+      .post<any>(`${this.apiUrl}/api/InsertBranch`, branchmaster, {
+        withCredentials: true,
+      })
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  getBranchModelList(): Observable<any[]> {
+    debugger;
+    return this.http.get<any[]>(`${this.apiUrl}/api/BranchModelList`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  getDistrictList(): Observable<any[]> {
+    debugger;
+    return this.http.get<any[]>(`${this.apiUrl}/api/DistrictList`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  getOfficeList(): Observable<any[]> {
+    debugger;
+    return this.http.get<any[]>(`${this.apiUrl}/api/OfficeList`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  getAllOfficeMasterList(): Observable<any[]> {
+    debugger;
+    return this.http.get<any[]>(`${this.apiUrl}/api/AllOfficeList`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+
+  getOfficeMasterList(): Observable<any[]> {
+    debugger;
+    return this.http.get<any[]>(`${this.apiUrl}/api/OfficeMasterList`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
+  OfficeMasterPost(officemaster: any): Observable<any> {
+    debugger;
+    return this.http
+      .post<any>(`${this.apiUrl}/api/InsertOffice`, officemaster, {
+        withCredentials: true,
+      })
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  deleteOfficeById(_id: Object): Observable<any> {
+    debugger;
+    return this.http.delete<any>(`${this.apiUrl}/api/DeleteOffice/${_id}`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        console.log('error in api service.');
+        return throwError(error);
+      })
+    );
+  }
+
+  getOfficeById(_id: string): Observable<any[]> {
+    debugger;
+    return this.http
+      .get<any[]>(`${this.apiUrl}/api/FindOfficebyId/${_id}`)
+      .pipe(
+        catchError((error) => {
+          console.error('Error:', error);
+          return throwError(error);
+        })
+      );
+  }
+
+  updateOfficebyId(_id: string, updatedData: any): Observable<any> {
+    debugger;
+    return this.http
+      .put<any>(`${this.apiUrl}/api/UpdateOffice/${_id}`, updatedData)
+      .pipe(
+        catchError((error) => {
+          console.error('Error:', error);
+          return throwError(error);
+        })
+      );
+  }
+
   updateRecord(_id: string, updatedData: any): Observable<any> {
     debugger;
     return this.http
@@ -200,18 +327,28 @@ export class AppServiceService {
   //     );
   // }
 
-  GetSearchRecordList(searchPayload: any): Observable<any> {
-    const queryParams = new HttpParams({ fromObject: searchPayload });
+  // GetSearchRecordList(searchPayload: any): Observable<any> {
+  //   const queryParams = new HttpParams({ fromObject: searchPayload });
+  //   const url = `${this.apiUrl}/api/searchRecordList`;
+
+  //   return this.http.get<any>(url, { params: queryParams }).pipe(
+  //     catchError((error) => {
+  //       console.error('Error', error);
+  //       return throwError(error);
+  //     })
+  //   );
+  // }
+
+  getRecords(payload: any): Observable<any> {
     const url = `${this.apiUrl}/api/searchRecordList`;
-
-    return this.http.get<any>(url, { params: queryParams }).pipe(
-      catchError((error) => {
-        console.error('Error', error);
-        return throwError(error);
-      })
-    );
+    return this.http.get<any>(url, { params: payload });
   }
-
+  GetSearchRecordList(payload: any): Observable<any> {
+    debugger;
+    console.log(payload, 'Payload');
+    const url = `${this.apiUrl}/api/searchRecordList`;
+    return this.http.get<any>(url, { params: payload });
+  }
   getPosts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/products`).pipe(
       catchError((error) => {

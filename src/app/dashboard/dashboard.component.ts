@@ -46,7 +46,9 @@ export class DashboardComponent implements OnInit {
         Emitters.authEmitter.emit(true);
       },
       (error) => {
+            this.router.navigate(['/']);
         this.message = 'You are not logged in';
+        this.authenticated = false;
         Emitters.authEmitter.emit(false);
         // Handle error
         // console.error('Error in component:', error);
