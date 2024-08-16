@@ -22,7 +22,7 @@
       <div class="form-group col-md-4">
         <select class="form-control" id="officeId" formControlName="officeId">
           <option value="" selected>-- Select Office --</option>
-          <option *ngFor="let ofc of filteredOfficeList" [value]="ofc.idno">{{ ofc.name }}</option>
+          <option *ngFor="let ofc of OfficeList" [value]="ofc.idno">{{ ofc.name }}</option>
         </select>
       </div>
     </div>

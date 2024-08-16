@@ -48,42 +48,17 @@
           </li>
 
         </ul>
-
-        <!-- Right navbar links -->
-        <!-- <ul class="navbar-nav ml-auto">
-               <li class="nav-item">
-                  <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                  <i class="fas fa-expand-arrows-alt"></i>
-                  </a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" data-widget="fullscreen" href="../index.html">
-                  <i class="fas fa-power-off"></i>
-                  </a>
-               </li>
-            </ul> -->
       </nav>
       <!-- /.navbar -->
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: rgba(44,62,80);">
         <!-- Brand Logo -->
         <a [routerLink]="['/dashboard']" class="brand-link animated swing">
-          <img src="../../assets/img/logorms.png" alt="DSMS Logo" width="100" height="100" style="margin-top: 60px; margin-left: 60px;">
+          <img src="../../assets/img/logorms.png" alt="DSMS Logo" width="100" height="100"
+            style="margin-top: 60px; margin-left: 60px;">
         </a>
         <!-- Sidebar -->
-        <div class="sidebar" >
-
-          <!-- Sidebar user panel (optional) -->
-          <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-
-            <div class="image">
-              <img src="../../assets/img/profile.png" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-              <a href="#" class="d-block">{{message}}</a>
-            </div>
-          </div> -->
-          <!-- Sidebar Menu -->
+        <div class="sidebar">
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <li class="nav-item">
@@ -91,12 +66,12 @@
                 <a [routerLink]="['dataentry']" class="nav-link ">
                   <!-- <a (click)="onNavigateToNewComponent()" class="nav-link"> -->
                   <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
-                  <p><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-file-earmark-plus-fill"
-                    viewBox="0 0 16 16">
-                    <path
-                      d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0" />
-                  </svg>
-                  રેકોર્ડ એન્ટ્રી
+                  <p><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                      class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16">
+                      <path
+                        d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0" />
+                    </svg>
+                    રેકોર્ડ એન્ટ્રી
                   </p>
                 </a>
               </li>
@@ -104,27 +79,27 @@
                 <!-- <a (click)="onNavigateToRecordList()" class="nav-link"> -->
                 <a [routerLink]="['recordlist']" class="nav-link bi bi-card-checklist">
                   <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
-                  <p><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-card-checklist"
-                    viewBox="0 0 16 16">
-                    <path
-                      d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
-                    <path
-                      d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0M7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0" />
-                  </svg>
-                રેકોર્ડ લિસ્ટ
-                     <!-- <span class="badge badge-light ">9+</span> -->
+                  <p><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                      class="bi bi-card-checklist" viewBox="0 0 16 16">
+                      <path
+                        d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
+                      <path
+                        d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0M7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0" />
+                    </svg>
+                    રેકોર્ડ લિસ્ટ
+                    <!-- <span class="badge badge-light ">9+</span> -->
                   </p>
                 </a>
               </li>
               <li>
                 <a [routerLink]="['OfficeMaster']" class="nav-link">
                   <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
-                <p><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                    class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16">
-                    <path
-                      d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0" />
-                  </svg>
-            ઓફિસ એન્ટ્રી
+                  <p><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                      class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16">
+                      <path
+                        d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0" />
+                    </svg>
+                    ઓફિસ એન્ટ્રી
                   </p>
                 </a>
 
@@ -135,89 +110,43 @@
                 <a [routerLink]="['OfficeList']" class="nav-link">
                   <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
 
-                    <p><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-card-checklist"
-                        viewBox="0 0 16 16">
-                        <path
-                          d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
-                        <path
-                          d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0M7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0" />
-                      </svg>
-                ઓફિસ લિસ્ટ
+                  <p><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                      class="bi bi-card-checklist" viewBox="0 0 16 16">
+                      <path
+                        d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
+                      <path
+                        d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0M7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0" />
+                    </svg>
+                    ઓફિસ લિસ્ટ
                   </p>
                 </a>
 
               </li>
-                <li class="nav-item">
-                  <!-- <a (click)="onNavigateToNewComponent()" class="nav-link"> -->
-                  <a [routerLink]="['branchmaster']" class="nav-link ">
-                    <!-- <a (click)="onNavigateToNewComponent()" class="nav-link"> -->
-                    <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
-                    <p><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                        class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16">
-                        <path
-                          d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0" />
-                      </svg>
-                  બ્રાન્ચ એન્ટ્રી
-                    </p>
-                  </a>
-                </li>
               <li class="nav-item">
-                <!-- <a (click)="onNavigateToRecordList()" class="nav-link"> -->
+                <!-- <a (click)="onNavigateToNewComponent()" class="nav-link"> -->
+                <a [routerLink]="['branchmaster']" class="nav-link ">
+                  <p><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                      class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16">
+                      <path
+                        d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0" />
+                    </svg>
+                    બ્રાન્ચ એન્ટ્રી
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a [routerLink]="['changepassword']" class="nav-link">
                   <!-- <i class="nav-icon fa fa-clinic-medical"></i> -->
                   <p>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-key"
-                            viewBox="0 0 16 16">
-                            <path
-                              d="M8.68 1.293a.5.5 0 0 1 .707 0l6.25 6.25a.5.5 0 0 1 0 .707l-1.4 1.4a.5.5 0 0 1-.707 0L12.5 8.707a.5.5 0 0 0-.707 0l-1.4 1.4a.5.5 0 0 1-.707 0L8.5 9.914V14.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5V9.914l-1.293 1.293a.5.5 0 0 1-.707 0l-1.4-1.4a.5.5 0 0 1 0-.707l6.25-6.25a.5.5 0 0 1 .707 0zM6 9.914V6.5a2 2 0 1 1 4 0v3.414l.293.293a.5.5 0 0 1 0 .707l-1.4 1.4a.5.5 0 0 1-.707 0L8.5 12.707a.5.5 0 0 0-.707 0l-1.4 1.4a.5.5 0 0 1-.707 0l-.293-.293a.5.5 0 0 1 0-.707l1.293-1.293zM7 5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-                          </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-key"
+                      viewBox="0 0 16 16">
+                      <path
+                        d="M8.68 1.293a.5.5 0 0 1 .707 0l6.25 6.25a.5.5 0 0 1 0 .707l-1.4 1.4a.5.5 0 0 1-.707 0L12.5 8.707a.5.5 0 0 0-.707 0l-1.4 1.4a.5.5 0 0 1-.707 0L8.5 9.914V14.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5V9.914l-1.293 1.293a.5.5 0 0 1-.707 0l-1.4-1.4a.5.5 0 0 1 0-.707l6.25-6.25a.5.5 0 0 1 .707 0zM6 9.914V6.5a2 2 0 1 1 4 0v3.414l.293.293a.5.5 0 0 1 0 .707l-1.4 1.4a.5.5 0 0 1-.707 0L8.5 12.707a.5.5 0 0 0-.707 0l-1.4 1.4a.5.5 0 0 1-.707 0l-.293-.293a.5.5 0 0 1 0-.707l1.293-1.293zM7 5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                    </svg>
                     ચેન્જ પાસવર્ડ
                   </p>
                 </a>
               </li>
-              <!-- <li class="nav-item">
-                        <a href="medicine-category.html" class="nav-link">
-                           <i class="nav-icon fa fa-tablets"></i>
-                           <p>
-
-                           </p>
-                        </a>
-                     </li> -->
-
-
-              <!-- <li class="nav-item">
-                        <a href="#" class="nav-link">
-                           <i class="nav-icon fas fa-capsules"></i>
-                           <p>
-                              Medicine
-                           </p>
-                              <i class="right fas fa-angle-left"></i>
-                        </a>
-                        <ul class="nav nav-treeview">
-                           <li class="nav-item">
-                              <a href="add-medicine.html" class="nav-link">
-                                 <i class="nav-icon fa fa-plus"></i>
-                                 <p>Add</p>
-                              </a>
-                           </li>
-                           <li class="nav-item">
-                              <a href="manage-medicine.html" class="nav-link">
-                                 <i class="nav-icon fa fa-list"></i>
-                                 <p>Manage</p>
-                              </a>
-                           </li>
-                        </ul>
-                     </li> -->
-
-              <!-- <li class="nav-item">
-                        <a href="database.html" class="nav-link">
-                           <i class="nav-icon fa fa-database"></i>
-                           <p>
-                              Database
-                           </p>
-                        </a>
-                     </li> -->
-
             </ul>
           </nav>
           <!-- /.sidebar-menu -->
@@ -226,25 +155,24 @@
       </aside>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
+
         <div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0" style="color: rgb(242,175,88);"><span class="fa fa-tachometer-alt"></span> ડેશબોર્ડ
+                <h1 class="m-0" style="color: rgb(242,175,88);"><span class="fa fa-tachometer-alt"></span> Dashboard
                 </h1>
               </div>
-
+              <!-- /.col -->
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">હોમ</a></li>
-                  <li class="breadcrumb-item active">ડેશબોર્ડ</li>
-
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
               </div>
-
+              <!-- /.col -->
             </div>
-
+            <!-- /.row -->
           </div>
           <!-- /.container-fluid -->
         </div>
@@ -252,24 +180,8 @@
         <!-- Main content -->
         <section class="content">
           <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
-            <!-- <div *ngIf="showDataEntry  && authenticated">
-
-              <app-data-entry></app-data-entry>
-            </div>
-
-            <div *ngIf="showRecordList  && authenticated">
-              <app-record-list></app-record-list>
-
-            </div> -->
             <router-outlet></router-outlet>
-
           </div>
-
-          <!-- /.row -->
-          <!-- /.row (main row) -->
-
-          <!-- /.container-fluid -->
         </section>
         <!-- /.content -->
       </div>
