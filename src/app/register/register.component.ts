@@ -34,16 +34,16 @@ export class RegisterComponent implements OnInit {
     private router: Router
   ) {
     this.fetchDistricts();
-    this.fetchBranch();
-    this.fetchOffice();
+    // this.fetchBranch();
+    // this.fetchOffice();
     // initialize your form in the constructor
     this.form = this.formBuilder.group({
       name: '',
       username: '',
       password: '',
-      dcode:'',
-      officeId:'',
-      branchId:''
+      dcode: '',
+      officeId: [{ value: '' }],
+      branchId: [{ value: '' }],
     });
   }
 
@@ -53,8 +53,16 @@ export class RegisterComponent implements OnInit {
       username: '',
       password: '',
       dcode: '',
-      officeId: '',
-      branchId: '',
+      officeId: [{ value: '' }],
+      branchId: [{ value: '' }],
+    });
+
+    this.form.get('dcode')?.valueChanges.subscribe((did) => {
+      this.onDistrictChange(did);
+    });
+
+    this.form.get('officeId')?.valueChanges.subscribe((officeId) => {
+      this.onOfficeChange(officeId);
     });
   }
   // Register(user:any):void {
@@ -68,26 +76,59 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  fetchBranch(): void {
-    this.apiService.getBranchList().subscribe((res) => {
-      this.branchList = res;
-      console.log(res);
-    });
+  // fetchBranch(): void {
+  //   this.apiService.getBranchList().subscribe((res) => {
+  //     this.branchList = res;
+  //     console.log(res);
+  //   });
+  // }
+
+  onDistrictChange(did: number): void {
+    debugger;
+    if (did) {
+      this.apiService.getOfficeList(did).subscribe((data: any[]) => {
+        this.officeList = data;
+        this.form.get('officeId')?.enable(); // Enable the office dropdown when offices are loaded
+      });
+    } else {
+      this.officeList = [];
+      this.form.get('officeId')?.disable(); // Disable the office dropdown if no district is selected
+    }
   }
 
-  fetchOffice(): void {
-    this.apiService.getOfficeList().subscribe((res) => {
-      this.officeList = res;
-      console.log(res);
-    });
+  onOfficeChange(officeId: number): void {
+    debugger;
+    if (officeId) {
+      this.apiService.getBranchListbyID(officeId).subscribe((data: any[]) => {
+        this.branchList = data;
+        this.form.get('branch')?.enable(); // Enable the office dropdown when offices are loaded
+      });
+    } else {
+      this.branchList = [];
+      this.form.get('branch')?.disable(); // Disable the office dropdown if no district is selected
+    }
   }
+
+  // fetchOffice(): void {
+  //   this.apiService.getOfficeList().subscribe((res) => {
+  //     this.officeList = res;
+  //     console.log(res);
+  //   });
+  // }
 
   submit(): void {
     debugger;
     let user = this.form?.getRawValue();
     console.log(user);
 
-    if (user.dcode =='' || user.officeId=='' || user.branchId =='' || user.name == '' || user.username == '' || user.password == '') {
+    if (
+      user.dcode == '' ||
+      user.officeId == '' ||
+      user.branchId == '' ||
+      user.name == '' ||
+      user.username == '' ||
+      user.password == ''
+    ) {
       Swal.fire('Error', 'Please Enter all the Details', 'error');
     } else {
       console.log(user);

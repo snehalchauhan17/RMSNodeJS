@@ -28,7 +28,18 @@ export class AppServiceService {
         })
       );
   }
-
+  LoginPost(user: any): Observable<any> {
+    return this.http
+      .post<any>(`${this.apiUrl}/api/login`, user, {
+        withCredentials: true,
+      })
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
   LogoutPost() {
     return this.http
       .post<any>(
@@ -46,23 +57,10 @@ export class AppServiceService {
       );
   }
 
-  LoginPost(user: any): Observable<any> {
-    return this.http
-      .post<any>(`${this.apiUrl}/api/login`, user, {
-        withCredentials: true,
-      })
-      .pipe(
-        catchError((error) => {
-          console.error(error);
-          return throwError(error);
-        })
-      );
-  }
-
-  ChangePawd(username: any, newPassword: any): Observable<any> {
+  ChangePawd(username: any, user: any): Observable<any> {
     debugger;
     return this.http
-      .put<any>(`${this.apiUrl}/api/ChangePassword/${username}`, newPassword)
+      .put<any>(`${this.apiUrl}/api/ChangePassword/${username}`, user)
       .pipe(
         catchError((error) => {
           console.error('Error:', error);
@@ -95,6 +93,36 @@ export class AppServiceService {
       })
     );
   }
+  DataEntryPost(dataentry: any): Observable<any> {
+    debugger;
+
+    return this.http
+      .post<any>(`${this.apiUrl}/api/InsertRecord`, dataentry, {
+        withCredentials: true,
+      })
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
+  UploadFile(file: File): Observable<any> {
+    debugger;
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+
+    return this.http
+      .post<any>(`${this.apiUrl}/api/upload`, formData, {
+        withCredentials: true,
+      })
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
   getDoc(): Observable<any[]> {
     debugger;
     return this.http.get<any[]>(`${this.apiUrl}/api/DocList`).pipe(
@@ -118,20 +146,7 @@ export class AppServiceService {
         })
       );
   }
-  DataEntryPost(dataentry: any): Observable<any> {
-    debugger;
 
-    return this.http
-      .post<any>(`${this.apiUrl}/api/InsertRecord`, dataentry, {
-        withCredentials: true,
-      })
-      .pipe(
-        catchError((error) => {
-          console.error(error);
-          return throwError(error);
-        })
-      );
-  }
   deleteEntryById(_id: Object): Observable<any> {
     debugger;
     return this.http.delete<any>(`${this.apiUrl}/api/DeleteRecord/${_id}`).pipe(
@@ -142,22 +157,6 @@ export class AppServiceService {
     );
   }
 
-  UploadFile(file: File): Observable<any> {
-    debugger;
-    const formData: FormData = new FormData();
-    formData.append('file', file, file.name);
-
-    return this.http
-      .post<any>(`${this.apiUrl}/api/upload`, formData, {
-        withCredentials: true,
-      })
-      .pipe(
-        catchError((error) => {
-          console.error(error);
-          return throwError(error);
-        })
-      );
-  }
   setFormData(data: any[]) {
     debugger;
 
@@ -174,7 +173,46 @@ export class AppServiceService {
         })
       );
   }
+  getDistrictList(): Observable<any[]> {
+    debugger;
+    return this.http.get<any[]>(`${this.apiUrl}/api/DistrictList`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
+  getOfficeList(did: number): Observable<any[]> {
+    debugger;
+    return this.http
+      .get<any[]>(`${this.apiUrl}/api/OfficeListbyId/${did}`)
+      .pipe(
+        catchError((error) => {
+          console.error('Error:', error);
+          return throwError(error);
+        })
+      );
+  }
 
+  getAllOfficeMasterList(): Observable<any[]> {
+    debugger;
+    return this.http.get<any[]>(`${this.apiUrl}/api/AllOfficeList`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  getOfficeMasterList(): Observable<any[]> {
+    debugger;
+    return this.http.get<any[]>(`${this.apiUrl}/api/OfficeMasterList`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
   getBranchList(): Observable<any[]> {
     debugger;
     return this.http.get<any[]>(`${this.apiUrl}/api/BranchList`).pipe(
@@ -184,7 +222,15 @@ export class AppServiceService {
       })
     );
   }
-
+  getBranchListbyID(officeId:number): Observable<any[]> {
+    debugger;
+    return this.http.get<any[]>(`${this.apiUrl}/api/BranchListbyID/${officeId}`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
   BranchEntryPost(branchmaster: any): Observable<any> {
     debugger;
 
@@ -210,46 +256,6 @@ export class AppServiceService {
     );
   }
 
-  getDistrictList(): Observable<any[]> {
-    debugger;
-    return this.http.get<any[]>(`${this.apiUrl}/api/DistrictList`).pipe(
-      catchError((error) => {
-        console.error('Error:', error);
-        return throwError(error);
-      })
-    );
-  }
-
-  getOfficeList(): Observable<any[]> {
-    debugger;
-    return this.http.get<any[]>(`${this.apiUrl}/api/OfficeList`).pipe(
-      catchError((error) => {
-        console.error('Error:', error);
-        return throwError(error);
-      })
-    );
-  }
-
-  getAllOfficeMasterList(): Observable<any[]> {
-    debugger;
-    return this.http.get<any[]>(`${this.apiUrl}/api/AllOfficeList`).pipe(
-      catchError((error) => {
-        console.error('Error:', error);
-        return throwError(error);
-      })
-    );
-  }
-
-
-  getOfficeMasterList(): Observable<any[]> {
-    debugger;
-    return this.http.get<any[]>(`${this.apiUrl}/api/OfficeMasterList`).pipe(
-      catchError((error) => {
-        console.error('Error:', error);
-        return throwError(error);
-      })
-    );
-  }
   OfficeMasterPost(officemaster: any): Observable<any> {
     debugger;
     return this.http
@@ -348,23 +354,5 @@ export class AppServiceService {
     console.log(payload, 'Payload');
     const url = `${this.apiUrl}/api/searchRecordList`;
     return this.http.get<any>(url, { params: payload });
-  }
-  getPosts(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/products`).pipe(
-      catchError((error) => {
-        console.error('Error:', error);
-        return throwError(error);
-      })
-    );
-  }
-  addPost(post: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/product`, post);
-  }
-  updatePost(id: number, post: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/product/:${id}`, post);
-  }
-
-  deletePost(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/product/:${id}`);
   }
 }

@@ -25,7 +25,7 @@ export class BranchmasterComponent {
   ngOnInit(): void {
     this.initializeForm();
     this.fetchDistricts();
-    this.fetchOffices();
+    // this.fetchOffices();
     this.fetchBranchList();
   }
   initializeForm(): void {
@@ -34,29 +34,82 @@ export class BranchmasterComponent {
       officeId: ['', Validators.required],
       BranchName: ['', Validators.required],
     });
+    this.BranchForm.get('districtId')?.valueChanges.subscribe((did) => {
+      this.onDistrictChange(did);
+    });
+
   }
 
-  fetchDistricts(): void {
+   fetchDistricts(): void {
     this.apiservice.getDistrictList().subscribe((res) => {
       this.districtList = res;
       console.log(res);
     });
   }
 
-  fetchOffices(): void {
-    this.apiservice.getOfficeList().subscribe((res) => {
-      this.OfficeList = res;
-      console.log(res, 'office name');
-    });
-  }
-  onDistrictSelected(did: any) {
-    for (let i = 0; i < this.OfficeList.length; i++) {
-      if (this.OfficeList[i].dcode == did) {
-        this.filteredOfficeList.push(this.OfficeList[i]);
-      }
+  onDistrictChange(did: number): void {
+    debugger;
+    if (did) {
+      this.apiservice.getOfficeList(did).subscribe((data: any[]) => {
+        this.OfficeList = data;
+        console.log(this.OfficeList);
+        this.BranchForm.get('officeId')?.enable(); // Enable the office dropdown when offices are loaded
+      });
+    } else {
+      this.OfficeList = [];
+      this.BranchForm.get('officeId')?.disable(); // Disable the office dropdown if no district is selected
     }
-    console.log(this.filteredOfficeList, 'office filtered name');
   }
+
+  // fetchOffices(): void {
+  //   this.apiservice.getOfficeList().subscribe((res) => {
+  //     this.OfficeList = res;
+  //     console.log(res, 'office name');
+  //   });
+  // }
+  // onDistrictSelected(did: any) {
+  //   for (let i = 0; i < this.OfficeList.length; i++) {
+  //     if (this.OfficeList[i].dcode == did) {
+  //       this.filteredOfficeList.push(this.OfficeList[i]);
+  //     }
+  //   }
+  //   console.log(this.filteredOfficeList, 'office filtered name');
+  // }
+
+  // fetchDistricts(): void {
+  //   this.apiservice.getDistrictList().subscribe((res) => {
+  //     this.districtList = res;
+  //     console.log(res);
+  //   });
+  // }
+
+  // onDistrictChange(did: number): void {
+  //   debugger;
+  //   if (did) {
+  //     this.apiservice.getOfficeList(did).subscribe((data: any[]) => {
+  //       this.OfficeList = data;
+  //       this.BranchForm.get('office')?.enable(); // Enable the office dropdown when offices are loaded
+  //     });
+  //   } else {
+  //     this.OfficeList = [];
+  //     this.BranchForm.get('office')?.disable(); // Disable the office dropdown if no district is selected
+  //   }
+  // }
+
+  // fetchOffices(): void {
+  //   this.apiservice.getOfficeList().subscribe((res) => {
+  //     this.OfficeList = res;
+  //     console.log(res, 'office name');
+  //   });
+  // }
+  // onDistrictSelected(did: any) {
+  //   for (let i = 0; i < this.OfficeList.length; i++) {
+  //     if (this.OfficeList[i].dcode == did) {
+  //       this.filteredOfficeList.push(this.OfficeList[i]);
+  //     }
+  //   }
+  //   console.log(this.filteredOfficeList, 'office filtered name');
+  // }
   AddBranch(branchmaster: any): void {
     debugger;
     console.log(this.BranchForm);

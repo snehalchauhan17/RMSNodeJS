@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
   title: 'Local Environment Heading',
-  apiURL: 'http://localhost:3001',
+  apiURL: 'http://10.154.2.172:3000',
 };

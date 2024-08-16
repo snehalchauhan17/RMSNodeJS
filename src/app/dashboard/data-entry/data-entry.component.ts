@@ -69,28 +69,30 @@ export class DataEntryComponent {
       PostPage: ['', Validators.required],
       TotalPage: ['', Validators.required],
       DocumentName: ['', Validators.required],
-      documentId: ['', Validators.required],
+      documentId: [''],
     });
   }
   onUpdate() {
     debugger;
     if (this.DEForm.valid) {
       const formData = this.DEForm.value;
-      const docid = sessionStorage.getItem('docid');
+   const docid = sessionStorage.getItem('docid');
+   formData.documentId = docid ? docid : null;
+    //  const docid = sessionStorage.getItem('docid');
 
-      if (docid) {
-        formData.documentId = docid;
+      // if (formData.documentId) {
+      //   formData.documentId = docid;
 
         if (this.isEditMode) {
           const _id = formData._id;
-          console.log('update formdata:',formData)
+          console.log('update formdata:', formData);
           this.updateRecord(_id, formData);
         } else {
           this.AddDataEntry(formData);
         }
-      } else {
-        console.error('docid not found in sessionStorage');
-      }
+      // } else {
+      //   console.error('docid not found in sessionStorage');
+      // }
     } else {
       // Handle form validation errors
     }
@@ -99,11 +101,15 @@ export class DataEntryComponent {
 
   AddDataEntry(dataentry: any) {
     debugger;
-    const docid = sessionStorage.getItem('docid');
-    console.log(this.DEForm);
-    if (docid) {
-      dataentry.documentId = docid;
 
+    console.log(this.DEForm);
+
+    if (dataentry.documentId) {
+      const docid = sessionStorage.getItem('docid');
+      dataentry.documentId = docid;
+    } else {
+    dataentry.documentId = null;
+    }
       console.log(this.DEForm);
       this.apiService.DataEntryPost(dataentry).subscribe(
         () => {
@@ -120,9 +126,7 @@ export class DataEntryComponent {
           Swal.fire('Error', err.error.message, 'error');
         }
       );
-    } else {
-      console.error('docid not found in sessionStorage');
-    }
+
     //}
   }
 

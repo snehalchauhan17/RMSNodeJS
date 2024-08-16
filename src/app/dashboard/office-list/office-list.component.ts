@@ -23,8 +23,8 @@ export class OfficeListComponent {
   ) {}
 
   ngOnInit() {
-    this.getofficeList();  
-    
+    this.getofficeList();
+
   }
 
   getofficeList() {

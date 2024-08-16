@@ -6,11 +6,10 @@
   <form [formGroup]="BranchForm" (ngSubmit)="AddBranch(BranchForm.value)">
     <div class="row">
       <div class="form-group col-md-4">
-        <label for="district">જિલ્લાનું નામ</label>
+        <label for="districtId">જિલ્લાનું નામ</label>
       </div>
       <div class="form-group col-md-4">
-        <select class="form-control" id="district" formControlName="districtId" #districtSelect
-          (change)="onDistrictSelected(districtSelect.value)">
+        <select class="form-control" id="districtId" formControlName="districtId">
           <option value="" selected>-- Select District --</option>
           <option *ngFor="let dr of districtList" [value]="dr.did">{{ dr.dname }}</option>
         </select>
@@ -18,10 +17,10 @@
     </div>
     <div class="row">
       <div class="form-group col-md-4">
-        <label for="office">ઓફિસનું નામ</label>
+        <label for="officeId">ઓફિસનું નામ</label>
       </div>
       <div class="form-group col-md-4">
-        <select class="form-control" id="office" formControlName="officeId">
+        <select class="form-control" id="officeId" formControlName="officeId">
           <option value="" selected>-- Select Office --</option>
           <option *ngFor="let ofc of filteredOfficeList" [value]="ofc.idno">{{ ofc.name }}</option>
         </select>
