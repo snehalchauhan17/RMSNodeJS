@@ -37,7 +37,8 @@ this.form = this.formbuilder.group({
 
     if (user.username == '' || user.password == '') {
     Swal.fire('Error', 'Please Enter all the Details', 'error');
-  } else {
+  }
+   else {
     console.log(user);
     sessionStorage.setItem('username',user.username);
     this.apiService.LoginPost(user).subscribe(
