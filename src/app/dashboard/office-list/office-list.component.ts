@@ -29,7 +29,7 @@ export class OfficeListComponent {
 
   getofficeList() {
     debugger;
-    this.apiservice.getAllOfficeMasterList().subscribe((res) => {
+    this.apiservice.getOfficeMasterList().subscribe((res) => {
       this.OfficeList = res;
       //const totalRecords = this.RecordList.length;
       console.log(this.OfficeList);

@@ -2,6 +2,7 @@
 <div class="text-center">
   <h3> રેકોર્ડ એન્ટ્રી ફોર્મ</h3>
 </div>
+<br>
 <!-- <nav class="navbar navbar-light bg-light">
   <div class="container-fluid center">
     <form class="d-flex" style="margin-left: 400px;">
@@ -13,40 +14,44 @@
 <form [formGroup]="DEForm">
   <div class="form-row">
     <div class="form-group col-md-4">
-      <label for="inputEmail4">વર્ષ</label>
+      <label for="inputEmail4">ફાઇલનુ વર્ષ</label>
       <input type="number" class="form-control" id="inputEmail4" placeholder="વર્ષ" formControlName="Year">
     </div>
     <div class="form-group col-md-4">
+      <label for="date">શાખામાં રેકોર્ડ જમા કરાવ્યા તારીખ</label>
+      <input type="date" class="form-control" id="IssueDate" formControlName="IssueDate" required>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
       <label for="inputPassword4">શાખા</label>
-      <select class="form-control"  placeholder="શાખા" formControlName="Branch">
-    <option value="" selected>-- બ્રાન્ચ સિલેક્ટ કરો --</option>
+      <select class="form-control" placeholder="શાખા" formControlName="Branch">
+        <option value="" selected>-- બ્રાન્ચ સિલેક્ટ કરો --</option>
         <option *ngFor="let br of branchList" value={{br.BRANCH}}>
           {{br.BRANCH}}
         </option>
 
       </select>
     </div>
-  </div>
-  <div class="form-row"></div>
-  <div class="form-group col-md-3">
-    <label for="inputPassword4">કેટેગરી</label>
-    <select id="inputState" class="form-control"placeholder="કેટેગરી"  formControlName="Category">
-  <option value="" selected>-- કેટેગરી સિલેક્ટ કરો --</option>
+
+  <!-- <div class="form-row"></div> -->
+  <div class="form-group col-md-4">
+    <label for="inputPassword4">વર્ગ</label>
+    <select id="inputState" class="form-control"placeholder="વર્ગ"  formControlName="Category">
+  <option value="" selected>-- વર્ગ સિલેક્ટ કરો --</option>
       <option>A</option>
             <option>B</option>
                   <option>C</option>
     </select>
 
   </div>
-  <div class="form-group col-md-3">
+    </div>
+  <!-- <div class="form-group col-md-4">
     <label for="inputPassword4">પ્રકાર</label>
     <input type="text" class="form-control" id="inputPassword4" placeholder="પ્રકાર" formControlName="Types">
-  </div>
+  </div> -->
 
-  <div class="form-group">
-    <label for="inputAddress">વિષય</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="વિષય" formControlName="Subject">
-  </div>
+
   <div class="form-group">
     <label for="inputAddress">નામ</label>
     <input type="text" class="form-control" id="inputAddress" placeholder="નામ" formControlName="Name">
@@ -56,36 +61,55 @@
     <label for="inputAddress">સરનામું</label>
     <input type="text" class="form-control" id="inputAddress" placeholder="સરનામું" formControlName="Address">
   </div>
+ <div class="form-group">
+    <label for="inputAddress">વિષય</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="વિષય" formControlName="Subject">
+  </div>
 
   <div class="form-row">
+
     <div class="form-group col-md-4">
-      <label for="inputCity">ગામ</label>
+      <label for="inputState">આખરી હુકમ નંબર</label>
+          <input type="text" class="form-control" id="inputCity" placeholder="આખરી હુકમ નંબર" formControlName="HukamNo">
+
+    </div>
+<div class="form-group col-md-4">
+  <label for="inputCity">હુકમ ની તારીખ</label>
+  <input type="date" class="form-control" id="IssueDate" formControlName="HukamDate" required>
+</div>
+  </div>
+  <div class="form-row">
+
+    <div class="form-group col-md-4">
+      <label for="inputState">તાલુકાનુ નામ</label>
+      <input type="text" class="form-control" id="inputCity" placeholder="તાલુકો" formControlName="Taluka">
+
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputCity">ગામનુ નામ</label>
       <input type="text" class="form-control" id="inputCity" placeholder="ગામ" formControlName="Village">
     </div>
-    <div class="form-group col-md-4">
-      <label for="inputState">તાલુકો</label>
-          <input type="text" class="form-control" id="inputCity" placeholder="તાલુકો" formControlName="Taluka">
-
-    </div>
-
+  </div>
+  <div class="form-row">
+  <div class="form-group  col-md-4">
+    <label for="inputAddress">સર્વે નંબર </label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="સર્વે નંબર" formControlName="SurveyNo">
   </div>
 
   <div class="form-group  col-md-4">
-    <label for="inputAddress">હુકમનુ નામ </label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="હુકમનુ નામ" formControlName="OrderName">
+    <label for="inputAddress">કોમ્પેક્ટર નંબર</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="કોમ્પેક્ટર નંબર" formControlName="CompactorNo">
   </div>
-  <div class="form-group  col-md-4">
-    <label for="inputAddress">કબાટ નંબર</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="કબાટ નંબર" formControlName="CupBoardNo">
   </div>
   <div class="form-row">
     <div class="form-group  col-md-4">
-      <label for="inputAddress">દફતર નંબર </label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="દફતર નંબર " formControlName="PartitionNo">
+      <label for="inputAddress">પોટલા નંબર </label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="પોટલા નંબર" formControlName="SurveyNo">
     </div>
+
     <div class="form-group  col-md-4">
-      <label for="inputAddress">દસ્તાવેજ/ફાઇલ નંબર</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="ફાઇલ નંબર" formControlName="FileNo">
+      <label for="inputAddress">ફેરીસ્ટ નંબર</label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="ફેરીસ્ટ નંબર" formControlName="FeristNo">
     </div>
   </div>
   <div class="form-row">
@@ -106,10 +130,14 @@
 
   <div class="form-row">
     <div class="form-group  col-md-4">
-      <label for="inputAddress">દસ્તાવેજ </label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="દસ્તાવેજ" formControlName="DocumentName">
+      <label for="inputAddress">અન્ય વિગત </label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="અન્ય વિગત" formControlName="anyDetail">
     </div>
+  <div class="form-group  col-md-1">
+    <br>
+    <label>દસ્તાવેજ</label>
 
+  </div>
     <div class="form-group  col-md-2">
       <br>
       <input type="file"  (change)="onFileSelected($event)">

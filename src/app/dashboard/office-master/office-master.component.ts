@@ -10,43 +10,45 @@ import { Observable, map } from 'rxjs';
 @Component({
   selector: 'app-office-master',
   templateUrl: './office-master.component.html',
-  styleUrl: './office-master.component.css'
+  styleUrl: './office-master.component.css',
 })
 export class OfficeMasterComponent {
-
   authenticated = false;
-
   districtList: any[];
-  officemasterlist : any[];
+  officemasterlist: any[];
   posts: any[];
-  officemasterForm !: FormGroup;
+  officemasterForm!: FormGroup;
   isEditMode: boolean = false;
 
   constructor(
     private apiService: AppServiceService,
     private router: Router,
-    private route:ActivatedRoute,
+    private route: ActivatedRoute,
     private formbuilder: FormBuilder //  private toastr: ToastrService
   ) {}
 
-  ngOnInit(): void {   
-       
-  //  this.DistrictList();
+  ngOnInit(): void {
+    this.fetchDistricts();
+    //  this.DistrictList();
     this.OfficeMasterList();
-  // this.route.params.subscribe(params => {
+    // this.route.params.subscribe(params => {
     this.createForm();
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       if (params['_id']) {
         this.editForm();
       }
-   });
-
+    });
   }
-  
-  onReset(){
+
+  onReset() {
     this.officemasterForm.reset();
   }
-
+  fetchDistricts(): void {
+    this.apiService.getDistrictList().subscribe((res) => {
+      this.districtList = res;
+      console.log(res);
+    });
+  }
   editForm() {
     debugger;
     this.isEditMode = true;
@@ -62,22 +64,20 @@ export class OfficeMasterComponent {
 
   populateForm(data: any): void {
     this.officemasterForm.patchValue({
-      _id : data._id,
+      _id: data._id,
       id: data.id,
       office: data.office,
       officetype: data.officetype,
-      dcode: data.dcode,      
-      
+      dcode: data.dcode,
     });
   }
 
   createForm() {
-    this.officemasterForm = this.formbuilder.group({   
-      _id: [''],  
-      office: ['', Validators.required],
-      id: ['', Validators.required],
-      officetype: ['', Validators.required],
-      dcode: ['', Validators.required],      
+    this.officemasterForm = this.formbuilder.group({
+
+      dcode: ['', Validators.required],
+      name: ['', Validators.required],
+      OTYP: ['', Validators.required],
     });
   }
 
@@ -85,24 +85,24 @@ export class OfficeMasterComponent {
     debugger;
     //let docid = dataentry.documentId
     //const docid = sessionStorage.getItem('docid');
-    console.log(this.officemasterForm);      
+    console.log(this.officemasterForm);
 
-      console.log(this.officemasterForm);
-      this.apiService.OfficeMasterPost(officemaster).subscribe(
-        () => {
-          // Insert successful, clear the form
-          this.officemasterForm.reset();
-          alert('Record Save Successfully');
-          // Navigate to the record list component
-          this.router.navigate(['/dashboard/OfficeList']);
-        },
-        (err) => {
-          alert('Error');
-          // Handle error
-          //  this.toastr.success('Hello World!', 'Custom Alert');
-          // Swal.fire('Error', err.error.message, 'error');
-        }
-      );    
+    console.log(this.officemasterForm);
+    this.apiService.OfficeMasterPost(officemaster).subscribe(
+      () => {
+        // Insert successful, clear the form
+        this.officemasterForm.reset();
+        alert('Record Save Successfully');
+        // Navigate to the record list component
+        this.router.navigate(['/dashboard/OfficeList']);
+      },
+      (err) => {
+        alert('Error');
+        // Handle error
+        //  this.toastr.success('Hello World!', 'Custom Alert');
+        // Swal.fire('Error', err.error.message, 'error');
+      }
+    );
     //}
   }
 
@@ -110,26 +110,24 @@ export class OfficeMasterComponent {
     debugger;
     this.apiService.getOfficeMasterList().subscribe((res) => {
       this.officemasterlist = res;
-      console.log(res,"Office");
+      console.log(res, 'Office');
     });
   }
-
 
   onUpdateOffice() {
     debugger;
     if (this.officemasterForm.valid) {
-      const formData = this.officemasterForm.value; 
+      const formData = this.officemasterForm.value;
 
-        if (this.isEditMode) {
-          const _id = formData._id;
-          console.log('update formdata:',formData)
-          console.log(_id);
-          this.updateOffice(_id, formData);
-        } else {
-          this.Addofficemasterlist(formData);
-        }
-      } 
-    else {
+      if (this.isEditMode) {
+        const _id = formData._id;
+        console.log('update formdata:', formData);
+        console.log(_id);
+        this.updateOffice(_id, formData);
+      } else {
+        this.Addofficemasterlist(formData);
+      }
+    } else {
       // Handle form validation errors
     }
   }
@@ -167,6 +165,4 @@ export class OfficeMasterComponent {
   //   const controller = this.filtersForm.get('cifInput');
   //   return controller.touched && controller.errors && controller.errors.maxlength
   // }
-
-
 }
