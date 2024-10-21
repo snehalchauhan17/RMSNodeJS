@@ -10,37 +10,35 @@
         <table class="table">
           <thead class="thead">
             <tr>
-              <th scope="col"><input type="checkbox" formControlName="checkYear"     (change)="toggleTextBox('txtYear', 'checkYear')"> વર્ષ </th>
-              <th scope="col"><input type="checkbox" formControlName="checkBranch"   (change)="toggleTextBox('txtBranch', 'checkBranch')"> શાખા </th>
-              <th scope="col"><input type="checkbox" formControlName="checkCategory" (change)="toggleTextBox('txtCategory', 'checkCategory')"> કેટેગરી </th>
-              <th scope="col"><input type="checkbox" formControlName="checkTypes"    (change)="toggleTextBox('txtTypes', 'checkTypes')"> પ્રકાર </th>
-              <th scope="col"><input type="checkbox" formControlName="checkSubject"  (change)="toggleTextBox('txtSubject', 'checkSubject')"> વિષય </th>
-              <th scope="col"><input type="checkbox" formControlName="checkName"     (change)="toggleTextBox('txtName', 'checkName')"> નામ </th>
-              <th scope="col"><input type="checkbox" formControlName="checkAddress"  (change)="toggleTextBox('txtAddress', 'checkAddress')"> સરનામું </th>
-              <th scope="col"><input type="checkbox" formControlName="checkVillage"  (change)="toggleTextBox('txtVillage', 'checkVillage')"> ગામ </th>
-              <th scope="col"><input type="checkbox" formControlName="checkTaluka"   (change)="toggleTextBox('txtTaluka', 'checkTaluka')"> તાલુકો </th>
-              <th scope="col"><input type="checkbox" formControlName="checkOrName"   (change)="toggleTextBox('txtOrderName', 'checkOrName')"> હુકમનુ નામ </th>
-              <th scope="col"><input type="checkbox" formControlName="checkCBNo"     (change)="toggleTextBox('txtCupBoardNo', 'checkCBNo')"> કબાટ નંબર </th>
-              <th scope="col"><input type="checkbox" formControlName="checkParNo"    (change)="toggleTextBox('txtPartitionNo', 'checkParNo')"> દફતર નંબર </th>
-              <th scope="col"><input type="checkbox" formControlName="checkFileNo"   (change)="toggleTextBox('txtFileNo', 'checkFileNo')"> ફાઇલ નંબર </th>
+              <th scope="col"><input type="checkbox" formControlName="checkYear"     (change)="toggleTextBox('txtYear',     'checkYear'    )">          ફાઇલનુ વર્ષ 			</th>
+              <th scope="col"><input type="checkbox" formControlName="checkBranch"   (change)="toggleTextBox('txtBranch',   'checkBranch'  )">      શાખા 						</th>
+              <th scope="col"><input type="checkbox" formControlName="checkCategory" (change)="toggleTextBox('txtCategory', 'checkCategory')">  વર્ગ 							</th>
+              <th scope="col"><input type="checkbox" formControlName="checkHukamNo"  (change)="toggleTextBox('txtHukamNo',  'checkHukamNo' )">    આખરી હુકમ નંબર 	</th>
+              <th scope="col"><input type="checkbox" formControlName="checkHukamDate"(change)="toggleTextBox('txtHukamDate','checkHukamDate')">હુકમ ની તારીખ 	 </th>
+              <th scope="col"><input type="checkbox" formControlName="checkTaluka"   (change)="toggleTextBox('txtTaluka',   'checkTaluka'  )"> 			તાલુકો 					  </th>
+              <th scope="col"><input type="checkbox" formControlName="checkVillage"  (change)="toggleTextBox('txtVillage',  'checkVillage' )"> 		ગામ 						</th>
+              <th scope="col"><input type="checkbox" formControlName="checkSurveyNo" (change)="toggleTextBox('txtSurveyNo', 'checkSurveyNo')">	સર્વે નંબર 				 </th>
+              <th scope="col"><input type="checkbox" formControlName="checkName"     (change)="toggleTextBox('txtName',     'checkName'    )">  				અરજદારનુ નામ 		 </th>
+              <th scope="col"><input type="checkbox" formControlName="checkSubject"  (change)="toggleTextBox('txtSubject',  'checkSubject' )"> 		વિષય 						 </th>
+              <th scope="col"><input type="checkbox" formControlName="checkPotlaNo"  (change)="toggleTextBox('txtPotlaNo',  'checkPotlaNo' )"> 		પોટલા નંબર        </th>
+              <th scope="col"><input type="checkbox" formControlName="checkFeristNo" (change)="toggleTextBox('txtFeristNo', 'checkFeristNo')">  ફેરીસ્ટ નંબર        </th>
 
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td> <input type="text" formControlName="txtYear"       class="spacebox"> </td>
-              <td> <input type="text" formControlName="txtBranch"     class="spacebox"> </td>
-              <td> <input type="text" formControlName="txtCategory"   class="spacebox"> </td>
-              <td> <input type="text" formControlName="txtTypes"      class="spacebox"> </td>
-              <td> <input type="text" formControlName="txtSubject"    class="spacebox"> </td>
-              <td> <input type="text" formControlName="txtName"       class="spacebox"> </td>
-              <td> <input type="text" formControlName="txtAddress"    class="spacebox"> </td>
-              <td> <input type="text" formControlName="txtVillage"    class="spacebox"> </td>
-              <td> <input type="text" formControlName="txtTaluka"       class="spacebox"> </td>
-              <td> <input type="text" formControlName="txtOrderName"    class="spacebox"> </td>
-              <td> <input type="text" formControlName="txtCupBoardNo"   class="spacebox"> </td>
-              <td> <input type="text" formControlName="txtPartitionNo" class="spacebox"> </td>
-              <td> <input type="text" formControlName="txtFileNo" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtYear" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtBranch" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtCategory" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtHukamNo" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtHukamDate" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtTaluka" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtVillage" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtSurveyNo" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtName" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtSubject" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtPotlaNo" class="spacebox"> </td>
+              <td> <input type="text" formControlName="txtFeristNo" class="spacebox"> </td>
 
             </tr>
           </tbody>
@@ -50,66 +48,70 @@
     </form>
   </div>
   <div>
-    <button type="button" style="width: 72px;" class="btn btn-primary" style="margin-left: 10px;margin-top: 5px;" (click)="search()">Search</button>
+    <button type="button" style="width: 72px;margin-left: 10px;margin-top: 5px;" class="btn btn-primary" (click)="search()">Search</button>
     <br><br>
     &nbsp;&nbsp;
-    <button type="button" style="width: 72px;" class="btn btn-primary" style="margin-top: -10px;" (click)="exit()">Back</button>
+    <button type="button" style="width: 72px;margin-top: -10px;" class="btn btn-primary"  (click)="exit()">Back</button>
   </div>
 </div>
+<div>
+  <button type="button" style="width: 72px; margin-left: 10px;" class="btn btn-primary" (click)="printPage()">Print</button>
+  &nbsp;
+  <button type="button"  style="width: 72px;  margin-left: 10px;"class="btn btn-primary" (click)="generatePDF()">PDF</button>
+    &nbsp;
+  <button type="button"  style="width: 72px;  margin-left: 10px;"class="btn btn-primary" (click)="exportExcel()">Excel</button>
+
+</div>
       <br>
-<div class="table-responsive">
-<table class="table">
+<div id="print-section" class="table-responsive">
+<table  class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col"> </th>
-      <th scope="col"> </th>
-        <th scope="col"> </th>
-        <th scope="col">વર્ષ          </th>
-        <th scope="col">શાખા          </th>
-        <th scope="col">કેટેગરી       </th>
-        <th scope="col">પ્રકાર        </th>
-        <th scope="col">વિષય         </th>
-        <th scope="col">નામ          </th>
-        <th scope="col">સરનામું          </th>
-        <th scope="col">ગામ          </th>
-        <th scope="col">તાલુકો         </th>
-        <th scope="col">હુકમનુ નામ       </th>
-        <th scope="col">કબાટ નંબર       </th>
-        <th scope="col"> દફતર નંબર       </th>
-        <th scope="col">ફાઇલ નંબર       </th>
-        <th scope="col">નોંધના પેજ      </th>
-        <th scope="col">પત્ર વ્યવહારના પેજ        </th>
-        <th scope="col">કુલ પેજ           </th>
-        <th scope="col">દસ્તાવેજ</th>
-        <!-- <th scope="col">DocumentID </th> -->
+      <th scope="col"  class="no-print"> </th>
+      <!-- <th scope="col"> </th>
+      <th scope="col"> </th> -->
+      <th scope="col">ફાઇલનુ વર્ષ </th>
+      <th scope="col">શાખા </th>
+      <th scope="col">વર્ગ </th>
+      <th scope="col">આખરી હુકમ નંબર </th>
+      <th scope="col">હુકમ ની તારીખ    </th>
+      <th scope="col">તાલુકો           </th>
+      <th scope="col">ગામ             </th>
+      <th scope="col">સર્વે નંબર         </th>
+      <th scope="col">અરજદાર નુ નામ    </th>
+      <th scope="col">વિષય             </th>
+      <th scope="col">પોટલા નંબર       </th>
+      <th scope="col">ફેરીસ્ટ નંબર       </th>
+
+      <!-- <th scope="col">DocumentID </th> -->
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of RecordList">
 
-  <!-- <TD> <button type="button" (click)="viewDocument(item.documentId);  $event.preventDefault();"   class="btn btn-primary">View</button></TD> -->
-  <TD><button type="button" (click)="viewDocument(item.documentId); $event.preventDefault();" [disabled]="!item.documentId"class="btn btn-primary">View</button></TD>
-  <TD>   <button type="button"  (click)="EditDataEntry(item._id);  $event.preventDefault();"  class="btn btn-primary" >Edit</button> </TD>
-  <td>   <button type="button"  (click)="DeleteDataEntry(item._id);  $event.preventDefault();"  class="btn btn-primary">Delete</button> </td>
-  <td>{{item.Year }} </td>
-  <td>{{item.Branch }} </td>
-  <td>{{item.Category }} </td>
-  <td>{{item.Types }} </td>
-  <td>{{item.Subject }} </td>
-  <td>{{item.Name }} </td>
-  <td>{{item.Address }} </td>
-  <td>{{item.Village }} </td>
-  <td>{{item.Taluka }} </td>
-  <td>{{item.OrderName }} </td>
-  <td>{{item.CupBoardNo }} </td>
-  <td>{{item.PartitionNo }} </td>
-  <td>{{item.FileNo }} </td>
-  <td>{{item.NotePage }} </td>
-  <td>{{item.PostPage }} </td>
-  <td>{{item.TotalPage }} </td>
-  <td>{{item.DocumentName}} </td>
-  <!-- <td>{{item.DocumentID }} </td> -->
+      <!-- <TD> <button type="button" (click)="viewDocument(item.documentId);  $event.preventDefault();"   class="btn btn-primary">View</button></TD> -->
+      <TD  class="no-print"><button type="button" (click)="viewDocument(item.documentId); $event.preventDefault();"
+          [disabled]="!item.documentId" class="btn btn-primary">View</button></TD>
+      <TD> <button type="button" (click)="EditDataEntry(item._id);  $event.preventDefault();"
+          class="btn btn-primary">Edit</button> </TD>
+      <!-- <td> <button type="button" (click)="DeleteDataEntry(item._id);  $event.preventDefault();"
+          class="btn btn-primary">Delete</button> </td> -->
+      <td>{{item.Year      }} </td>
+      <td>{{item.Branch    }} </td>
+      <td>{{item.Category  }} </td>
+      <td>{{item.HukamNo   }} </td>
+      <td>{{item.HukamDate }} </td>
+      <td>{{item.Taluka    }} </td>
+      <td>{{item.Village   }} </td>
+      <td>{{item.SurveyNo  }} </td>
+      <td>{{item.Name      }} </td>
+      <td>{{item.Subject   }} </td>
+      <td>{{item.PotlaNo   }} </td>
+      <td>{{item.FeristNo  }} </td>
+
+      <!-- <td>{{item.DocumentID }} </td> -->
     </tr>
   </tbody>
 </table>
 </div>
+

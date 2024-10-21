@@ -52,24 +52,26 @@ export class DataEntryComponent {
   createForm() {
     this.DEForm = this.formbuilder.group({
       _id: [''],
-      Year: ['', Validators.required],
-      Branch: ['', Validators.required],
-      Category: ['', Validators.required],
-      Types: ['', Validators.required],
-      Subject: ['', Validators.required],
-      Name: ['', Validators.required],
-      Address: ['', Validators.required],
-      Village: ['', Validators.required],
-      Taluka: ['', Validators.required],
-      OrderName: ['', Validators.required],
-      CupBoardNo: ['', Validators.required],
-      PartitionNo: ['', Validators.required],
-      FileNo: ['', Validators.required],
-      NotePage: ['', Validators.required],
-      PostPage: ['', Validators.required],
-      TotalPage: ['', Validators.required],
-      DocumentName: ['', Validators.required],
-      documentId: [''],
+      Year				: ['', Validators.required],
+      IssueDate		: ['', Validators.required],
+      Branch			: ['', Validators.required],
+      Category		: ['', Validators.required],
+      Name				: ['', Validators.required],
+      Address			: ['', Validators.required],
+      Subject			: ['', Validators.required],
+      HukamNo			: ['', Validators.required],
+      HukamDate		: ['', Validators.required],
+      Taluka			: ['', Validators.required],
+      Village			: ['', Validators.required],
+      SurveyNo		: ['', Validators.required],
+      CompactorNo	: ['', Validators.required],
+      PotlaNo			: ['', Validators.required],
+      FeristNo		: ['', Validators.required],
+      NotePage		: ['', Validators.required],
+      PostPage		: ['', Validators.required],
+      TotalPage		: ['', Validators.required],
+      anyDetail		: ['', Validators.required],
+      documentId	: [''],
     });
   }
   onUpdate() {
@@ -104,18 +106,21 @@ export class DataEntryComponent {
 
     console.log(this.DEForm);
 
-    if (dataentry.documentId) {
-      const docid = sessionStorage.getItem('docid');
-      dataentry.documentId = docid;
-    } else {
-    dataentry.documentId = null;
-    }
+ const docid = sessionStorage.getItem('docid');
+if (docid) {
+  dataentry.documentId = docid;
+} else {
+  dataentry.documentId = null;
+}
       console.log(this.DEForm);
       this.apiService.DataEntryPost(dataentry).subscribe(
         () => {
           // Insert successful, clear the form
           this.DEForm.reset();
           alert('Record Save Successfully');
+          // Clear docid from sessionStorage to prevent reuse
+          sessionStorage.removeItem('docid');
+
           // Navigate to the record list component
           this.router.navigate(['/dashboard/recordlist']);
         },
@@ -162,25 +167,27 @@ export class DataEntryComponent {
 
   populateForm(data: any): void {
     this.DEForm.patchValue({
-      _id: data._id,
-      Year: data.Year,
-      Branch: data.Branch,
-      Category: data.Category,
-      Types: data.Types,
-      Subject: data.Subject,
-      Name: data.Name,
-      Address: data.Address,
-      Village: data.Village,
-      Taluka: data.Taluka,
-      OrderName: data.OrderName,
-      CupBoardNo: data.CupBoardNo,
-      PartitionNo: data.PartitionNo,
-      FileNo: data.FileNo,
-      NotePage: data.NotePage,
-      PostPage: data.PostPage,
-      TotalPage: data.TotalPage,
-      DocumentName: data.DocumentName,
-      documentId: data.documentId,
+					id: data._id,
+					Year				:data.Year,
+					IssueDate		:data.IssueDate,
+					Branch			:data.Branch,
+					Category		:data.Category,
+					Name				:data.Name,
+					Address			:data.Address,
+					Subject			:data.Subject,
+					HukamNo			:data.HukamNo,
+					HukamDate		:data.HukamDate,
+					Taluka			:data.Taluka,
+					Village			:data.Village,
+					SurveyNo		:data.SurveyNo,
+					CompactorNo	:data.CompactorNo,
+					PotlaNo			:data.PotlaNo,
+					FeristNo		:data.FeristNo,
+					NotePage		:data.NotePage,
+					PostPage		:data.PostPage,
+					TotalPage		:data.TotalPage,
+					anyDetail		:data.anyDetail,
+					documentId	:data.documentId,
     });
   }
 
@@ -206,6 +213,7 @@ export class DataEntryComponent {
   }
 
   onUpload(): void {
+    debugger;
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('file', this.selectedFile);

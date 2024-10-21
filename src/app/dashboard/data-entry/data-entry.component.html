@@ -53,7 +53,7 @@
 
 
   <div class="form-group">
-    <label for="inputAddress">નામ</label>
+    <label for="inputAddress">અરજદારનું નામ</label>
     <input type="text" class="form-control" id="inputAddress" placeholder="નામ" formControlName="Name">
   </div>
 
@@ -93,38 +93,37 @@
   <div class="form-row">
   <div class="form-group  col-md-4">
     <label for="inputAddress">સર્વે નંબર </label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="સર્વે નંબર" formControlName="SurveyNo">
+    <input type="number" class="form-control" id="inputAddress" placeholder="સર્વે નંબર" formControlName="SurveyNo">
   </div>
 
   <div class="form-group  col-md-4">
     <label for="inputAddress">કોમ્પેક્ટર નંબર</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="કોમ્પેક્ટર નંબર" formControlName="CompactorNo">
+    <input  type="number"class="form-control" id="inputAddress" placeholder="કોમ્પેક્ટર નંબર" formControlName="CompactorNo">
   </div>
   </div>
   <div class="form-row">
     <div class="form-group  col-md-4">
       <label for="inputAddress">પોટલા નંબર </label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="પોટલા નંબર" formControlName="SurveyNo">
+      <input  type="number" class="form-control" id="inputAddress" placeholder="પોટલા નંબર" formControlName="PotlaNo">
     </div>
 
     <div class="form-group  col-md-4">
       <label for="inputAddress">ફેરીસ્ટ નંબર</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="ફેરીસ્ટ નંબર" formControlName="FeristNo">
+      <input  type="number" class="form-control" id="inputAddress" placeholder="ફેરીસ્ટ નંબર" formControlName="FeristNo">
     </div>
   </div>
   <div class="form-row">
     <div class="form-group  col-md-4">
       <label for="inputAddress">નોંધના પેજ </label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="નોંધના પેજ" formControlName="NotePage">
+      <input type="number" class="form-control" id="inputAddress" placeholder="નોંધના પેજ" formControlName="NotePage">
     </div>
     <div class="form-group  col-md-4">
       <label for="inputAddress">પત્ર વ્યવહારના પેજ</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="પત્ર વ્યવહારના પેજ"
-        formControlName="PostPage">
+      <input  type="number" class="form-control" id="inputAddress" placeholder="પત્ર વ્યવહારના પેજ" formControlName="PostPage">
     </div>
     <div class="form-group  col-md-4">
       <label for="inputAddress">કુલ પેજ</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="કુલ પેજ" formControlName="TotalPage">
+      <input  type="number" class="form-control" id="inputAddress" placeholder="કુલ પેજ" formControlName="TotalPage">
     </div>
   </div>
 
@@ -156,10 +155,10 @@
       <BR>
         <button type="submit" (click)="AddDataEntry(DEForm.value); $event.preventDefault();" [disabled]="isEditMode" class="btn btn-primary" style="width: -webkit-fill-available;">ઉમેરો</button>    </div>
 
-    <div class="form-group col-md-3">
+    <!-- <div class="form-group col-md-3">
       <BR>
       <button type="submit" class="btn btn-primary" (click)="onReset()" style="width: -webkit-fill-available;">રદ</button>
-    </div>
+    </div> -->
     <div class="form-group col-md-3">
       <BR>
 

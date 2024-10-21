@@ -194,15 +194,15 @@ export class AppServiceService {
       );
   }
 
-  getAllOfficeMasterList(): Observable<any[]> {
-    debugger;
-    return this.http.get<any[]>(`${this.apiUrl}/api/AllOfficeList`).pipe(
-      catchError((error) => {
-        console.error('Error:', error);
-        return throwError(error);
-      })
-    );
-  }
+  // getAllOfficeMasterList(): Observable<any[]> {
+  //   debugger;
+  //   return this.http.get<any[]>(`${this.apiUrl}/api/AllOfficeList`).pipe(
+  //     catchError((error) => {
+  //       console.error('Error:', error);
+  //       return throwError(error);
+  //     })
+  //   );
+  // }
 
   getOfficeMasterList(): Observable<any[]> {
     debugger;
@@ -222,14 +222,16 @@ export class AppServiceService {
       })
     );
   }
-  getBranchListbyID(officeId:number): Observable<any[]> {
+  getBranchListbyID(officeId: number): Observable<any[]> {
     debugger;
-    return this.http.get<any[]>(`${this.apiUrl}/api/BranchListbyID/${officeId}`).pipe(
-      catchError((error) => {
-        console.error('Error:', error);
-        return throwError(error);
-      })
-    );
+    return this.http
+      .get<any[]>(`${this.apiUrl}/api/BranchListbyID/${officeId}`)
+      .pipe(
+        catchError((error) => {
+          console.error('Error:', error);
+          return throwError(error);
+        })
+      );
   }
   BranchEntryPost(branchmaster: any): Observable<any> {
     debugger;
