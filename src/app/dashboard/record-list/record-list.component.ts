@@ -84,72 +84,82 @@ export class RecordListComponent {
     });
   }
 
-
-
-  generatePDF() {
-    debugger;
-    // Create an instance of jsPDF
-    const doc = new jsPDF();
-
-    // Add the custom Gujarati font (Shruti)
-    doc.addFileToVFS('arial-unicode-ms.ttf', this.fontservice.shrutiBase64); // Load from service
-    doc.addFont('arial-unicode-ms.ttf', 'arial-unicode-ms', 'normal'); // Add the font to jsPDF
-    doc.setFont('arial-unicode-ms'); // Set the font to Shruti
-
-    // Prepare data for AutoTable
-    const data = this.RecordList.map((item) => [
-      item.Year,
-      item.Branch,
-      item.Category,
-      item.HukamNo,
-      item.HukamDate,
-      item.Taluka,
-      item.Village,
-      item.SurveyNo,
-      item.Name,
-      item.Subject,
-      item.PotlaNo,
-      item.FeristNo,
-    ]);
-
-    // Add title to the PDF document (Gujarati text)
-    doc.setFontSize(8);
-    doc.text('રેકોર્ડ લિસ્ટ', 14, 10); // This should render correctly if the font supports it
-
-    // Add table with AutoTable plugin
-    autoTable(doc, {
-      head: [
-        [
-          'ફાઇલનુ વર્ષ',
-          'શાખા',
-          'વર્ગ',
-          'આખરી હુકમ નંબર',
-          'હુકમ ની તારીખ',
-          'તાલુકો',
-          'ગામ',
-          'સર્વે નંબર',
-          'અરજદાર નુ નામ',
-          'વિષય',
-          'પોટલા નંબર',
-          'ફેરીસ્ટ નંબર',
-        ],
-      ],
-      body: data,
-      styles: {
-        font: 'shruti', // Use Shruti font for table text
-        fontSize: 10,
-      },
-      headStyles: {
-        font: 'shruti', // Use Shruti font for table headers
-        fontSize: 8,
-      },
-      theme: 'striped',
-      startY: 20, // Start position for the table after the title
-    });
-
-    // Save the PDF document
-    doc.save('record-list.pdf');
+  generatePDF(){
+  // Make sure to pass the current searchPayload to the API
+  this.apiservice.generatePDF(this.searchPayload).subscribe((blob) => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'my-document.pdf';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  });
   }
+
+  // generatePDF() {
+  //   debugger;
+  //   // Create an instance of jsPDF
+  //   const doc = new jsPDF();
+
+  //   // Add the custom Gujarati font (Shruti)
+  //   doc.addFileToVFS('arial-unicode-ms.ttf', this.fontservice.shrutiBase64); // Load from service
+  //   doc.addFont('arial-unicode-ms.ttf', 'arial-unicode-ms', 'normal'); // Add the font to jsPDF
+  //   doc.setFont('arial-unicode-ms'); // Set the font to Shruti
+
+  //   // Prepare data for AutoTable
+  //   const data = this.RecordList.map((item) => [
+  //     item.Year,
+  //     item.Branch,
+  //     item.Category,
+  //     item.HukamNo,
+  //     item.HukamDate,
+  //     item.Taluka,
+  //     item.Village,
+  //     item.SurveyNo,
+  //     item.Name,
+  //     item.Subject,
+  //     item.PotlaNo,
+  //     item.FeristNo,
+  //   ]);
+
+  //   // Add title to the PDF document (Gujarati text)
+  //   doc.setFontSize(8);
+  //   doc.text('રેકોર્ડ લિસ્ટ', 14, 10); // This should render correctly if the font supports it
+
+  //   // Add table with AutoTable plugin
+  //   autoTable(doc, {
+  //     head: [
+  //       [
+  //         'ફાઇલનુ વર્ષ',
+  //         'શાખા',
+  //         'વર્ગ',
+  //         'આખરી હુકમ નંબર',
+  //         'હુકમ ની તારીખ',
+  //         'તાલુકો',
+  //         'ગામ',
+  //         'સર્વે નંબર',
+  //         'અરજદાર નુ નામ',
+  //         'વિષય',
+  //         'પોટલા નંબર',
+  //         'ફેરીસ્ટ નંબર',
+  //       ],
+  //     ],
+  //     body: data,
+  //     styles: {
+  //       font: 'shruti', // Use Shruti font for table text
+  //       fontSize: 10,
+  //     },
+  //     headStyles: {
+  //       font: 'shruti', // Use Shruti font for table headers
+  //       fontSize: 8,
+  //     },
+  //     theme: 'striped',
+  //     startY: 20, // Start position for the table after the title
+  //   });
+
+  //   // Save the PDF document
+  //   doc.save('record-list.pdf');
+  // }
   exportExcel(): void {
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.RecordList);
     const workbook: XLSX.WorkBook = {

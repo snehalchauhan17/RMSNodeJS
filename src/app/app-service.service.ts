@@ -107,6 +107,15 @@ export class AppServiceService {
         })
       );
   }
+  //   generatePDF() {
+  //   return this.http.get(`${this.apiUrl}/api/generatepdf`, { responseType: 'blob' });
+  // }
+  generatePDF(searchPayload: any): Observable<Blob> {
+    return this.http.get<Blob>(`${this.apiUrl}/api/generatepdf`, {
+      params: searchPayload,
+      responseType: 'blob' as 'json', // Specify responseType to handle blob
+    });
+  }
   UploadFile(file: File): Observable<any> {
     debugger;
     const formData: FormData = new FormData();

@@ -92,8 +92,8 @@
       <!-- <TD> <button type="button" (click)="viewDocument(item.documentId);  $event.preventDefault();"   class="btn btn-primary">View</button></TD> -->
       <TD  class="no-print"><button type="button" (click)="viewDocument(item.documentId); $event.preventDefault();"
           [disabled]="!item.documentId" class="btn btn-primary">View</button></TD>
-      <TD> <button type="button" (click)="EditDataEntry(item._id);  $event.preventDefault();"
-          class="btn btn-primary">Edit</button> </TD>
+      <!-- <TD> <button type="button" (click)="EditDataEntry(item._id);  $event.preventDefault();"
+          class="btn btn-primary">Edit</button> </TD> -->
       <!-- <td> <button type="button" (click)="DeleteDataEntry(item._id);  $event.preventDefault();"
           class="btn btn-primary">Delete</button> </td> -->
       <td>{{item.Year      }} </td>
