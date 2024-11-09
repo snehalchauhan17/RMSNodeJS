@@ -30,9 +30,14 @@ export class DashboardComponent implements OnInit {
   }
 
   Auth() {
+<<<<<<< HEAD
     debugger;
+=======
+debugger;
+>>>>>>> EntryPage
     Emitters.authEmitter.subscribe((auth: boolean) => {
       this.authenticated = auth;
+
     });
   }
   LogOut(): void {

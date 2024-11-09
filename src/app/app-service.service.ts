@@ -29,6 +29,7 @@ export class AppServiceService {
       );
   }
   LoginPost(user: any): Observable<any> {
+
     return this.http
       .post<any>(`${this.apiUrl}/api/login`, user, {
         withCredentials: true,
@@ -57,17 +58,8 @@ export class AppServiceService {
       );
   }
 
-  ChangePawd(username: any, user: any): Observable<any> {
-    debugger;
-    return this.http
-      .put<any>(`${this.apiUrl}/api/ChangePassword/${username}`, user)
-      .pipe(
-        catchError((error) => {
-          console.error('Error:', error);
-          return throwError(error);
-        })
-      );
-  }
+
+
 
   //To get Data of Registered User
 
