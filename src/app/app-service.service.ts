@@ -14,6 +14,16 @@ export class AppServiceService {
   private formData = new BehaviorSubject<any>(null);
   currentFormData = this.formData.asObservable();
 
+
+  GetRoleMasterList(): Observable<any[]> {
+    debugger;
+    return this.http.get<any[]>(`${this.apiUrl}/api/RoleList`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
   //To Register
   RegisterPost(user: any): Observable<any> {
     debugger;

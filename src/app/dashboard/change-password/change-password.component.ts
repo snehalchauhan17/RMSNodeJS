@@ -38,35 +38,35 @@ export class ChangePasswordComponent {
     );
   }
 
-  ChangePWd(user: any): void {
-    debugger;
-    console.log(user.newPassword);
-    const username = sessionStorage.getItem('username');
-    // let user = this.ChangeForm?.getRawValue();
-    user = this.ChangeForm.value;
-    if (
-      user.oldPassword == '' ||
-      user.newPassword == '' ||
-      user.confirmPassword == ''
-    ) {
-      Swal.fire(
-        'Error',
-        'Please fill in all required fields correctly',
-        'error'
-      );
-    } else {
-      console.log(user);
-      this.apiservice.ChangePawd(username, user).subscribe(
-        () => {
-          this.router.navigate(['/dashboard']).then(() => {
-            window.location.reload();
-          });
-        },
+  // ChangePWd(user: any): void {
+  //   debugger;
+  //   console.log(user.newPassword);
+  //   const username = sessionStorage.getItem('username');
+  //   // let user = this.ChangeForm?.getRawValue();
+  //   user = this.ChangeForm.value;
+  //   if (
+  //     user.oldPassword == '' ||
+  //     user.newPassword == '' ||
+  //     user.confirmPassword == ''
+  //   ) {
+  //     Swal.fire(
+  //       'Error',
+  //       'Please fill in all required fields correctly',
+  //       'error'
+  //     );
+  //   } else {
+  //     console.log(user);
+  //     this.apiservice.ChangePawd(username, user).subscribe(
+  //       () => {
+  //         this.router.navigate(['/dashboard']).then(() => {
+  //           window.location.reload();
+  //         });
+  //       },
 
-        (err) => {
-          Swal.fire('Error', err.error.message, 'error');
-        }
-      );
-    }
-  }
+  //       (err) => {
+  //         Swal.fire('Error', err.error.message, 'error');
+  //       }
+  //     );
+  //   }
+  // }
 }

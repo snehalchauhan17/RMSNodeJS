@@ -27,6 +27,7 @@ export class RegisterComponent implements OnInit {
   districtList: any[];
   officeList: any[];
   branchList: any[];
+  roleList:any[];
   constructor(
     private formBuilder: FormBuilder,
     private apiService: AppServiceService,
@@ -34,6 +35,7 @@ export class RegisterComponent implements OnInit {
     private router: Router
   ) {
     this.fetchDistricts();
+    this.fetchRoleList();
     // this.fetchBranch();
     // this.fetchOffice();
     // initialize your form in the constructor
@@ -75,7 +77,12 @@ export class RegisterComponent implements OnInit {
       console.log(res);
     });
   }
-
+  fetchRoleList(): void {
+    this.apiService.GetRoleMasterList().subscribe((res) => {
+      this.roleList = res;
+      console.log(res);
+    });
+  }
   // fetchBranch(): void {
   //   this.apiService.getBranchList().subscribe((res) => {
   //     this.branchList = res;
@@ -127,7 +134,8 @@ export class RegisterComponent implements OnInit {
       user.branchId == '' ||
       user.name == '' ||
       user.username == '' ||
-      user.password == ''
+      user.password == '' ||
+      user.role == ''
     ) {
       Swal.fire('Error', 'Please Enter all the Details', 'error');
     } else {
