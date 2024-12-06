@@ -7,6 +7,8 @@ import { environment } from 'src/environments/environment';
 import { AppServiceService } from 'src/app/app-service.service';
 import Swal from 'sweetalert2';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Emitters } from '../emitters/emitter';
+import { AuthService } from '../auth.service';  // Import the AuthService
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -27,11 +29,12 @@ export class RegisterComponent implements OnInit {
   districtList: any[];
   officeList: any[];
   branchList: any[];
-  roleList:any[];
+  roleList: any[];
   constructor(
     private formBuilder: FormBuilder,
     private apiService: AppServiceService,
     private http: HttpClient,
+    private authService: AuthService,
     private router: Router
   ) {
     this.fetchDistricts();
@@ -46,6 +49,7 @@ export class RegisterComponent implements OnInit {
       dcode: '',
       officeId: [{ value: '' }],
       branchId: [{ value: '' }],
+      RoleId: [{ value: '' }],
     });
   }
 
@@ -57,6 +61,7 @@ export class RegisterComponent implements OnInit {
       dcode: '',
       officeId: [{ value: '' }],
       branchId: [{ value: '' }],
+      RoleId: [{ value: '' }],
     });
 
     this.form.get('dcode')?.valueChanges.subscribe((did) => {
@@ -135,13 +140,21 @@ export class RegisterComponent implements OnInit {
       user.name == '' ||
       user.username == '' ||
       user.password == '' ||
-      user.role == ''
+      user.RoleId == ''
     ) {
       Swal.fire('Error', 'Please Enter all the Details', 'error');
     } else {
       console.log(user);
       this.apiService.RegisterPost(user).subscribe(
-        () => {
+        (response) => {
+          const token = response.user.token;
+          const roleId = response.user.RoleId; // You may extract roleId based on your response structure
+
+          // Automatically log the user in after registration
+          this.authService.login(user.username, token, roleId,user.dcode,user.officeId,user.branchId);
+          // Emit authentication status as true after successful registration
+          // Emitters.authEmitter.emit(true);
+          Swal.fire('Success', 'Registration successful', 'success');
           this.router.navigate(['/dashboard']).then(() => {
             window.location.reload();
           });

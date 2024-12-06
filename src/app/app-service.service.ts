@@ -14,7 +14,6 @@ export class AppServiceService {
   private formData = new BehaviorSubject<any>(null);
   currentFormData = this.formData.asObservable();
 
-
   GetRoleMasterList(): Observable<any[]> {
     debugger;
     return this.http.get<any[]>(`${this.apiUrl}/api/RoleList`).pipe(
@@ -39,7 +38,6 @@ export class AppServiceService {
       );
   }
   LoginPost(user: any): Observable<any> {
-
     return this.http
       .post<any>(`${this.apiUrl}/api/login`, user, {
         withCredentials: true,
@@ -51,6 +49,7 @@ export class AppServiceService {
         })
       );
   }
+
   LogoutPost() {
     return this.http
       .post<any>(
@@ -68,14 +67,10 @@ export class AppServiceService {
       );
   }
 
-
-
-
   //To get Data of Registered User
-
   GetUserName(): Observable<any[]> {
     return this.http
-      .get<any[]>(`${this.apiUrl}/api/getName`, {
+      .get<any[]>(`${this.apiUrl}/api/UserDetailList`, {
         withCredentials: true,
       })
       .pipe(
@@ -86,12 +81,12 @@ export class AppServiceService {
       );
   }
 
+
   getRecord(): Observable<any[]> {
-    debugger;
     return this.http.get<any[]>(`${this.apiUrl}/api/RecordList`).pipe(
       catchError((error) => {
         console.error('Error:', error);
-        return throwError(error);
+        return throwError(() => new Error('Error fetching records'));
       })
     );
   }
@@ -224,6 +219,16 @@ export class AppServiceService {
       })
     );
   }
+
+  getTalukaFromDistrict(): Observable<any[]> {
+    debugger;
+    return this.http.get<any[]>(`${this.apiUrl}/api/TalukaListFromDist`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
   getBranchList(): Observable<any[]> {
     debugger;
     return this.http.get<any[]>(`${this.apiUrl}/api/BranchList`).pipe(
@@ -237,6 +242,17 @@ export class AppServiceService {
     debugger;
     return this.http
       .get<any[]>(`${this.apiUrl}/api/BranchListbyID/${officeId}`)
+      .pipe(
+        catchError((error) => {
+          console.error('Error:', error);
+          return throwError(error);
+        })
+      );
+  }
+  getVillageListbyID(dcode: number, TCode: number): Observable<any[]> {
+    debugger;
+    return this.http
+      .get<any[]>(`${this.apiUrl}/api/VillageListbyID/${dcode}/${TCode}`)
       .pipe(
         catchError((error) => {
           console.error('Error:', error);

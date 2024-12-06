@@ -63,11 +63,12 @@ export class OfficeMasterComponent {
   }
 
   populateForm(data: any): void {
+    console.log('populateForm',data);
     this.officemasterForm.patchValue({
       _id: data._id,
-      id: data.id,
-      office: data.office,
-      officetype: data.officetype,
+      id: data.idno,
+      name: data.name,
+      OTYP: data.OTYP,
       dcode: data.dcode,
     });
   }
@@ -83,9 +84,6 @@ export class OfficeMasterComponent {
 
   Addofficemasterlist(officemaster: any) {
     debugger;
-    //let docid = dataentry.documentId
-    //const docid = sessionStorage.getItem('docid');
-    console.log(this.officemasterForm);
 
     console.log(this.officemasterForm);
     this.apiService.OfficeMasterPost(officemaster).subscribe(
@@ -148,21 +146,5 @@ export class OfficeMasterComponent {
     );
   }
 
-  // get hasDropDownError() {
-  //   return (
-  //     this.filtersForm.get('paisDropdown').touched &&
-  //     this.filtersForm.get('paisDropdown').errors &&
-  //     this.filtersForm.get('paisDropdown').errors.required
-  //   )
-  // }
 
-  // get hasInputErrorRequired() {
-  //   const controller = this.filtersForm.get('cifInput');
-  //   return controller.touched && controller.errors && controller.errors.required
-  // }
-
-  // get hasInputErrorMaxlength() {
-  //   const controller = this.filtersForm.get('cifInput');
-  //   return controller.touched && controller.errors && controller.errors.maxlength
-  // }
 }

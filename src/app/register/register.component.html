@@ -69,7 +69,7 @@
               <div class="input-group mb-3">
                 <select class="form-control" id="branch" formControlName="branchId">
                 <option value="" selected>-- Select Branch --</option>
-                  <option *ngFor="let br of branchList" [value]="br.oid">{{ br.BRANCH }}</option>
+                  <option *ngFor="let br of branchList" [value]="br._id">{{ br.BRANCH }}</option>
                 </select>
                 <div class="input-group-append">
                   <div class="input-group-text">
