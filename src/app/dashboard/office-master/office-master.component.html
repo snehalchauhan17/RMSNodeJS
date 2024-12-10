@@ -20,7 +20,7 @@
           <div class="form-group col-md-4">
             <select class="form-control" placeholder="જિલ્લાનું નામ પસંદ કરો" formControlName="dcode">
               <option value="" selected>-- Select District --</option>
-              <option *ngFor="let dr of districtList" [value]="dr.did">{{ dr.dname }}</option>
+              <option *ngFor="let dr of districtList" [value]="dr.dcode">{{ dr.name_g }}</option>
             </select>
           </div>
         </div>
@@ -54,18 +54,16 @@
           [disabled]="isEditMode" class="btn btn-primary" style="width: -webkit-fill-available;">ઉમેરો</button>
 
       </div>
+      <div class="form-group col-md-2">
+
+        <button type="submit" *ngIf="isEditMode" (click)="onUpdateOffice();" class="btn btn-primary"
+          style="width: -webkit-fill-available;">સુધારો</button>
+      </div>
     </div>
 
 
     <br/>
 
-    <div>
-    <div>
-
-      <button type="submit" *ngIf="isEditMode" (click)="onUpdateOffice();" class="btn btn-primary"
-        style="width: -webkit-fill-available;">સુધારો</button>
-    </div>
-  </div>
 
 
 

@@ -22,51 +22,51 @@ export class ChangePasswordComponent {
 
   ngOnInit(): void {
     debugger;
-    this.initializeForm();
+    //this.initializeForm();
   }
-  initializeForm(): void {
-    this.ChangeForm = this.formbuilder.group(
-      {
-        oldPassword: ['',Validators.required, //   OldPwdValidators.shouldBe1234,
-            Validators.minLength(6) ],
-        newPassword: ['', Validators.required, Validators.minLength(6)],
-        confirmPassword: ['', Validators.required, Validators.minLength(6)],
-      },
-      // {
-      //   validator: OldPwdValidators.matchPwds,
-      // }
-    );
-  }
+  // initializeForm(): void {
+  //   this.ChangeForm = this.formbuilder.group(
+  //     {
+  //       oldPassword: ['',Validators.required, //   OldPwdValidators.shouldBe1234,
+  //           Validators.minLength(6) ],
+  //       newPassword: ['', Validators.required, Validators.minLength(6)],
+  //       confirmPassword: ['', Validators.required, Validators.minLength(6)],
+  //     },
+  //     // {
+  //     //   validator: OldPwdValidators.matchPwds,
+  //     // }
+  //   );
+  // }
 
-  ChangePWd(user: any): void {
-    debugger;
-    console.log(user.newPassword);
-    const username = sessionStorage.getItem('username');
-    // let user = this.ChangeForm?.getRawValue();
-    user = this.ChangeForm.value;
-    if (
-      user.oldPassword == '' ||
-      user.newPassword == '' ||
-      user.confirmPassword == ''
-    ) {
-      Swal.fire(
-        'Error',
-        'Please fill in all required fields correctly',
-        'error'
-      );
-    } else {
-      console.log(user);
-      this.apiservice.ChangePawd(username, user).subscribe(
-        () => {
-          this.router.navigate(['/dashboard']).then(() => {
-            window.location.reload();
-          });
-        },
+  // ChangePWd(user: any): void {
+  //   debugger;
+  //   console.log(user.newPassword);
+  //   const username = sessionStorage.getItem('username');
+  //   // let user = this.ChangeForm?.getRawValue();
+  //   user = this.ChangeForm.value;
+  //   if (
+  //     user.oldPassword == '' ||
+  //     user.newPassword == '' ||
+  //     user.confirmPassword == ''
+  //   ) {
+  //     Swal.fire(
+  //       'Error',
+  //       'Please fill in all required fields correctly',
+  //       'error'
+  //     );
+  //   } else {
+  //     console.log(user);
+  //     this.apiservice.ChangePawd(username, user).subscribe(
+  //       () => {
+  //         this.router.navigate(['/dashboard']).then(() => {
+  //           window.location.reload();
+  //         });
+  //       },
 
-        (err) => {
-          Swal.fire('Error', err.error.message, 'error');
-        }
-      );
-    }
-  }
+  //       (err) => {
+  //         Swal.fire('Error', err.error.message, 'error');
+  //       }
+  //     );
+  //   }
+  // }
 }

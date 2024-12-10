@@ -11,7 +11,7 @@
       <div class="form-group col-md-4">
         <select class="form-control" id="districtId" formControlName="districtId">
           <option value="" selected>-- Select District --</option>
-          <option *ngFor="let dr of districtList" [value]="dr.did">{{ dr.dname }}</option>
+          <option *ngFor="let dr of districtList" [value]="dr.dcode">{{ dr.name_g }}</option>
         </select>
       </div>
     </div>
@@ -65,7 +65,7 @@
                   class="btn btn-primary">Delete</button> </td> -->
             <td>{{ branch.districtName }}</td>
             <td>{{ branch.officeName }}</td>
-            <td>{{ branch.BranchName }}</td>
+            <td>{{ branch.BRANCH }}</td>
           </tr>
         </tbody>
       </table>

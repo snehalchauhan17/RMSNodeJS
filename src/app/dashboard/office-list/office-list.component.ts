@@ -8,13 +8,12 @@ import { CommonModule } from '@angular/common'
 @Component({
   selector: 'app-office-list',
   templateUrl: './office-list.component.html',
-  styleUrl: './office-list.component.css'
+  styleUrl: './office-list.component.css',
 })
 export class OfficeListComponent {
-
-  OfficeList : any[];
-  formList : any[];
-
+  OfficeList: any[];
+  formList: any[];
+  dcode:any;
   constructor(
     private apiservice: AppServiceService,
     private route: ActivatedRoute,
@@ -23,19 +22,20 @@ export class OfficeListComponent {
   ) {}
 
   ngOnInit() {
+    this.dcode = sessionStorage.getItem('dcode') || '';
     this.getofficeList();
-
   }
 
   getofficeList() {
     debugger;
     this.apiservice.getOfficeMasterList().subscribe((res) => {
-      this.OfficeList = res;
+         this.OfficeList = res;
+            console.log(this.OfficeList);
+      this.OfficeList = res.filter((br) => br.dcode == this.dcode);
       //const totalRecords = this.RecordList.length;
       console.log(this.OfficeList);
     });
   }
-
 
   EditOfficeEntry(_id: string) {
     this.apiservice.getOfficeById(_id).subscribe((res) => {
@@ -47,19 +47,15 @@ export class OfficeListComponent {
     });
   }
 
-
   DeleteOfficeEntry(_id: Object) {
     debugger;
     if (confirm('are sure you want to delete record?')) {
       // event.target.innerText = "Deleting..."
       this.apiservice.deleteOfficeById(_id).subscribe((res) => {
         this.getofficeList();
-        console.log("PRoblem in Comp");
+        console.log('PRoblem in Comp');
         alert(res.message);
       });
     }
   }
-
-
-
 }

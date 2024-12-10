@@ -5,3 +5,19 @@
   display: inline-block;
   padding-left: 6.8rem;
 }
+.user-info {
+
+  padding: 10px 15px;
+  border-radius: 5px; /* Rounded corners for a smooth look */
+}
+
+.user-info h4 {
+  color: #f8f9fa; /* Light text for contrast on dark background */
+
+  margin: 0;
+}
+
+.user-label {
+  color:rgb(242, 175, 88); /* Accent color for labels like "નામ:" and "રોલ:" */
+  font-weight: 300;
+}

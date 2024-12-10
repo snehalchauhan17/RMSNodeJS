@@ -16,6 +16,7 @@ export class BranchmasterComponent {
   filteredOfficeList: any[] = [];
   branchmaster: any;
   branchList: any[];
+  dcode: any;
   constructor(
     private apiservice: AppServiceService,
     private formbuilder: FormBuilder,
@@ -23,6 +24,7 @@ export class BranchmasterComponent {
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
+    this.dcode = sessionStorage.getItem('dcode') || '';
     this.initializeForm();
     this.fetchDistricts();
     // this.fetchOffices();
@@ -34,23 +36,22 @@ export class BranchmasterComponent {
       officeId: ['', Validators.required],
       BranchName: ['', Validators.required],
     });
-    this.BranchForm.get('districtId')?.valueChanges.subscribe((did) => {
-      this.onDistrictChange(did);
+    this.BranchForm.get('districtId')?.valueChanges.subscribe((dcode) => {
+      this.onDistrictChange(dcode);
     });
-
   }
 
-   fetchDistricts(): void {
+  fetchDistricts(): void {
     this.apiservice.getDistrictList().subscribe((res) => {
       this.districtList = res;
       console.log(res);
     });
   }
 
-  onDistrictChange(did: number): void {
+  onDistrictChange(dcode: number): void {
     debugger;
-    if (did) {
-      this.apiservice.getOfficeList(did).subscribe((data: any[]) => {
+    if (dcode) {
+      this.apiservice.getOfficeList(dcode).subscribe((data: any[]) => {
         this.OfficeList = data;
         console.log(this.OfficeList);
         this.BranchForm.get('officeId')?.enable(); // Enable the office dropdown when offices are loaded
@@ -130,7 +131,8 @@ export class BranchmasterComponent {
   fetchBranchList() {
     debugger;
     this.apiservice.getBranchModelList().subscribe((res) => {
-      this.branchList = res;
+      this.branchList = res.filter((br) => br.dcode == this.dcode);
+     // this.branchList = res;
 
       console.log(res);
     });

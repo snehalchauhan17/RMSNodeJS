@@ -11,6 +11,7 @@ import autoTable from 'jspdf-autotable';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts'; // Required for default font
 import { PDFDocument, rgb } from 'pdf-lib';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-record-list',
@@ -25,7 +26,7 @@ export class RecordListComponent {
   formList: any[];
   searchForm!: FormGroup;
   searchPayload: any = {};
-
+  roleId: number;
   totalRecords: string = '';
   // IsDisableYear: boolean = false;
   // IsDisableBranch: boolean = false;
@@ -47,12 +48,14 @@ export class RecordListComponent {
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService // Inject AuthService
   ) {}
 
   ngOnInit() {
     this.getRecordList();
     // this.SearchForm();
+    this.roleId = this.authService.getRole();
     console.log('searchform', this.searchForm);
     this.searchForm = this.fb.group({
       checkYear: [false],
@@ -84,100 +87,143 @@ export class RecordListComponent {
     });
   }
 
-  generatePDF(){
-  // Make sure to pass the current searchPayload to the API
-  this.apiservice.generatePDF(this.searchPayload).subscribe((blob) => {
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'my-document.pdf';
-    a.click();
-    window.URL.revokeObjectURL(url);
-  });
-  }
-
   // generatePDF() {
-  //   debugger;
-  //   // Create an instance of jsPDF
-  //   const doc = new jsPDF();
-
-  //   // Add the custom Gujarati font (Shruti)
-  //   doc.addFileToVFS('arial-unicode-ms.ttf', this.fontservice.shrutiBase64); // Load from service
-  //   doc.addFont('arial-unicode-ms.ttf', 'arial-unicode-ms', 'normal'); // Add the font to jsPDF
-  //   doc.setFont('arial-unicode-ms'); // Set the font to Shruti
-
-  //   // Prepare data for AutoTable
-  //   const data = this.RecordList.map((item) => [
-  //     item.Year,
-  //     item.Branch,
-  //     item.Category,
-  //     item.HukamNo,
-  //     item.HukamDate,
-  //     item.Taluka,
-  //     item.Village,
-  //     item.SurveyNo,
-  //     item.Name,
-  //     item.Subject,
-  //     item.PotlaNo,
-  //     item.FeristNo,
-  //   ]);
-
-  //   // Add title to the PDF document (Gujarati text)
-  //   doc.setFontSize(8);
-  //   doc.text('રેકોર્ડ લિસ્ટ', 14, 10); // This should render correctly if the font supports it
-
-  //   // Add table with AutoTable plugin
-  //   autoTable(doc, {
-  //     head: [
-  //       [
-  //         'ફાઇલનુ વર્ષ',
-  //         'શાખા',
-  //         'વર્ગ',
-  //         'આખરી હુકમ નંબર',
-  //         'હુકમ ની તારીખ',
-  //         'તાલુકો',
-  //         'ગામ',
-  //         'સર્વે નંબર',
-  //         'અરજદાર નુ નામ',
-  //         'વિષય',
-  //         'પોટલા નંબર',
-  //         'ફેરીસ્ટ નંબર',
-  //       ],
-  //     ],
-  //     body: data,
-  //     styles: {
-  //       font: 'shruti', // Use Shruti font for table text
-  //       fontSize: 10,
-  //     },
-  //     headStyles: {
-  //       font: 'shruti', // Use Shruti font for table headers
-  //       fontSize: 8,
-  //     },
-  //     theme: 'striped',
-  //     startY: 20, // Start position for the table after the title
+  //   // Make sure to pass the current searchPayload to the API
+  //   this.apiservice.generatePDF(this.searchPayload).subscribe((blob) => {
+  //     const url = window.URL.createObjectURL(blob);
+  //     const a = document.createElement('a');
+  //     a.href = url;
+  //     a.download = 'RecordList.pdf';
+  //     a.click();
+  //     window.URL.revokeObjectURL(url);
   //   });
+  // }
+  generatePDF() {
+    // Make sure to pass the current searchPayload to the API
+    this.apiservice.generatePDF(this.searchPayload).subscribe((blob) => {
+      const url = window.URL.createObjectURL(blob);
 
-  //   // Save the PDF document
-  //   doc.save('record-list.pdf');
+      // Open the PDF in a new tab/window
+      const pdfWindow = window.open(url, '_blank');
+
+      // Check if the window was successfully opened
+      if (pdfWindow) {
+        // Optionally, add some time delay before starting the download action
+        setTimeout(() => {
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'RecordList.pdf';
+          a.click();
+          window.URL.revokeObjectURL(url);
+        }, 500); // Delay to ensure the new tab opens first
+      } else {
+        // Handle the case where the pop-up blocker may have prevented opening the tab
+        alert(
+          'Unable to open the PDF in a new tab. Please disable your pop-up blocker.'
+        );
+      }
+    });
+  }
+  // exportExcel(): void {
+  //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.RecordList);
+  //   const workbook: XLSX.WorkBook = {
+  //     Sheets: { 'Record List': worksheet },
+  //     SheetNames: ['Record List'],
+  //   };
+  //   XLSX.writeFile(workbook, 'record-list.xlsx');
   // }
   exportExcel(): void {
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.RecordList);
+    // Remove the first column and last 5 columns
+    const modifiedRecordList = this.RecordList.map((record) => {
+      // Create a new object without the first column (index 0) and the last 5 columns
+      const keys = Object.keys(record);
+      const newRecord: any = {};
+
+      // Keep all keys except the first one and the last 5
+      keys.slice(1, keys.length - 5).forEach((key) => {
+        newRecord[key] = record[key];
+      });
+
+      return newRecord;
+    });
+
+    // Create the worksheet from the modified record list
+    const worksheet: XLSX.WorkSheet =
+      XLSX.utils.json_to_sheet(modifiedRecordList);
+
+    // Create the workbook
     const workbook: XLSX.WorkBook = {
       Sheets: { 'Record List': worksheet },
       SheetNames: ['Record List'],
     };
+
+    // Write to file
     XLSX.writeFile(workbook, 'record-list.xlsx');
   }
+  // printPage() {
+  //   const printContent = document.getElementById('print-section');
+  //   const WindowPrt = window.open('', '', 'width=900,height=650');
+  //   if (WindowPrt && printContent) {
+  //     WindowPrt.document.write(`
+  //     <html>
+  //       <head>
+  //         <title>Print Record List</title>
+  //         <style>
+  //         body { font-family: Arial, sans-serif; }
+  //           table { width: 100%; border-collapse: collapse; }
+  //           th, td { padding: 8px; border: 1px solid black; text-align: left; }
+  //           .thead-dark th { background-color: #343a40; color: white; }
+  //           .no-print { display: none; }
+  //         </style>
+  //       </head>
+  //       <body>
+  //         <h3 style="text-align: center;">રેકોર્ડ લિસ્ટ</h3>
+  //         ${printContent.innerHTML}
+  //       </body>
+  //     </html>
+  //   `);
+  //     WindowPrt.document.close();
+  //     WindowPrt.focus();
+  //     WindowPrt.print();
+  //     WindowPrt.close();
+  //   }
+  // }
+
   printPage() {
     const printContent = document.getElementById('print-section');
     const WindowPrt = window.open('', '', 'width=900,height=650');
     if (WindowPrt && printContent) {
+      // Clone the content to avoid modifying the original table
+      const printContentClone = printContent.cloneNode(true) as HTMLElement;
+
+      // Convert HTMLCollectionOf to an array
+      const rows = Array.from(printContentClone.getElementsByTagName('tr'));
+      // Loop through each row and hide the first two columns (td or th)
+      for (let row of rows) {
+        const cells = row.getElementsByTagName('td');
+        const headers = row.getElementsByTagName('th');
+
+        // Hide the first two columns in both header and data rows
+        if (cells.length > 1) {
+          cells[0].style.display = 'none'; // Hide first column
+          cells[1].style.display = 'none'; // Hide second column
+          cells[2].style.display = 'none'; // Hide second column
+        }
+
+        if (headers.length > 1) {
+          headers[0].style.display = 'none'; // Hide first column in header
+          headers[1].style.display = 'none'; // Hide second column in header
+          headers[2].style.display = 'none'; // Hide second column in header
+        }
+      }
+
+      // Write the content to the new window
       WindowPrt.document.write(`
       <html>
         <head>
           <title>Print Record List</title>
           <style>
-          body { font-family: Arial, sans-serif; }
+            body { font-family: Arial, sans-serif; }
             table { width: 100%; border-collapse: collapse; }
             th, td { padding: 8px; border: 1px solid black; text-align: left; }
             .thead-dark th { background-color: #343a40; color: white; }
@@ -186,13 +232,14 @@ export class RecordListComponent {
         </head>
         <body>
           <h3 style="text-align: center;">રેકોર્ડ લિસ્ટ</h3>
-          ${printContent.innerHTML}
+          ${printContentClone.innerHTML}
         </body>
       </html>
     `);
+
       WindowPrt.document.close();
-      WindowPrt.focus();
-      WindowPrt.print();
+      // WindowPrt.focus();
+       WindowPrt.print();
       WindowPrt.close();
     }
   }
@@ -256,6 +303,7 @@ export class RecordListComponent {
   }
 
   EditDataEntry(_id: string) {
+    debugger;
     this.apiservice.getRecordById(_id).subscribe((res) => {
       this.formList = res;
       console.log('res is:', this.formList);

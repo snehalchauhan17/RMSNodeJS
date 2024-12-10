@@ -27,7 +27,7 @@
       <label for="inputPassword4">શાખા</label>
       <select class="form-control" placeholder="શાખા" formControlName="Branch">
         <option value="" selected>-- બ્રાન્ચ સિલેક્ટ કરો --</option>
-        <option *ngFor="let br of branchList" value={{br.BRANCH}}>
+        <option *ngFor="let br of branchList"  [value]="br._id" >
           {{br.BRANCH}}
         </option>
 
@@ -82,18 +82,29 @@
 
     <div class="form-group col-md-4">
       <label for="inputState">તાલુકાનુ નામ</label>
-      <input type="text" class="form-control" id="inputCity" placeholder="તાલુકો" formControlName="Taluka">
+        <select class="form-control" placeholder="તાલુકો" id="Taluka" formControlName="Taluka">
+          <option value="" selected>-- તાલુકો સિલેક્ટ કરો --</option>
+          <option *ngFor="let br of talukaList" [value]="br.TCode" >
+            {{br.TalName_G}}
+          </option>
+
+        </select>
+      <!-- <input type="text" class="form-control" id="inputCity" placeholder="તાલુકો" formControlName="Taluka"> -->
 
     </div>
     <div class="form-group col-md-4">
       <label for="inputCity">ગામનુ નામ</label>
-      <input type="text" class="form-control" id="inputCity" placeholder="ગામ" formControlName="Village">
+        <select class="form-control" id="Village"placeholder="ગામ"  formControlName="Village">
+          <option value="" selected>-- ગામ સિલેક્ટ કરો --</option>
+          <option *ngFor="let br of villageList" [value]="br.dtv">{{br.vname_g}}</option>
+        </select>
+      <!-- <input type="text" class="form-control" id="inputCity" placeholder="ગામ" formControlName="Village"> -->
     </div>
   </div>
   <div class="form-row">
   <div class="form-group  col-md-4">
     <label for="inputAddress">સર્વે નંબર </label>
-    <input type="number" class="form-control" id="inputAddress" placeholder="સર્વે નંબર" formControlName="SurveyNo">
+    <input type="text" class="form-control" id="inputAddress" placeholder="સર્વે નંબર" formControlName="SurveyNo">
   </div>
 
   <div class="form-group  col-md-4">
@@ -162,7 +173,7 @@
     <div class="form-group col-md-3">
       <BR>
 
-      <button type="submit" *ngIf="isEditMode" (click)="onUpdate();" class="btn btn-primary"
+      <button type="submit" *ngIf="isEditMode && roleId === 1"  (click)="onUpdate();" class="btn btn-primary"
         style="width: -webkit-fill-available;">સુધારો</button>
     </div>
 

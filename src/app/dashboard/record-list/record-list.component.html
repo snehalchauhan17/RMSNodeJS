@@ -55,11 +55,11 @@
   </div>
 </div>
 <div>
-  <button type="button" style="width: 72px; margin-left: 10px;" class="btn btn-primary" (click)="printPage()">Print</button>
+  <button type="button" style="width: 72px; margin-left: 10px;" class="btn btn-primary"  (click)="printPage()">Print</button>
   &nbsp;
-  <button type="button"  style="width: 72px;  margin-left: 10px;"class="btn btn-primary" (click)="generatePDF()">PDF</button>
+  <button type="button"  style="width: 72px;  margin-left: 10px;"class="btn btn-primary"  (click)="generatePDF()">PDF</button>
     &nbsp;
-  <button type="button"  style="width: 72px;  margin-left: 10px;"class="btn btn-primary" (click)="exportExcel()">Excel</button>
+  <button type="button"  style="width: 72px;  margin-left: 10px;"class="btn btn-primary"   (click)="exportExcel()">Excel</button>
 
 </div>
       <br>
@@ -68,8 +68,8 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col"  class="no-print"> </th>
-      <!-- <th scope="col"> </th>
-      <th scope="col"> </th> -->
+      <th scope="col" *ngIf="roleId === 1" > </th>
+      <th scope="col" *ngIf="roleId === 1" > </th>
       <th scope="col">ફાઇલનુ વર્ષ </th>
       <th scope="col">શાખા </th>
       <th scope="col">વર્ગ </th>
@@ -92,17 +92,19 @@
       <!-- <TD> <button type="button" (click)="viewDocument(item.documentId);  $event.preventDefault();"   class="btn btn-primary">View</button></TD> -->
       <TD  class="no-print"><button type="button" (click)="viewDocument(item.documentId); $event.preventDefault();"
           [disabled]="!item.documentId" class="btn btn-primary">View</button></TD>
-      <!-- <TD> <button type="button" (click)="EditDataEntry(item._id);  $event.preventDefault();"
-          class="btn btn-primary">Edit</button> </TD> -->
-      <!-- <td> <button type="button" (click)="DeleteDataEntry(item._id);  $event.preventDefault();"
-          class="btn btn-primary">Delete</button> </td> -->
+      <TD *ngIf="roleId === 1" > <button type="button" (click)="EditDataEntry(item._id);  $event.preventDefault();"
+          class="btn btn-primary">Edit</button> </TD>
+      <td   *ngIf="roleId === 1" > <button type="button" (click)="DeleteDataEntry(item._id);  $event.preventDefault();"
+          class="btn btn-primary">Delete</button> </td>
       <td>{{item.Year      }} </td>
-      <td>{{item.Branch    }} </td>
+      <td>{{item.BranchName    }} </td>
       <td>{{item.Category  }} </td>
       <td>{{item.HukamNo   }} </td>
-      <td>{{item.HukamDate }} </td>
-      <td>{{item.Taluka    }} </td>
-      <td>{{item.Village   }} </td>
+      <td>{{ item.HukamDate | date: 'dd-MM-yyyy' }}</td>
+
+      <!-- <td>{{item.HukamDate }} </td> -->
+      <td>{{item.TalukaName    }} </td>
+      <td>{{item.VillageName   }} </td>
       <td>{{item.SurveyNo  }} </td>
       <td>{{item.Name      }} </td>
       <td>{{item.Subject   }} </td>

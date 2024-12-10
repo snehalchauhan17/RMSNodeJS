@@ -11,6 +11,7 @@ import { BranchmasterComponent } from './dashboard/branchmaster/branchmaster.com
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+
 //import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { RecordListComponent } from './dashboard/record-list/record-list.component';
 //import { ToastrModule } from 'ngx-toastr';
@@ -22,6 +23,7 @@ import { TableModule } from 'primeng/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { OfficeMasterComponent } from './dashboard/office-master/office-master.component';
 import { OfficeListComponent } from './dashboard/office-list/office-list.component';
+
 
 
 @NgModule({
@@ -40,7 +42,6 @@ import { OfficeListComponent } from './dashboard/office-list/office-list.compone
   ],
   imports: [
     BrowserModule,
-    //  NgMultiSelectDropDownModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,
     RouterModule,

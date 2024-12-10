@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
-//import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-data-entry',
@@ -17,81 +17,95 @@ export class DataEntryComponent {
   posts: any[];
   DEForm!: FormGroup;
   authenticated = false;
+  roleId: number;
+  Branch: string;
 
   // @ViewChild('fileUpload')
-   fileUpload: any;
+  fileUpload: any;
   selectedFile: File | null = null;
   dataentry: any;
   branchList: any[];
+  villageList: any[];
+  talukaList: any[];
   isEditMode: boolean = false;
-
+  dcode: any;
+  officeId: any;
+  branchId: any;
   constructor(
     private apiService: AppServiceService,
     private router: Router,
-    private route:ActivatedRoute,
-    private formbuilder: FormBuilder
+    private route: ActivatedRoute,
+    private formbuilder: FormBuilder,
+    private authService: AuthService // Inject AuthService
   ) {}
 
   ngOnInit(): void {
+    debugger;
+    this.dcode = sessionStorage.getItem('dcode') || '';
+    this.branchId = sessionStorage.getItem('branchId') || '';
+    this.officeId = sessionStorage.getItem('officeId') || '';
+    this.roleId = this.authService.getRole();
 
     this.Auth();
     this.createForm();
-    this.BranchList();
-  this.route.params.subscribe(params => {
-    if (params['_id']) {
-      this.editForm();
-    }
-  });
+    this.TalukaList();
+    this.DEForm.get('Taluka')?.valueChanges.subscribe((TCode) => {
+      this.onTalukaChangeVillageList(this.dcode, TCode);
+    });
+    this.route.params.subscribe((params) => {
+      if (params['_id']) {
+        this.editForm();
+      }
+    });
 
+    this.BranchList();
   }
 
-
-  onReset(){
+  onReset() {
     this.DEForm.reset();
   }
   createForm() {
     this.DEForm = this.formbuilder.group({
       _id: [''],
-      Year				: ['', Validators.required],
-      IssueDate		: ['', Validators.required],
-      Branch			: ['', Validators.required],
-      Category		: ['', Validators.required],
-      Name				: ['', Validators.required],
-      Address			: ['', Validators.required],
-      Subject			: ['', Validators.required],
-      HukamNo			: ['', Validators.required],
-      HukamDate		: ['', Validators.required],
-      Taluka			: ['', Validators.required],
-      Village			: ['', Validators.required],
-      SurveyNo		: ['', Validators.required],
-      CompactorNo	: ['', Validators.required],
-      PotlaNo			: ['', Validators.required],
-      FeristNo		: ['', Validators.required],
-      NotePage		: ['', Validators.required],
-      PostPage		: ['', Validators.required],
-      TotalPage		: ['', Validators.required],
-      anyDetail		: ['', Validators.required],
-      documentId	: [''],
+      Year: ['', Validators.required],
+      IssueDate: ['', Validators.required],
+      Branch: ['', Validators.required],
+      Category: ['', Validators.required],
+      Name: ['', Validators.required],
+      Address: ['', Validators.required],
+      Subject: ['', Validators.required],
+      HukamNo: ['', Validators.required],
+      HukamDate: ['', Validators.required],
+      Taluka: ['', Validators.required],
+      Village: ['', Validators.required],
+      SurveyNo: ['', Validators.required],
+      CompactorNo: ['', Validators.required],
+      PotlaNo: ['', Validators.required],
+      FeristNo: ['', Validators.required],
+      NotePage: ['', Validators.required],
+      PostPage: ['', Validators.required],
+      TotalPage: ['', Validators.required],
+      anyDetail: ['', Validators.required],
+      documentId: [''],
     });
   }
   onUpdate() {
     debugger;
     if (this.DEForm.valid) {
       const formData = this.DEForm.value;
-   const docid = sessionStorage.getItem('docid');
-   formData.documentId = docid ? docid : null;
-    //  const docid = sessionStorage.getItem('docid');
 
-      // if (formData.documentId) {
-      //   formData.documentId = docid;
-
-        if (this.isEditMode) {
-          const _id = formData._id;
-          console.log('update formdata:', formData);
-          this.updateRecord(_id, formData);
-        } else {
-          this.AddDataEntry(formData);
+      if (this.isEditMode) {
+        if (!formData._id) {
+          formData._id = this.DEForm.get('id')?.value; // Manually set _id from the form control
+          console.log('update formdata Id   formData._id:', formData._id);
         }
+
+        console.log('update formdata Id:', formData);
+        console.log('update formdata:', formData);
+        this.updateRecord(formData._id, formData);
+      } else {
+        this.AddDataEntry(formData);
+      }
       // } else {
       //   console.error('docid not found in sessionStorage');
       // }
@@ -100,37 +114,37 @@ export class DataEntryComponent {
     }
   }
 
-
   AddDataEntry(dataentry: any) {
     debugger;
 
     console.log(this.DEForm);
 
- const docid = sessionStorage.getItem('docid');
-if (docid) {
-  dataentry.documentId = docid;
-} else {
-  dataentry.documentId = null;
-}
-      console.log(this.DEForm);
-      this.apiService.DataEntryPost(dataentry).subscribe(
-        () => {
-          // Insert successful, clear the form
-          this.DEForm.reset();
-          alert('Record Save Successfully');
-          // Clear docid from sessionStorage to prevent reuse
-          sessionStorage.removeItem('docid');
-
-          // Navigate to the record list component
-          this.router.navigate(['/dashboard/recordlist']);
-        },
-        (err) => {
-          alert('Error');
-          // Handle error
-          //  this.toastr.success('Hello World!', 'Custom Alert');
-          Swal.fire('Error', err.error.message, 'error');
-        }
-      );
+    const docid = sessionStorage.getItem('docid');
+    if (docid) {
+      dataentry.documentId = docid;
+    } else {
+      dataentry.documentId = null;
+    }
+    dataentry.dcode =this.dcode;
+    console.log(this.DEForm);
+    this.apiService.DataEntryPost(dataentry).subscribe(
+      () => {
+        // Insert successful, clear the form
+        this.DEForm.reset();
+        alert('Record Save Successfully');
+        // Clear docid from sessionStorage to prevent reuse
+        sessionStorage.removeItem('docid');
+        window.location.reload();
+        // Navigate to the record list component
+        // this.router.navigate(['/dashboard/recordlist']);
+      },
+      (err) => {
+        alert('Error');
+        // Handle error
+        //  this.toastr.success('Hello World!', 'Custom Alert');
+        Swal.fire('Error', err.error.message, 'error');
+      }
+    );
 
     //}
   }
@@ -142,7 +156,8 @@ if (docid) {
         this.DEForm.reset();
         alert('Record Updated Successfully');
         this.DEForm.reset();
-        this.router.navigate(['/dashboard/recordlist']);
+        window.location.reload();
+        //    this.router.navigate(['/dashboard/recordlist']);
       },
       (err) => {
         console.error('Error updating record:', err);
@@ -151,12 +166,11 @@ if (docid) {
     );
   }
 
-
   editForm() {
     debugger;
     this.isEditMode = true;
     this.apiService.currentFormData.subscribe((data) => {
-      console.log(data);
+      console.log('data for edit', data);
       if (data && data._id) {
         this.populateForm(data);
       } else {
@@ -166,31 +180,31 @@ if (docid) {
   }
 
   populateForm(data: any): void {
+    console.log('populating form with data:', data);
     this.DEForm.patchValue({
-					id: data._id,
-					Year				:data.Year,
-					IssueDate		:data.IssueDate,
-					Branch			:data.Branch,
-					Category		:data.Category,
-					Name				:data.Name,
-					Address			:data.Address,
-					Subject			:data.Subject,
-					HukamNo			:data.HukamNo,
-					HukamDate		:data.HukamDate,
-					Taluka			:data.Taluka,
-					Village			:data.Village,
-					SurveyNo		:data.SurveyNo,
-					CompactorNo	:data.CompactorNo,
-					PotlaNo			:data.PotlaNo,
-					FeristNo		:data.FeristNo,
-					NotePage		:data.NotePage,
-					PostPage		:data.PostPage,
-					TotalPage		:data.TotalPage,
-					anyDetail		:data.anyDetail,
-					documentId	:data.documentId,
+      _id: data._id,
+      Year: data.Year,
+      IssueDate: data.IssueDate,
+      Branch: data.Branch,
+      Category: data.Category,
+      Name: data.Name,
+      Address: data.Address,
+      Subject: data.Subject,
+      HukamNo: data.HukamNo,
+      HukamDate: data.HukamDate,
+      Taluka: data.Taluka,
+      Village: data.Village,
+      SurveyNo: data.SurveyNo,
+      CompactorNo: data.CompactorNo,
+      PotlaNo: data.PotlaNo,
+      FeristNo: data.FeristNo,
+      NotePage: data.NotePage,
+      PostPage: data.PostPage,
+      TotalPage: data.TotalPage,
+      anyDetail: data.anyDetail,
+      documentId: data.documentId,
     });
   }
-
 
   Auth() {
     Emitters.authEmitter.subscribe((auth: boolean) => {
@@ -198,14 +212,63 @@ if (docid) {
     });
   }
 
-  BranchList() {
-    debugger;
-    this.apiService.getBranchList().subscribe((res) => {
-      this.branchList = res;
-      console.log(res);
+  // getUserName() {
+  //   if (this.UserName && this.roleId) {
+  //     // Fetch both userlist and rolelist
+  //     this.apiService.GetUserName().subscribe((userList) => {
+  //       const user = userList.find((user) => user.username === this.UserName);
+  //       if (user) {
+  //         this.name = user.name;
+  //       }
+  //     });
+
+  //     this.apiService.GetRoleMasterList().subscribe((roleList) => {
+  //       console.log('RoleList:', roleList);
+  //       const role = roleList.find((role) => role.RoleId === this.roleId);
+  //       console.log('RoleId :', role);
+  //       if (role) {
+  //         this.RoleName = role.RoleName;
+  //         console.log('RoleId :', this.RoleName);
+  //       }
+  //     });
+  //   }
+  // }
+
+  TalukaList() {
+    console.log('districtid', this.dcode);
+    this.apiService.getTalukaFromDistrict().subscribe((res) => {
+      console.log('talukaList:', res);
+      // Filter the list to only include items matching branchId
+      this.talukaList = res.filter((br) => br.DCode == this.dcode);
+      //this.talukaList = res;
+      console.log('Filtered talukaList:');
     });
   }
 
+  onTalukaChangeVillageList(dcode: number, TCode: number): void {
+    debugger;
+    if (TCode || dcode) {
+      this.apiService
+        .getVillageListbyID(dcode, TCode)
+        .subscribe((data: any[]) => {
+          this.villageList = data;
+          this.DEForm.get('Village')?.enable(); // Enable the office dropdown when offices are loaded
+          console.log('Village:', data);
+        });
+    } else {
+      this.villageList = [];
+      this.DEForm.get('Village')?.disable(); // Disable the office dropdown if no district is selected
+    }
+  }
+  BranchList() {
+    console.log('BranchID', this.officeId);
+    this.apiService.getBranchList().subscribe((branchList) => {
+      console.log('BranchList1:', branchList);
+      // Filter the list to only include items matching branchId
+      this.branchList = branchList.filter((br) => br.oid == this.officeId);
+      console.log('Filtered BranchList:', this.branchList);
+    });
+  }
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
