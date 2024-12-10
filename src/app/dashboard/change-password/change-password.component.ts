@@ -22,21 +22,21 @@ export class ChangePasswordComponent {
 
   ngOnInit(): void {
     debugger;
-    //this.initializeForm();
+    this.initializeForm();
   }
-  // initializeForm(): void {
-  //   this.ChangeForm = this.formbuilder.group(
-  //     {
-  //       oldPassword: ['',Validators.required, //   OldPwdValidators.shouldBe1234,
-  //           Validators.minLength(6) ],
-  //       newPassword: ['', Validators.required, Validators.minLength(6)],
-  //       confirmPassword: ['', Validators.required, Validators.minLength(6)],
-  //     },
-  //     // {
-  //     //   validator: OldPwdValidators.matchPwds,
-  //     // }
-  //   );
-  // }
+  initializeForm(): void {
+    this.ChangeForm = this.formbuilder.group(
+      {
+        oldPassword: ['',Validators.required, //   OldPwdValidators.shouldBe1234,
+            Validators.minLength(6) ],
+        newPassword: ['', Validators.required, Validators.minLength(6)],
+        confirmPassword: ['', Validators.required, Validators.minLength(6)],
+      },
+      // {
+      //   validator: OldPwdValidators.matchPwds,
+      // }
+    );
+  }
 
   // ChangePWd(user: any): void {
   //   debugger;
