@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host 10.154.2.172 --port 4200",
+
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -35,7 +36,7 @@
     "pdfmake": "^0.2.14",
     "primeicons": "^6.0.1",
     "primeng": "^17.12.0",
-    "rxjs": "~7.5.0",
+    "rxjs": "^7.8.1",
     "sweetalert2": "^11.10.3",
     "toastr": "^2.1.4",
     "tslib": "^2.3.0",

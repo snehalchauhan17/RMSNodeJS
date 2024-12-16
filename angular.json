@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/node-angular-ui",
+            "outputPath": "dist/rmsnodejs",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -47,8 +47,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "5mb",
+                  "maximumError": "6mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -64,27 +64,25 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
+              "fileReplacements": [],
               "namedChunks": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "RMSNodeJS:build"
-          },
+        "serve": 
+        {
           "configurations": {
             "production": {
-              "browserTarget": "RMSNodeJS:build:production"
+              "browserTarget": "rmsnodejs:build:production"
             },
             "development": {
-              "browserTarget": "RMSNodeJS:build:development"
+              "browserTarget": "rmsnodejs:build:development"
             }
-          },
-          "defaultConfiguration": "development"
+          }          
 
         },
+        
 
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
