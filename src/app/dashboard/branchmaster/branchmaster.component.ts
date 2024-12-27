@@ -28,7 +28,7 @@ export class BranchmasterComponent {
     this.initializeForm();
     this.fetchDistricts();
     // this.fetchOffices();
-    this.fetchBranchList();
+    this.fetchBranchList(this.dcode);
   }
   initializeForm(): void {
     this.BranchForm = this.formbuilder.group({
@@ -44,7 +44,6 @@ export class BranchmasterComponent {
   fetchDistricts(): void {
     this.apiservice.getDistrictList().subscribe((res) => {
       this.districtList = res;
-      console.log(res);
     });
   }
 
@@ -53,7 +52,6 @@ export class BranchmasterComponent {
     if (dcode) {
       this.apiservice.getOfficeList(dcode).subscribe((data: any[]) => {
         this.OfficeList = data;
-        console.log(this.OfficeList);
         this.BranchForm.get('officeId')?.enable(); // Enable the office dropdown when offices are loaded
       });
     } else {
@@ -65,7 +63,6 @@ export class BranchmasterComponent {
   // fetchOffices(): void {
   //   this.apiservice.getOfficeList().subscribe((res) => {
   //     this.OfficeList = res;
-  //     console.log(res, 'office name');
   //   });
   // }
   // onDistrictSelected(did: any) {
@@ -74,13 +71,11 @@ export class BranchmasterComponent {
   //       this.filteredOfficeList.push(this.OfficeList[i]);
   //     }
   //   }
-  //   console.log(this.filteredOfficeList, 'office filtered name');
   // }
 
   // fetchDistricts(): void {
   //   this.apiservice.getDistrictList().subscribe((res) => {
   //     this.districtList = res;
-  //     console.log(res);
   //   });
   // }
 
@@ -100,7 +95,6 @@ export class BranchmasterComponent {
   // fetchOffices(): void {
   //   this.apiservice.getOfficeList().subscribe((res) => {
   //     this.OfficeList = res;
-  //     console.log(res, 'office name');
   //   });
   // }
   // onDistrictSelected(did: any) {
@@ -109,11 +103,9 @@ export class BranchmasterComponent {
   //       this.filteredOfficeList.push(this.OfficeList[i]);
   //     }
   //   }
-  //   console.log(this.filteredOfficeList, 'office filtered name');
   // }
   AddBranch(branchmaster: any): void {
     debugger;
-    console.log(this.BranchForm);
 
     this.apiservice.BranchEntryPost(branchmaster).subscribe(
       () => {
@@ -128,20 +120,19 @@ export class BranchmasterComponent {
       }
     );
   }
-  fetchBranchList() {
+  fetchBranchList(dcode:number) {
     debugger;
-    this.apiservice.getBranchModelList().subscribe((res) => {
-      this.branchList = res.filter((br) => br.dcode == this.dcode);
+    this.apiservice.getBranchModelList(dcode).subscribe((res) => {
+      this.branchList = res;
      // this.branchList = res;
-
-      console.log(res);
+     console.log(this.branchList);
+     console.log(res);
     });
   }
 
   // EditOfficeEntry(_id: string) {
   //   this.apiservice.getOfficeById(_id).subscribe((res) => {
   //     this.formList = res;
-  //     console.log('res is:', this.formList);
   //     this.apiservice.setFormData(this.formList);
   //     this.router.navigate(['dashboard/OfficeMaster', _id]);
   //     //   this.router.navigate(['dashboard/dataentry',_id]);
@@ -154,7 +145,6 @@ export class BranchmasterComponent {
   //     // event.target.innerText = "Deleting..."
   //     this.apiservice.deleteOfficeById(_id).subscribe((res) => {
   //       this.getofficeList();
-  //       console.log('PRoblem in Comp');
   //       alert(res.message);
   //     });
   //   }

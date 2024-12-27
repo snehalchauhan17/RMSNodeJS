@@ -70,19 +70,17 @@
           },
           "defaultConfiguration": "development"
         },
-        "serve": 
-        {
-          "configurations": {
-            "production": {
-              "browserTarget": "rmsnodejs:build:production"
-            },
-            "development": {
-              "browserTarget": "rmsnodejs:build:development"
-            }
-          }          
-
-        },
-        
+       "serve": {
+  "builder": "@angular-devkit/build-angular:dev-server",
+  "options": {
+    "browserTarget": "RMSNodeJS:build"
+  },
+  "configurations": {
+    "development": {
+      "browserTarget": "RMSNodeJS:build:development"
+    }
+  }
+},
 
         "test": {
           "builder": "@angular-devkit/build-angular:karma",

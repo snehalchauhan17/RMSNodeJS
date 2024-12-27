@@ -14,6 +14,8 @@ export class AppServiceService {
   private formData = new BehaviorSubject<any>(null);
   currentFormData = this.formData.asObservable();
 
+
+  
   GetRoleMasterList(): Observable<any[]> {
     debugger;
     return this.http.get<any[]>(`${this.apiUrl}/api/RoleList`).pipe(
@@ -67,6 +69,10 @@ export class AppServiceService {
       );
   }
 
+
+  changePassword(token: string, oldPassword: string, newPassword: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/api/ChangePassword`, { token, oldPassword, newPassword });
+  }
   //To get Data of Registered User
   GetUserName(): Observable<any[]> {
     return this.http
@@ -275,9 +281,10 @@ export class AppServiceService {
       );
   }
 
-  getBranchModelList(): Observable<any[]> {
+  getBranchModelList(dcode:number): Observable<any[]> {
     debugger;
-    return this.http.get<any[]>(`${this.apiUrl}/api/BranchModelList`).pipe(
+    return this.http
+    .get<any[]>(`${this.apiUrl}/api/BranchModelList/${dcode}`).pipe(
       catchError((error) => {
         console.error('Error:', error);
         return throwError(error);

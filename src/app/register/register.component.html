@@ -33,7 +33,7 @@
               <div class="input-group mb-3">
                 <select class="form-control" id="dcode" formControlName="dcode">
                   <option value="" selected>-- Select District --</option>
-                  <option *ngFor="let dr of districtList" [value]="dr.did">{{ dr.dname }}</option>
+                  <option *ngFor="let dr of districtList" [value]="dr.dcode">{{ dr.name_g }}</option>
                 </select>
                 <div class="input-group-append">
                   <div class="input-group-text">

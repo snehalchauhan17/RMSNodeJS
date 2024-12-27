@@ -100,8 +100,6 @@ export class DataEntryComponent {
           console.log('update formdata Id   formData._id:', formData._id);
         }
 
-        console.log('update formdata Id:', formData);
-        console.log('update formdata:', formData);
         this.updateRecord(formData._id, formData);
       } else {
         this.AddDataEntry(formData);
@@ -170,7 +168,6 @@ export class DataEntryComponent {
     debugger;
     this.isEditMode = true;
     this.apiService.currentFormData.subscribe((data) => {
-      console.log('data for edit', data);
       if (data && data._id) {
         this.populateForm(data);
       } else {
