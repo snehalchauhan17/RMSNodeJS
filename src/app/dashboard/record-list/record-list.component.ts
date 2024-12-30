@@ -87,17 +87,6 @@ export class RecordListComponent {
     });
   }
 
-  // generatePDF() {
-  //   // Make sure to pass the current searchPayload to the API
-  //   this.apiservice.generatePDF(this.searchPayload).subscribe((blob) => {
-  //     const url = window.URL.createObjectURL(blob);
-  //     const a = document.createElement('a');
-  //     a.href = url;
-  //     a.download = 'RecordList.pdf';
-  //     a.click();
-  //     window.URL.revokeObjectURL(url);
-  //   });
-  // }
   generatePDF() {
     // Make sure to pass the current searchPayload to the API
     this.apiservice.generatePDF(this.searchPayload).subscribe((blob) => {
@@ -124,14 +113,7 @@ export class RecordListComponent {
       }
     });
   }
-  // exportExcel(): void {
-  //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.RecordList);
-  //   const workbook: XLSX.WorkBook = {
-  //     Sheets: { 'Record List': worksheet },
-  //     SheetNames: ['Record List'],
-  //   };
-  //   XLSX.writeFile(workbook, 'record-list.xlsx');
-  // }
+ 
   exportExcel(): void {
     // Remove the first column and last 5 columns
     const modifiedRecordList = this.RecordList.map((record) => {
@@ -143,6 +125,10 @@ export class RecordListComponent {
       keys.slice(1, keys.length - 5).forEach((key) => {
         newRecord[key] = record[key];
       });
+  // Add TalukaName, BranchName, and VillageName if available
+  newRecord.Taluka = record.TalukaName || 'N/A'; // Default to 'N/A' if not available
+  newRecord.Branch = record.BranchName || 'N/A';
+  newRecord.Village = record.VillageName || 'N/A';
 
       return newRecord;
     });

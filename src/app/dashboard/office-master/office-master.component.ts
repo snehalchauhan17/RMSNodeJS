@@ -28,6 +28,7 @@ export class OfficeMasterComponent {
   ) {}
 
   ngOnInit(): void {
+    debugger;
     this.fetchDistricts();
     //  this.DistrictList();
     this.OfficeMasterList();
@@ -75,7 +76,7 @@ export class OfficeMasterComponent {
 
   createForm() {
     this.officemasterForm = this.formbuilder.group({
-
+      _id :['', Validators.required],
       dcode: ['', Validators.required],
       name: ['', Validators.required],
       OTYP: ['', Validators.required],
