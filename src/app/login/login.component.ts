@@ -37,12 +37,12 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void {
-    debugger;
+
     let user = this.form?.getRawValue();
     if (user.username == '' || user.password == '') {
       Swal.fire('Error', 'Please Enter all the Details', 'error');
     } else {
-      console.log(user);
+
 
       // Call API to log in
       this.apiService.LoginPost(user).subscribe(
@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
       );
     }
     //    else {
-    //     console.log(user);
+  
     //  //   sessionStorage.setItem('username',user.username);
     //     this.apiService.LoginPost(user).subscribe(
     //       () =>{ this.router.navigate(['/dashboard']).then(()=>{

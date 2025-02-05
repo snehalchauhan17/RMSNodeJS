@@ -28,15 +28,14 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger;
-        this.roleId = this.authService.getRole();
-        this.UserName = sessionStorage.getItem('username') || '';
+
+    this.roleId = this.authService.getRole();
+    this.UserName = sessionStorage.getItem('username') || '';
     this.getUserName();
     this.Auth();
   }
 
   Auth() {
-    debugger;
     this.authService.authenticated$.subscribe((auth) => {
       this.authenticated = auth;
     });
@@ -46,7 +45,6 @@ export class DashboardComponent implements OnInit {
     }
   }
   LogOut(): void {
-    debugger;
     this.authService.logout(); // Clears the session storage
     // Call the logout API to clear the JWT cookie
     this.apiService.LogoutPost().subscribe((response) => {
@@ -65,12 +63,10 @@ export class DashboardComponent implements OnInit {
       });
 
       this.apiService.GetRoleMasterList().subscribe((roleList) => {
-        console.log("RoleList:",roleList)
+
         const role = roleList.find((role) => role.RoleId === this.roleId);
-                console.log('RoleId :', role);
         if (role) {
           this.RoleName = role.RoleName;
-                 console.log('RoleId :', this.RoleName);
         }
       });
     }

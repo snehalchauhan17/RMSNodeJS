@@ -27,20 +27,16 @@ export class OfficeListComponent {
   }
 
   getofficeList() {
-    debugger;
     this.apiservice.getOfficeMasterList().subscribe((res) => {
          this.OfficeList = res;
-            console.log(this.OfficeList);
       this.OfficeList = res.filter((br) => br.dcode == this.dcode);
       //const totalRecords = this.RecordList.length;
-      console.log(this.OfficeList);
     });
   }
 
   EditOfficeEntry(_id: string) {
     this.apiservice.getOfficeById(_id).subscribe((res) => {
       this.formList = res;
-      console.log('res is:', this.formList);
       this.apiservice.setFormData(this.formList);
       this.router.navigate(['dashboard/OfficeMaster', _id]);
       //   this.router.navigate(['dashboard/dataentry',_id]);
@@ -48,12 +44,10 @@ export class OfficeListComponent {
   }
 
   DeleteOfficeEntry(_id: Object) {
-    debugger;
     if (confirm('are sure you want to delete record?')) {
       // event.target.innerText = "Deleting..."
       this.apiservice.deleteOfficeById(_id).subscribe((res) => {
         this.getofficeList();
-        console.log('PRoblem in Comp');
         alert(res.message);
       });
     }

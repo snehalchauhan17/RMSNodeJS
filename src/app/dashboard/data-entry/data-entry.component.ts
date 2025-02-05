@@ -40,7 +40,7 @@ export class DataEntryComponent {
   ) {}
 
   ngOnInit(): void {
-    debugger;
+
     this.dcode = sessionStorage.getItem('dcode') || '';
     this.branchId = sessionStorage.getItem('branchId') || '';
     this.officeId = sessionStorage.getItem('officeId') || '';
@@ -90,14 +90,12 @@ export class DataEntryComponent {
     });
   }
   onUpdate() {
-    debugger;
     if (this.DEForm.valid) {
       const formData = this.DEForm.value;
 
       if (this.isEditMode) {
         if (!formData._id) {
           formData._id = this.DEForm.get('id')?.value; // Manually set _id from the form control
-          console.log('update formdata Id   formData._id:', formData._id);
         }
 
         this.updateRecord(formData._id, formData);
@@ -113,9 +111,7 @@ export class DataEntryComponent {
   }
 
   AddDataEntry(dataentry: any) {
-    debugger;
 
-    console.log(this.DEForm);
 
     const docid = sessionStorage.getItem('docid');
     if (docid) {
@@ -124,7 +120,6 @@ export class DataEntryComponent {
       dataentry.documentId = null;
     }
     dataentry.dcode =this.dcode;
-    console.log(this.DEForm);
     this.apiService.DataEntryPost(dataentry).subscribe(
       () => {
         // Insert successful, clear the form
@@ -148,7 +143,13 @@ export class DataEntryComponent {
   }
 
   updateRecord(_id: string, updatedData: any) {
-    debugger;
+    
+    const docid = sessionStorage.getItem('docid');
+    if (docid) {
+      updatedData.documentId = docid;
+    } else {
+      updatedData.documentId = null;
+    }
     this.apiService.updateRecord(_id, updatedData).subscribe(
       () => {
         this.DEForm.reset();
@@ -165,19 +166,17 @@ export class DataEntryComponent {
   }
 
   editForm() {
-    debugger;
     this.isEditMode = true;
     this.apiService.currentFormData.subscribe((data) => {
       if (data && data._id) {
         this.populateForm(data);
       } else {
-        console.log('Error: No data received');
+        console.error('Error: No data received');
       }
     });
   }
 
   populateForm(data: any): void {
-    console.log('populating form with data:', data);
     this.DEForm.patchValue({
       _id: data._id,
       Year: data.Year,
@@ -220,37 +219,31 @@ export class DataEntryComponent {
   //     });
 
   //     this.apiService.GetRoleMasterList().subscribe((roleList) => {
-  //       console.log('RoleList:', roleList);
+
   //       const role = roleList.find((role) => role.RoleId === this.roleId);
-  //       console.log('RoleId :', role);
+
   //       if (role) {
   //         this.RoleName = role.RoleName;
-  //         console.log('RoleId :', this.RoleName);
   //       }
   //     });
   //   }
   // }
 
   TalukaList() {
-    console.log('districtid', this.dcode);
     this.apiService.getTalukaFromDistrict().subscribe((res) => {
-      console.log('talukaList:', res);
       // Filter the list to only include items matching branchId
       this.talukaList = res.filter((br) => br.DCode == this.dcode);
       //this.talukaList = res;
-      console.log('Filtered talukaList:');
     });
   }
 
   onTalukaChangeVillageList(dcode: number, TCode: number): void {
-    debugger;
     if (TCode || dcode) {
       this.apiService
         .getVillageListbyID(dcode, TCode)
         .subscribe((data: any[]) => {
           this.villageList = data;
           this.DEForm.get('Village')?.enable(); // Enable the office dropdown when offices are loaded
-          console.log('Village:', data);
         });
     } else {
       this.villageList = [];
@@ -258,12 +251,9 @@ export class DataEntryComponent {
     }
   }
   BranchList() {
-    console.log('BranchID', this.officeId);
-    this.apiService.getBranchList().subscribe((branchList) => {
-      console.log('BranchList1:', branchList);
+    this.apiService.getBranchList().subscribe((branchList) => {;
       // Filter the list to only include items matching branchId
       this.branchList = branchList.filter((br) => br.oid == this.officeId);
-      console.log('Filtered BranchList:', this.branchList);
     });
   }
 
@@ -273,7 +263,13 @@ export class DataEntryComponent {
   }
 
   onUpload(): void {
-    debugger;
+     
+    // const docid = sessionStorage.getItem('docid');
+    // if (docid) {
+    //   documentId = docid;
+    // } else {
+    //   documentId = null;
+    // }
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('file', this.selectedFile);
@@ -281,7 +277,6 @@ export class DataEntryComponent {
         (response) => {
           sessionStorage.setItem('docid', response.document._id);
           alert('File uploaded successfully!');
-          console.log('File uploaded successfully!', response);
           //     this.selectedFile = null;
         },
         (error) => {

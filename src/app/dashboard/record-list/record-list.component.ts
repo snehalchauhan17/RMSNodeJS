@@ -56,7 +56,6 @@ export class RecordListComponent {
     this.getRecordList();
     // this.SearchForm();
     this.roleId = this.authService.getRole();
-    console.log('searchform', this.searchForm);
     this.searchForm = this.fb.group({
       checkYear: [false],
       checkBranch: [false],
@@ -251,8 +250,6 @@ export class RecordListComponent {
 
     this.apiservice.GetSearchRecordList(this.searchPayload).subscribe(
       (response) => {
-        console.log('Search Results:', response);
-
         // Update the records after the search operation completes
         this.RecordList = response;
       },
@@ -266,7 +263,6 @@ export class RecordListComponent {
     this.apiservice.getRecord().subscribe((res) => {
       this.RecordList = res;
       const totalRecords = this.RecordList.length;
-      console.log(this.RecordList);
     });
   }
 
@@ -274,7 +270,7 @@ export class RecordListComponent {
     location.reload();
   }
   viewDocument(_id: Object): void {
-    debugger;
+
     this.apiservice.ViewDoc(_id).subscribe(
       (data: ArrayBuffer) => {
         // Handle viewing the document here
@@ -289,10 +285,9 @@ export class RecordListComponent {
   }
 
   EditDataEntry(_id: string) {
-    debugger;
+
     this.apiservice.getRecordById(_id).subscribe((res) => {
       this.formList = res;
-      console.log('res is:', this.formList);
       this.apiservice.setFormData(this.formList);
       this.router.navigate(['dashboard/dataentry', _id]);
       //   this.router.navigate(['dashboard/dataentry',_id]);
@@ -300,7 +295,7 @@ export class RecordListComponent {
   }
 
   DeleteDataEntry(_id: Object) {
-    debugger;
+
     if (confirm('are sure you want to delete record?')) {
       // event.target.innerText = "Deleting..."
       this.apiservice.deleteEntryById(_id).subscribe((res) => {

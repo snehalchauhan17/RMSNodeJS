@@ -48,7 +48,6 @@ export class BranchmasterComponent {
   }
 
   onDistrictChange(dcode: number): void {
-    debugger;
     if (dcode) {
       this.apiservice.getOfficeList(dcode).subscribe((data: any[]) => {
         this.OfficeList = data;
@@ -80,7 +79,6 @@ export class BranchmasterComponent {
   // }
 
   // onDistrictChange(did: number): void {
-  //   debugger;
   //   if (did) {
   //     this.apiservice.getOfficeList(did).subscribe((data: any[]) => {
   //       this.OfficeList = data;
@@ -105,7 +103,6 @@ export class BranchmasterComponent {
   //   }
   // }
   AddBranch(branchmaster: any): void {
-    debugger;
 
     this.apiservice.BranchEntryPost(branchmaster).subscribe(
       () => {
@@ -121,12 +118,10 @@ export class BranchmasterComponent {
     );
   }
   fetchBranchList(dcode:number) {
-    debugger;
+
     this.apiservice.getBranchModelList(dcode).subscribe((res) => {
       this.branchList = res;
      // this.branchList = res;
-     console.log(this.branchList);
-     console.log(res);
     });
   }
 
@@ -140,7 +135,6 @@ export class BranchmasterComponent {
   // }
 
   // DeleteOfficeEntry(_id: Object) {
-  //   debugger;
   //   if (confirm('are sure you want to delete record?')) {
   //     // event.target.innerText = "Deleting..."
   //     this.apiservice.deleteOfficeById(_id).subscribe((res) => {

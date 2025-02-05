@@ -28,7 +28,7 @@ export class OfficeMasterComponent {
   ) {}
 
   ngOnInit(): void {
-    debugger;
+
     this.fetchDistricts();
     //  this.DistrictList();
     this.OfficeMasterList();
@@ -47,24 +47,21 @@ export class OfficeMasterComponent {
   fetchDistricts(): void {
     this.apiService.getDistrictList().subscribe((res) => {
       this.districtList = res;
-      console.log(res);
     });
   }
   editForm() {
-    debugger;
+
     this.isEditMode = true;
     this.apiService.currentFormData.subscribe((data) => {
-      console.log(data);
       if (data && data._id) {
         this.populateForm(data);
       } else {
-        console.log('Error: No data received');
+        console.error('Error: No data received');
       }
     });
   }
 
   populateForm(data: any): void {
-    console.log('populateForm',data);
     this.officemasterForm.patchValue({
       _id: data._id,
       id: data.idno,
@@ -84,9 +81,8 @@ export class OfficeMasterComponent {
   }
 
   Addofficemasterlist(officemaster: any) {
-    debugger;
 
-    console.log(this.officemasterForm);
+
     this.apiService.OfficeMasterPost(officemaster).subscribe(
       () => {
         // Insert successful, clear the form
@@ -106,22 +102,19 @@ export class OfficeMasterComponent {
   }
 
   OfficeMasterList() {
-    debugger;
+
     this.apiService.getOfficeMasterList().subscribe((res) => {
       this.officemasterlist = res;
-      console.log(res, 'Office');
     });
   }
 
   onUpdateOffice() {
-    debugger;
+
     if (this.officemasterForm.valid) {
       const formData = this.officemasterForm.value;
 
       if (this.isEditMode) {
         const _id = formData._id;
-        console.log('update formdata:', formData);
-        console.log(_id);
         this.updateOffice(_id, formData);
       } else {
         this.Addofficemasterlist(formData);
@@ -132,7 +125,7 @@ export class OfficeMasterComponent {
   }
 
   updateOffice(_id: string, updatedData: any) {
-    debugger;
+
     this.apiService.updateOfficebyId(_id, updatedData).subscribe(
       () => {
         this.officemasterForm.reset();

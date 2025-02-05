@@ -26,7 +26,7 @@ export class ChangePasswordComponent {
 
 
   ngOnInit(): void {
-    debugger;
+    
     this.initializeForm();
   }
   
@@ -64,7 +64,7 @@ export class ChangePasswordComponent {
   
 
   onSubmit(): void {
-    debugger;
+
    
     const { oldPassword, newPassword } = this.ChangeForm.value;
    const token = sessionStorage.getItem('codedtoken'); // Assuming the token is stored in localStorage

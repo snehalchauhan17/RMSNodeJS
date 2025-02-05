@@ -25,7 +25,6 @@ import { OfficeMasterComponent } from './dashboard/office-master/office-master.c
 import { OfficeListComponent } from './dashboard/office-list/office-list.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +38,7 @@ import { OfficeListComponent } from './dashboard/office-list/office-list.compone
     ChangePasswordComponent,
     OfficeMasterComponent,
     OfficeListComponent,
+    
   ],
   imports: [
     BrowserModule,
