@@ -1,4 +1,4 @@
-
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,12 +14,6 @@
     <div class="container" id="navbar-design">
       <h1>Record Management System</h1>
       <nav class="navbar navbar-expand " >
-        <!-- <ul>
-
-          <li><a class="nav-link" routerLink="/login" data-widget="pushmenu" role="button"><i class="fas fa-bars">Login</i></a></li>
-          <li><a href="#">Register</a></li>
-        </ul> -->
-
 
         <ul class="navbar-nav">
           <li class="nav-item">
@@ -67,4 +61,42 @@
   </footer>
 </body>
 
-</html>
+</html> -->
+<mat-sidenav-container class="sidenav-container">
+ 
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <span>Record Management System</span>
+      <span class="spacer"></span>
+      <button mat-icon-button routerLink="/login" *ngIf="!authenticated">
+        <mat-icon>login</mat-icon>
+      </button>
+    
+      <button mat-icon-button routerLink="/register" *ngIf="authenticated">
+        <mat-icon>Register</mat-icon>
+      </button>
+      <button mat-icon-button (click)="LogOut()" *ngIf="authenticated">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <section id="hero">
+      <div class="container">
+        <div class="content-box">
+          <h2>Welcome to the Record Management System</h2>
+          <p>
+            Securely manage and organize your records efficiently with our modern, cloud-based solution.
+          </p>
+          <!-- <button mat-raised-button color="primary" routerLink="/register">Get Started</button> -->
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>
+        <a href="https://guj.nic.in/" target="_blank">&copy; 2024 National Informatics Centre (NIC). All Rights Reserved.</a>
+      </p>
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

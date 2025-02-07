@@ -23,8 +23,12 @@ import { TableModule } from 'primeng/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { OfficeMasterComponent } from './dashboard/office-master/office-master.component';
 import { OfficeListComponent } from './dashboard/office-list/office-list.component';
-
-
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list'; // For mat-nav-list
+import { MatIconModule } from '@angular/material/icon'; // For mat-icon
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,8 +57,15 @@ import { OfficeListComponent } from './dashboard/office-list/office-list.compone
     TableModule,
     MatPaginatorModule,
     //   ToastrModule.forRoot(),
+    MatToolbarModule,  // Import MatToolbarModule
+    MatButtonModule,    // Import MatButtonModule
+    MatSidenavModule,
+    MatListModule,  // ✅ Add this for mat-nav-list
+    MatIconModule,  // ✅ Add this for mat-icon
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
