@@ -17,7 +17,6 @@ export class AppServiceService {
 
   
   GetRoleMasterList(): Observable<any[]> {
-    debugger;
     return this.http.get<any[]>(`${this.apiUrl}/api/RoleList`).pipe(
       catchError((error) => {
         console.error('Error:', error);
@@ -27,7 +26,6 @@ export class AppServiceService {
   }
   //To Register
   RegisterPost(user: any): Observable<any> {
-    debugger;
     return this.http
       .post<any>(`${this.apiUrl}/api/MUserMaster`, user, {
         withCredentials: true,
@@ -97,7 +95,6 @@ export class AppServiceService {
     );
   }
   DataEntryPost(dataentry: any): Observable<any> {
-    debugger;
 
     return this.http
       .post<any>(`${this.apiUrl}/api/InsertRecord`, dataentry, {
@@ -120,7 +117,7 @@ export class AppServiceService {
     });
   }
   UploadFile(file: File): Observable<any> {
-    debugger;
+
     const formData: FormData = new FormData();
     formData.append('file', file, file.name);
 
@@ -136,7 +133,7 @@ export class AppServiceService {
       );
   }
   getDoc(): Observable<any[]> {
-    debugger;
+
     return this.http.get<any[]>(`${this.apiUrl}/api/DocList`).pipe(
       catchError((error) => {
         console.error('Error:', error);
@@ -146,7 +143,7 @@ export class AppServiceService {
   }
 
   ViewDoc(_id: Object): Observable<ArrayBuffer> {
-    debugger;
+
     return this.http
       .get<ArrayBuffer>(`${this.apiUrl}/api/ViewDocument/${_id}`, {
         responseType: 'arraybuffer' as 'json', // Cast to satisfy TypeScript
@@ -160,7 +157,7 @@ export class AppServiceService {
   }
 
   deleteEntryById(_id: Object): Observable<any> {
-    debugger;
+
     return this.http.delete<any>(`${this.apiUrl}/api/DeleteRecord/${_id}`).pipe(
       catchError((error) => {
         console.error('Error:', error);
@@ -170,12 +167,12 @@ export class AppServiceService {
   }
 
   setFormData(data: any[]) {
-    debugger;
+
 
     this.formData.next(data);
   }
   getRecordById(_id: string): Observable<any[]> {
-    debugger;
+
     return this.http
       .get<any[]>(`${this.apiUrl}/api/FindRecordbyID/${_id}`)
       .pipe(
@@ -186,7 +183,7 @@ export class AppServiceService {
       );
   }
   getDistrictList(): Observable<any[]> {
-    debugger;
+
     return this.http.get<any[]>(`${this.apiUrl}/api/DistrictList`).pipe(
       catchError((error) => {
         console.error('Error:', error);
@@ -195,7 +192,7 @@ export class AppServiceService {
     );
   }
   getOfficeList(did: number): Observable<any[]> {
-    debugger;
+
     return this.http
       .get<any[]>(`${this.apiUrl}/api/OfficeListbyId/${did}`)
       .pipe(
@@ -207,7 +204,7 @@ export class AppServiceService {
   }
 
   // getAllOfficeMasterList(): Observable<any[]> {
-  //   debugger;
+
   //   return this.http.get<any[]>(`${this.apiUrl}/api/AllOfficeList`).pipe(
   //     catchError((error) => {
   //       console.error('Error:', error);
@@ -217,7 +214,7 @@ export class AppServiceService {
   // }
 
   getOfficeMasterList(): Observable<any[]> {
-    debugger;
+
     return this.http.get<any[]>(`${this.apiUrl}/api/OfficeMasterList`).pipe(
       catchError((error) => {
         console.error('Error:', error);
@@ -227,7 +224,7 @@ export class AppServiceService {
   }
 
   getTalukaFromDistrict(): Observable<any[]> {
-    debugger;
+
     return this.http.get<any[]>(`${this.apiUrl}/api/TalukaListFromDist`).pipe(
       catchError((error) => {
         console.error('Error:', error);
@@ -236,7 +233,7 @@ export class AppServiceService {
     );
   }
   getBranchList(): Observable<any[]> {
-    debugger;
+
     return this.http.get<any[]>(`${this.apiUrl}/api/BranchList`).pipe(
       catchError((error) => {
         console.error('Error:', error);
@@ -245,7 +242,7 @@ export class AppServiceService {
     );
   }
   getBranchListbyID(officeId: number): Observable<any[]> {
-    debugger;
+
     return this.http
       .get<any[]>(`${this.apiUrl}/api/BranchListbyID/${officeId}`)
       .pipe(
@@ -256,7 +253,7 @@ export class AppServiceService {
       );
   }
   getVillageListbyID(dcode: number, TCode: number): Observable<any[]> {
-    debugger;
+
     return this.http
       .get<any[]>(`${this.apiUrl}/api/VillageListbyID/${dcode}/${TCode}`)
       .pipe(
@@ -267,7 +264,7 @@ export class AppServiceService {
       );
   }
   BranchEntryPost(branchmaster: any): Observable<any> {
-    debugger;
+  
 
     return this.http
       .post<any>(`${this.apiUrl}/api/InsertBranch`, branchmaster, {
@@ -282,7 +279,7 @@ export class AppServiceService {
   }
 
   getBranchModelList(dcode:number): Observable<any[]> {
-    debugger;
+   
     return this.http
     .get<any[]>(`${this.apiUrl}/api/BranchModelList/${dcode}`).pipe(
       catchError((error) => {
@@ -293,7 +290,7 @@ export class AppServiceService {
   }
 
   OfficeMasterPost(officemaster: any): Observable<any> {
-    debugger;
+
     return this.http
       .post<any>(`${this.apiUrl}/api/InsertOffice`, officemaster, {
         withCredentials: true,
@@ -307,18 +304,17 @@ export class AppServiceService {
   }
 
   deleteOfficeById(_id: Object): Observable<any> {
-    debugger;
+
     return this.http.delete<any>(`${this.apiUrl}/api/DeleteOffice/${_id}`).pipe(
       catchError((error) => {
         console.error('Error:', error);
-        console.log('error in api service.');
         return throwError(error);
       })
     );
   }
 
   getOfficeById(_id: string): Observable<any[]> {
-    debugger;
+
     return this.http
       .get<any[]>(`${this.apiUrl}/api/FindOfficebyId/${_id}`)
       .pipe(
@@ -330,7 +326,7 @@ export class AppServiceService {
   }
 
   updateOfficebyId(_id: string, updatedData: any): Observable<any> {
-    debugger;
+
     return this.http
       .put<any>(`${this.apiUrl}/api/UpdateOffice/${_id}`, updatedData)
       .pipe(
@@ -342,7 +338,7 @@ export class AppServiceService {
   }
 
   updateRecord(_id: string, updatedData: any): Observable<any> {
-    debugger;
+
     return this.http
       .put<any>(`${this.apiUrl}/api/UpdateRecord/${_id}`, updatedData)
       .pipe(
@@ -358,7 +354,7 @@ export class AppServiceService {
   // }
 
   // GetSearchRecordList(searchPayload: any): Observable<any> {
-  //   debugger;
+
   //   return this.http
   //     .post<any>(`${this.apiUrl}/api/searchRecordList`, searchPayload)
   //     .pipe(
@@ -386,8 +382,7 @@ export class AppServiceService {
     return this.http.get<any>(url, { params: payload });
   }
   GetSearchRecordList(payload: any): Observable<any> {
-    debugger;
-    console.log(payload, 'Payload');
+
     const url = `${this.apiUrl}/api/searchRecordList`;
     return this.http.get<any>(url, { params: payload });
   }

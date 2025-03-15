@@ -1,4 +1,14 @@
-/* 
+/* a {
+  color: #fff;
+  text-decoration: none;
+  background-color: transparent;
+} */
+
+/* .background {
+  background: linear-gradient(to bottom right, #ffffff, #f0f0f0);
+  height: 100vh;
+  width: 100%;
+} */
 body {
   margin: 0;
   padding: 0;
@@ -14,12 +24,12 @@ body {
 .content-box {
 
   background-color: rgba(221, 221, 223, 0.7);
-
+  /* Background color with opacity */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-
+      /* Box shadow effect */
   padding: 20px;
   border-radius: 10px;
-
+  /* Optional: Add rounded corners */
 }
 
 .content-box h2 {
@@ -46,7 +56,7 @@ header h1 {
 
 nav {
   float: right;
-
+  /* background-color: rgba(62, 88, 113);; */
 }
 
 nav ul {
@@ -66,10 +76,10 @@ nav ul li a {
 }
 
 #hero {
- 
+  /* background: url('../../assets/img/RMS.jpg') no-repeat center center/cover; */
   background: url('../../assets/img/RMS.jpg') no-repeat center center/cover;
   height: calc(100vh - 80px);
-
+  /* Adjust for header height */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -103,159 +113,4 @@ footer {
   nav ul li {
     margin-left: 10px;
   }
-} */
-/* Global Styles */
-/* Global Styles */
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.container {
-  width: 100%;
-  padding: 20px;
-}
-
-h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-p {
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-/* Header Styles */
-mat-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  padding: 0 20px;
-  transition: background-color 0.3s ease-in-out, padding 0.3s ease-in-out;
-}
-
-.spacer {
-  flex: 1;
-}
-
-mat-toolbar button {
-  margin-left: 10px;
-  transition: background-color 0.3s ease-in-out, margin-left 0.3s ease-in-out;
-}
-
-mat-toolbar button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Hero Section Styles */
-#hero {
-  background: url('../../assets/img/RMS.jpg') no-repeat center center/cover;
-  color: #fff;
-  padding: 40px 20px;
-  text-align: center;
-  height: calc(100vh - 80px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#hero h2 {
-  font-size: 2.5rem;
-  transition: font-size 0.3s ease-in-out;
-}
-
-#hero p {
-  font-size: 1.25rem;
-  transition: font-size 0.3s ease-in-out;
-}
-
-/* Footer Styles */
-footer {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  text-align: center;
-  padding: 10px 0;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  transition: background-color 0.3s ease-in-out, padding 0.3s ease-in-out;
-}
-
-footer p {
-  margin: 0;
-  transition: margin 0.3s ease-in-out;
-}
-
-/* Media Queries for Responsive Design */
-@media (max-width: 768px) {
-  mat-toolbar {
-    flex-direction: column;
-    padding: 10px;
-  }
-  
-  mat-toolbar button {
-    margin: 5px 0;
-  }
-  
-  #hero {
-    padding: 20px 10px;
-  }
-  
-  #hero h2 {
-    font-size: 2rem;
-  }
-  
-  #hero p {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  mat-toolbar {
-    padding: 5px;
-  }
-  
-  #hero {
-    padding: 10px 5px;
-  }
-  
-  #hero h2 {
-    font-size: 1.5rem;
-  }
-  
-  #hero p {
-    font-size: 0.875rem;
-  }
-}
-
-/* Custom link color */
-a {
-  color: #fff;
-  text-decoration: none;
-  background-color: transparent;
-  transition: color 0.3s ease-in-out;
-}
-
-a:hover {
-  color: #00ced1;
-}
-
-/* Transparent Register Button with Hover Effect */
-mat-toolbar button[routerLink="/register"] {
-  background: transparent;
-  border: 1px solid #fff;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-
-mat-toolbar button[routerLink="/register"]:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #000;
 }

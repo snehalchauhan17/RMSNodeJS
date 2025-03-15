@@ -125,14 +125,7 @@ export class BranchmasterComponent {
     });
   }
 
-  // EditOfficeEntry(_id: string) {
-  //   this.apiservice.getOfficeById(_id).subscribe((res) => {
-  //     this.formList = res;
-  //     this.apiservice.setFormData(this.formList);
-  //     this.router.navigate(['dashboard/OfficeMaster', _id]);
-  //     //   this.router.navigate(['dashboard/dataentry',_id]);
-  //   });
-  // }
+  
 
   // DeleteOfficeEntry(_id: Object) {
   //   if (confirm('are sure you want to delete record?')) {

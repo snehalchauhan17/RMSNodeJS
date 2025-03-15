@@ -13,7 +13,6 @@ export class HomeComponent implements OnInit {
   showDataEntry = false;
   message = '';
   authenticated = false;
-  menuOpen: boolean = false;
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -25,7 +24,12 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.Auth();
   }
- 
+  getBackgroundImageStyle(): SafeStyle {
+    const imageUrl = this.sanitizer.bypassSecurityTrustUrl(
+      '/src/assets/img/Home.jpg'
+    );
+    return this.sanitizer.bypassSecurityTrustStyle(`url(${imageUrl})`);
+  }
 
   Auth() {
     Emitters.authEmitter.subscribe((auth: boolean) => {
@@ -34,10 +38,5 @@ export class HomeComponent implements OnInit {
   }
   LogOut(): void {
     this.apiService.LogoutPost().subscribe(() => (this.authenticated = false));
-  }
-
-  toggleMenu() {
-    this.menuOpen = !this.menuOpen;
-    document.querySelector('.nav-links')?.classList.toggle('show');
   }
 }

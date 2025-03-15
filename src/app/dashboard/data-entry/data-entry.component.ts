@@ -263,7 +263,16 @@ export class DataEntryComponent {
   }
 
   onUpload(): void {
-     
+    if (!this.selectedFile) {
+      alert('Please select a file to upload.');
+      return;
+    }
+  
+    // Check if the selected file is a PDF
+    if (this.selectedFile.type !== 'application/pdf') {
+      alert('Only PDF files are allowed!');
+      return;
+    }
     // const docid = sessionStorage.getItem('docid');
     // if (docid) {
     //   documentId = docid;
