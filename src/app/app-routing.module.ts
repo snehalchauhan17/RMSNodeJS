@@ -10,7 +10,7 @@ import { ChangePasswordComponent } from './dashboard/change-password/change-pass
 import {BranchmasterComponent} from './dashboard/branchmaster/branchmaster.component';
 import { OfficeMasterComponent } from './dashboard/office-master/office-master.component';
 import { OfficeListComponent } from './dashboard/office-list/office-list.component';
-
+import { ErrorpageComponent } from './errorpage/errorpage.component';
 const routes: Routes = [
   // { path: '', component: LoginComponent },
   { path: '', component: HomeComponent },
@@ -34,6 +34,9 @@ const routes: Routes = [
       // ... other child routes
     ],
   },
+  { path: 'error', component: ErrorpageComponent },
+  { path: '**', redirectTo: '/error', pathMatch: 'full' } // Catch-all route
+
 
   // Add other routes as needed
 ];

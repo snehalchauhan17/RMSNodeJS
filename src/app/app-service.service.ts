@@ -156,16 +156,27 @@ export class AppServiceService {
       );
   }
 
-  deleteEntryById(_id: Object): Observable<any> {
+  // deleteEntryById(_id: Object): Observable<any> {
 
-    return this.http.delete<any>(`${this.apiUrl}/api/DeleteRecord/${_id}`).pipe(
+  //   return this.http.delete<any>(`${this.apiUrl}/api/DeleteRecord/${_id}`).pipe(
+  //     catchError((error) => {
+  //       console.error('Error:', error);
+  //       return throwError(error);
+  //     })
+  //   );
+  // }
+  deleteEntryById(_id: string, updatedBy: string): Observable<any> {
+    const options = {
+      body: { updatedBy },  // ✅ Include updatedBy in request body
+    };
+  
+    return this.http.delete<any>(`${this.apiUrl}/api/DeleteRecord/${_id}`, options).pipe(
       catchError((error) => {
         console.error('Error:', error);
         return throwError(error);
       })
     );
   }
-
   setFormData(data: any[]) {
 
 

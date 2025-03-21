@@ -28,19 +28,7 @@ export class RecordListComponent {
   searchPayload: any = {};
   roleId: number;
   totalRecords: string = '';
-  // IsDisableYear: boolean = false;
-  // IsDisableBranch: boolean = false;
-  // IsDisableCategory: boolean = false;
-  // IsDisableTypes: boolean = false;
-  // IsDisableSubject: boolean = false;
-  // IsDisableName: boolean = false;
-  // IsDisableAddress: boolean = false;
-  // IsDisableVillage: boolean = false;
-  // IsDisableTaluka: boolean = false;
-  // IsDisableOrderName: boolean = false;
-  // IsDisableCupBoardNo: boolean = false;
-  // IsDisablePartitionNo: boolean = false;
-  // IsDisableFileNo: boolean = false;
+  UserName: any;
 
   constructor(
     private apiservice: AppServiceService,
@@ -54,6 +42,7 @@ export class RecordListComponent {
 
   ngOnInit() {
     this.getRecordList();
+    this.UserName = sessionStorage.getItem('username') || '';
     // this.SearchForm();
     this.roleId = this.authService.getRole();
     this.searchForm = this.fb.group({
@@ -294,15 +283,26 @@ export class RecordListComponent {
     });
   }
 
-  DeleteDataEntry(_id: Object) {
+  // DeleteDataEntry(_id: Object) {
+  //   updatedData.updatedBy = this.UserName;  // ✅ Assign updatedBy field
+  //   if (confirm('are sure you want to delete record?')) {
+  //     // event.target.innerText = "Deleting..."
+  //     this.apiservice.deleteEntryById(_id).subscribe((res) => {
+  //       this.getRecordList();
 
-    if (confirm('are sure you want to delete record?')) {
-      // event.target.innerText = "Deleting..."
-      this.apiservice.deleteEntryById(_id).subscribe((res) => {
+  //       alert(res.message);
+  //     });
+  //   }
+  // }
+  DeleteDataEntry(_id: string) {
+    const updatedBy = this.UserName;  // ✅ Get updatedBy from logged-in user
+  
+    if (confirm('Are you sure you want to delete this record?')) {
+      this.apiservice.deleteEntryById(_id, updatedBy).subscribe((res) => {
         this.getRecordList();
-
         alert(res.message);
       });
     }
   }
+  
 }

@@ -31,6 +31,7 @@ export class DataEntryComponent {
   dcode: any;
   officeId: any;
   branchId: any;
+  UserName: any;
   constructor(
     private apiService: AppServiceService,
     private router: Router,
@@ -40,10 +41,11 @@ export class DataEntryComponent {
   ) {}
 
   ngOnInit(): void {
-
+debugger;
     this.dcode = sessionStorage.getItem('dcode') || '';
     this.branchId = sessionStorage.getItem('branchId') || '';
     this.officeId = sessionStorage.getItem('officeId') || '';
+    this.UserName = sessionStorage.getItem('username') || '';
     this.roleId = this.authService.getRole();
 
     this.Auth();
@@ -66,8 +68,8 @@ export class DataEntryComponent {
   }
   createForm() {
     this.DEForm = this.formbuilder.group({
-      _id: [''],
-      Year: ['', Validators.required],
+      _id: [],
+      Year: [ Validators.required],
       IssueDate: ['', Validators.required],
       Branch: ['', Validators.required],
       Category: ['', Validators.required],
@@ -112,7 +114,19 @@ export class DataEntryComponent {
 
   AddDataEntry(dataentry: any) {
 
+  // Fields to be ignored from validation
+  const ignoredFields = ['anyDetail', 'documentId'];
 
+  // Check if any required field (except ignored ones) is empty
+  const invalidFields = Object.keys(this.DEForm.controls).filter(
+    (key) => !ignoredFields.includes(key) && this.DEForm.controls[key].invalid
+  );
+
+  if (invalidFields.length > 0) {
+    this.DEForm.markAllAsTouched(); // Mark fields as touched to show validation errors
+    alert('Please fill all required fields before submitting!');
+    return; // Stop form submission
+  }
     const docid = sessionStorage.getItem('docid');
     if (docid) {
       dataentry.documentId = docid;
@@ -120,6 +134,7 @@ export class DataEntryComponent {
       dataentry.documentId = null;
     }
     dataentry.dcode =this.dcode;
+    dataentry.createdBy = this.UserName;  // ✅ Assign createdBy field
     this.apiService.DataEntryPost(dataentry).subscribe(
       () => {
         // Insert successful, clear the form
@@ -150,6 +165,8 @@ export class DataEntryComponent {
     } else {
       updatedData.documentId = null;
     }
+    updatedData.updatedBy = this.UserName;  // ✅ Assign updatedBy field
+  
     this.apiService.updateRecord(_id, updatedData).subscribe(
       () => {
         this.DEForm.reset();

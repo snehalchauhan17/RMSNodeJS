@@ -11,7 +11,8 @@ import { BranchmasterComponent } from './dashboard/branchmaster/branchmaster.com
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-
+import { ErrorpageComponent } from './errorpage/errorpage.component';
+import { GlobalErrorHandler } from './error-handler.service';
 //import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { RecordListComponent } from './dashboard/record-list/record-list.component';
 //import { ToastrModule } from 'ngx-toastr';
@@ -29,6 +30,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list'; // For mat-nav-list
 import { MatIconModule } from '@angular/material/icon'; // For mat-icon
+import { AuthService } from './auth.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +66,9 @@ import { MatIconModule } from '@angular/material/icon'; // For mat-icon
     MatIconModule,  // ✅ Add this for mat-icon
   ],
   providers: [
-    provideAnimationsAsync()
+    AuthService,
+    provideAnimationsAsync(),
+   { provide: ErrorpageComponent, useClass: GlobalErrorHandler }
   ],
   bootstrap: [AppComponent],
 })
