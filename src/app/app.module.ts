@@ -11,7 +11,8 @@ import { BranchmasterComponent } from './dashboard/branchmaster/branchmaster.com
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-
+import { ErrorpageComponent } from './errorpage/errorpage.component';
+import { GlobalErrorHandler } from './error-handler.service';
 //import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { RecordListComponent } from './dashboard/record-list/record-list.component';
 //import { ToastrModule } from 'ngx-toastr';
@@ -23,9 +24,13 @@ import { TableModule } from 'primeng/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { OfficeMasterComponent } from './dashboard/office-master/office-master.component';
 import { OfficeListComponent } from './dashboard/office-list/office-list.component';
-
-
-
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list'; // For mat-nav-list
+import { MatIconModule } from '@angular/material/icon'; // For mat-icon
+import { AuthService } from './auth.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +44,7 @@ import { OfficeListComponent } from './dashboard/office-list/office-list.compone
     ChangePasswordComponent,
     OfficeMasterComponent,
     OfficeListComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -53,8 +59,17 @@ import { OfficeListComponent } from './dashboard/office-list/office-list.compone
     TableModule,
     MatPaginatorModule,
     //   ToastrModule.forRoot(),
+    MatToolbarModule,  // Import MatToolbarModule
+    MatButtonModule,    // Import MatButtonModule
+    MatSidenavModule,
+    MatListModule,  // ✅ Add this for mat-nav-list
+    MatIconModule,  // ✅ Add this for mat-icon
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    provideAnimationsAsync(),
+   { provide: ErrorpageComponent, useClass: GlobalErrorHandler }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

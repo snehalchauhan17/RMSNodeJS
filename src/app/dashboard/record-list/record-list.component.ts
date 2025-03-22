@@ -28,19 +28,7 @@ export class RecordListComponent {
   searchPayload: any = {};
   roleId: number;
   totalRecords: string = '';
-  // IsDisableYear: boolean = false;
-  // IsDisableBranch: boolean = false;
-  // IsDisableCategory: boolean = false;
-  // IsDisableTypes: boolean = false;
-  // IsDisableSubject: boolean = false;
-  // IsDisableName: boolean = false;
-  // IsDisableAddress: boolean = false;
-  // IsDisableVillage: boolean = false;
-  // IsDisableTaluka: boolean = false;
-  // IsDisableOrderName: boolean = false;
-  // IsDisableCupBoardNo: boolean = false;
-  // IsDisablePartitionNo: boolean = false;
-  // IsDisableFileNo: boolean = false;
+  UserName: any;
 
   constructor(
     private apiservice: AppServiceService,
@@ -54,9 +42,9 @@ export class RecordListComponent {
 
   ngOnInit() {
     this.getRecordList();
+    this.UserName = sessionStorage.getItem('username') || '';
     // this.SearchForm();
     this.roleId = this.authService.getRole();
-    console.log('searchform', this.searchForm);
     this.searchForm = this.fb.group({
       checkYear: [false],
       checkBranch: [false],
@@ -87,17 +75,6 @@ export class RecordListComponent {
     });
   }
 
-  // generatePDF() {
-  //   // Make sure to pass the current searchPayload to the API
-  //   this.apiservice.generatePDF(this.searchPayload).subscribe((blob) => {
-  //     const url = window.URL.createObjectURL(blob);
-  //     const a = document.createElement('a');
-  //     a.href = url;
-  //     a.download = 'RecordList.pdf';
-  //     a.click();
-  //     window.URL.revokeObjectURL(url);
-  //   });
-  // }
   generatePDF() {
     // Make sure to pass the current searchPayload to the API
     this.apiservice.generatePDF(this.searchPayload).subscribe((blob) => {
@@ -124,14 +101,7 @@ export class RecordListComponent {
       }
     });
   }
-  // exportExcel(): void {
-  //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.RecordList);
-  //   const workbook: XLSX.WorkBook = {
-  //     Sheets: { 'Record List': worksheet },
-  //     SheetNames: ['Record List'],
-  //   };
-  //   XLSX.writeFile(workbook, 'record-list.xlsx');
-  // }
+ 
   exportExcel(): void {
     // Remove the first column and last 5 columns
     const modifiedRecordList = this.RecordList.map((record) => {
@@ -143,6 +113,10 @@ export class RecordListComponent {
       keys.slice(1, keys.length - 5).forEach((key) => {
         newRecord[key] = record[key];
       });
+  // Add TalukaName, BranchName, and VillageName if available
+  newRecord.Taluka = record.TalukaName || 'N/A'; // Default to 'N/A' if not available
+  newRecord.Branch = record.BranchName || 'N/A';
+  newRecord.Village = record.VillageName || 'N/A';
 
       return newRecord;
     });
@@ -265,8 +239,6 @@ export class RecordListComponent {
 
     this.apiservice.GetSearchRecordList(this.searchPayload).subscribe(
       (response) => {
-        console.log('Search Results:', response);
-
         // Update the records after the search operation completes
         this.RecordList = response;
       },
@@ -280,7 +252,6 @@ export class RecordListComponent {
     this.apiservice.getRecord().subscribe((res) => {
       this.RecordList = res;
       const totalRecords = this.RecordList.length;
-      console.log(this.RecordList);
     });
   }
 
@@ -288,7 +259,7 @@ export class RecordListComponent {
     location.reload();
   }
   viewDocument(_id: Object): void {
-    debugger;
+
     this.apiservice.ViewDoc(_id).subscribe(
       (data: ArrayBuffer) => {
         // Handle viewing the document here
@@ -303,25 +274,35 @@ export class RecordListComponent {
   }
 
   EditDataEntry(_id: string) {
-    debugger;
+
     this.apiservice.getRecordById(_id).subscribe((res) => {
       this.formList = res;
-      console.log('res is:', this.formList);
       this.apiservice.setFormData(this.formList);
       this.router.navigate(['dashboard/dataentry', _id]);
       //   this.router.navigate(['dashboard/dataentry',_id]);
     });
   }
 
-  DeleteDataEntry(_id: Object) {
-    debugger;
-    if (confirm('are sure you want to delete record?')) {
-      // event.target.innerText = "Deleting..."
-      this.apiservice.deleteEntryById(_id).subscribe((res) => {
-        this.getRecordList();
+  // DeleteDataEntry(_id: Object) {
+  //   updatedData.updatedBy = this.UserName;  // ✅ Assign updatedBy field
+  //   if (confirm('are sure you want to delete record?')) {
+  //     // event.target.innerText = "Deleting..."
+  //     this.apiservice.deleteEntryById(_id).subscribe((res) => {
+  //       this.getRecordList();
 
+  //       alert(res.message);
+  //     });
+  //   }
+  // }
+  DeleteDataEntry(_id: string) {
+    const updatedBy = this.UserName;  // ✅ Get updatedBy from logged-in user
+  
+    if (confirm('Are you sure you want to delete this record?')) {
+      this.apiservice.deleteEntryById(_id, updatedBy).subscribe((res) => {
+        this.getRecordList();
         alert(res.message);
       });
     }
   }
+  
 }

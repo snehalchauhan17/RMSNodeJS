@@ -28,7 +28,7 @@ export class BranchmasterComponent {
     this.initializeForm();
     this.fetchDistricts();
     // this.fetchOffices();
-    this.fetchBranchList();
+    this.fetchBranchList(this.dcode);
   }
   initializeForm(): void {
     this.BranchForm = this.formbuilder.group({
@@ -44,16 +44,13 @@ export class BranchmasterComponent {
   fetchDistricts(): void {
     this.apiservice.getDistrictList().subscribe((res) => {
       this.districtList = res;
-      console.log(res);
     });
   }
 
   onDistrictChange(dcode: number): void {
-    debugger;
     if (dcode) {
       this.apiservice.getOfficeList(dcode).subscribe((data: any[]) => {
         this.OfficeList = data;
-        console.log(this.OfficeList);
         this.BranchForm.get('officeId')?.enable(); // Enable the office dropdown when offices are loaded
       });
     } else {
@@ -65,7 +62,6 @@ export class BranchmasterComponent {
   // fetchOffices(): void {
   //   this.apiservice.getOfficeList().subscribe((res) => {
   //     this.OfficeList = res;
-  //     console.log(res, 'office name');
   //   });
   // }
   // onDistrictSelected(did: any) {
@@ -74,18 +70,15 @@ export class BranchmasterComponent {
   //       this.filteredOfficeList.push(this.OfficeList[i]);
   //     }
   //   }
-  //   console.log(this.filteredOfficeList, 'office filtered name');
   // }
 
   // fetchDistricts(): void {
   //   this.apiservice.getDistrictList().subscribe((res) => {
   //     this.districtList = res;
-  //     console.log(res);
   //   });
   // }
 
   // onDistrictChange(did: number): void {
-  //   debugger;
   //   if (did) {
   //     this.apiservice.getOfficeList(did).subscribe((data: any[]) => {
   //       this.OfficeList = data;
@@ -100,7 +93,6 @@ export class BranchmasterComponent {
   // fetchOffices(): void {
   //   this.apiservice.getOfficeList().subscribe((res) => {
   //     this.OfficeList = res;
-  //     console.log(res, 'office name');
   //   });
   // }
   // onDistrictSelected(did: any) {
@@ -109,11 +101,8 @@ export class BranchmasterComponent {
   //       this.filteredOfficeList.push(this.OfficeList[i]);
   //     }
   //   }
-  //   console.log(this.filteredOfficeList, 'office filtered name');
   // }
   AddBranch(branchmaster: any): void {
-    debugger;
-    console.log(this.BranchForm);
 
     this.apiservice.BranchEntryPost(branchmaster).subscribe(
       () => {
@@ -128,33 +117,21 @@ export class BranchmasterComponent {
       }
     );
   }
-  fetchBranchList() {
-    debugger;
-    this.apiservice.getBranchModelList().subscribe((res) => {
-      this.branchList = res.filter((br) => br.dcode == this.dcode);
-     // this.branchList = res;
+  fetchBranchList(dcode:number) {
 
-      console.log(res);
+    this.apiservice.getBranchModelList(dcode).subscribe((res) => {
+      this.branchList = res;
+     // this.branchList = res;
     });
   }
 
-  // EditOfficeEntry(_id: string) {
-  //   this.apiservice.getOfficeById(_id).subscribe((res) => {
-  //     this.formList = res;
-  //     console.log('res is:', this.formList);
-  //     this.apiservice.setFormData(this.formList);
-  //     this.router.navigate(['dashboard/OfficeMaster', _id]);
-  //     //   this.router.navigate(['dashboard/dataentry',_id]);
-  //   });
-  // }
+  
 
   // DeleteOfficeEntry(_id: Object) {
-  //   debugger;
   //   if (confirm('are sure you want to delete record?')) {
   //     // event.target.innerText = "Deleting..."
   //     this.apiservice.deleteOfficeById(_id).subscribe((res) => {
   //       this.getofficeList();
-  //       console.log('PRoblem in Comp');
   //       alert(res.message);
   //     });
   //   }

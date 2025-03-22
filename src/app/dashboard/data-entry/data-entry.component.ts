@@ -31,6 +31,7 @@ export class DataEntryComponent {
   dcode: any;
   officeId: any;
   branchId: any;
+  UserName: any;
   constructor(
     private apiService: AppServiceService,
     private router: Router,
@@ -40,10 +41,11 @@ export class DataEntryComponent {
   ) {}
 
   ngOnInit(): void {
-    debugger;
+debugger;
     this.dcode = sessionStorage.getItem('dcode') || '';
     this.branchId = sessionStorage.getItem('branchId') || '';
     this.officeId = sessionStorage.getItem('officeId') || '';
+    this.UserName = sessionStorage.getItem('username') || '';
     this.roleId = this.authService.getRole();
 
     this.Auth();
@@ -66,8 +68,8 @@ export class DataEntryComponent {
   }
   createForm() {
     this.DEForm = this.formbuilder.group({
-      _id: [''],
-      Year: ['', Validators.required],
+      _id: [],
+      Year: [ Validators.required],
       IssueDate: ['', Validators.required],
       Branch: ['', Validators.required],
       Category: ['', Validators.required],
@@ -90,18 +92,14 @@ export class DataEntryComponent {
     });
   }
   onUpdate() {
-    debugger;
     if (this.DEForm.valid) {
       const formData = this.DEForm.value;
 
       if (this.isEditMode) {
         if (!formData._id) {
           formData._id = this.DEForm.get('id')?.value; // Manually set _id from the form control
-          console.log('update formdata Id   formData._id:', formData._id);
         }
 
-        console.log('update formdata Id:', formData);
-        console.log('update formdata:', formData);
         this.updateRecord(formData._id, formData);
       } else {
         this.AddDataEntry(formData);
@@ -115,10 +113,20 @@ export class DataEntryComponent {
   }
 
   AddDataEntry(dataentry: any) {
-    debugger;
 
-    console.log(this.DEForm);
+  // Fields to be ignored from validation
+  const ignoredFields = ['anyDetail', 'documentId'];
 
+  // Check if any required field (except ignored ones) is empty
+  const invalidFields = Object.keys(this.DEForm.controls).filter(
+    (key) => !ignoredFields.includes(key) && this.DEForm.controls[key].invalid
+  );
+
+  if (invalidFields.length > 0) {
+    this.DEForm.markAllAsTouched(); // Mark fields as touched to show validation errors
+    alert('Please fill all required fields before submitting!');
+    return; // Stop form submission
+  }
     const docid = sessionStorage.getItem('docid');
     if (docid) {
       dataentry.documentId = docid;
@@ -126,7 +134,7 @@ export class DataEntryComponent {
       dataentry.documentId = null;
     }
     dataentry.dcode =this.dcode;
-    console.log(this.DEForm);
+    dataentry.createdBy = this.UserName;  // ✅ Assign createdBy field
     this.apiService.DataEntryPost(dataentry).subscribe(
       () => {
         // Insert successful, clear the form
@@ -150,7 +158,15 @@ export class DataEntryComponent {
   }
 
   updateRecord(_id: string, updatedData: any) {
-    debugger;
+    
+    const docid = sessionStorage.getItem('docid');
+    if (docid) {
+      updatedData.documentId = docid;
+    } else {
+      updatedData.documentId = null;
+    }
+    updatedData.updatedBy = this.UserName;  // ✅ Assign updatedBy field
+  
     this.apiService.updateRecord(_id, updatedData).subscribe(
       () => {
         this.DEForm.reset();
@@ -167,20 +183,17 @@ export class DataEntryComponent {
   }
 
   editForm() {
-    debugger;
     this.isEditMode = true;
     this.apiService.currentFormData.subscribe((data) => {
-      console.log('data for edit', data);
       if (data && data._id) {
         this.populateForm(data);
       } else {
-        console.log('Error: No data received');
+        console.error('Error: No data received');
       }
     });
   }
 
   populateForm(data: any): void {
-    console.log('populating form with data:', data);
     this.DEForm.patchValue({
       _id: data._id,
       Year: data.Year,
@@ -223,37 +236,31 @@ export class DataEntryComponent {
   //     });
 
   //     this.apiService.GetRoleMasterList().subscribe((roleList) => {
-  //       console.log('RoleList:', roleList);
+
   //       const role = roleList.find((role) => role.RoleId === this.roleId);
-  //       console.log('RoleId :', role);
+
   //       if (role) {
   //         this.RoleName = role.RoleName;
-  //         console.log('RoleId :', this.RoleName);
   //       }
   //     });
   //   }
   // }
 
   TalukaList() {
-    console.log('districtid', this.dcode);
     this.apiService.getTalukaFromDistrict().subscribe((res) => {
-      console.log('talukaList:', res);
       // Filter the list to only include items matching branchId
       this.talukaList = res.filter((br) => br.DCode == this.dcode);
       //this.talukaList = res;
-      console.log('Filtered talukaList:');
     });
   }
 
   onTalukaChangeVillageList(dcode: number, TCode: number): void {
-    debugger;
     if (TCode || dcode) {
       this.apiService
         .getVillageListbyID(dcode, TCode)
         .subscribe((data: any[]) => {
           this.villageList = data;
           this.DEForm.get('Village')?.enable(); // Enable the office dropdown when offices are loaded
-          console.log('Village:', data);
         });
     } else {
       this.villageList = [];
@@ -261,12 +268,9 @@ export class DataEntryComponent {
     }
   }
   BranchList() {
-    console.log('BranchID', this.officeId);
-    this.apiService.getBranchList().subscribe((branchList) => {
-      console.log('BranchList1:', branchList);
+    this.apiService.getBranchList().subscribe((branchList) => {;
       // Filter the list to only include items matching branchId
       this.branchList = branchList.filter((br) => br.oid == this.officeId);
-      console.log('Filtered BranchList:', this.branchList);
     });
   }
 
@@ -276,7 +280,22 @@ export class DataEntryComponent {
   }
 
   onUpload(): void {
-    debugger;
+    if (!this.selectedFile) {
+      alert('Please select a file to upload.');
+      return;
+    }
+  
+    // Check if the selected file is a PDF
+    if (this.selectedFile.type !== 'application/pdf') {
+      alert('Only PDF files are allowed!');
+      return;
+    }
+    // const docid = sessionStorage.getItem('docid');
+    // if (docid) {
+    //   documentId = docid;
+    // } else {
+    //   documentId = null;
+    // }
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('file', this.selectedFile);
@@ -284,7 +303,6 @@ export class DataEntryComponent {
         (response) => {
           sessionStorage.setItem('docid', response.document._id);
           alert('File uploaded successfully!');
-          console.log('File uploaded successfully!', response);
           //     this.selectedFile = null;
         },
         (error) => {

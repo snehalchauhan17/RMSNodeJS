@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/node-angular-ui",
+            "outputPath": "dist/rmsnodejs",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -25,11 +25,11 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css",
               "src/assets/css/adminlte.min.css",
               "src/assets/css/style.css",
               "node_modules/sweetalert2/src/sweetalert2.scss"
-
             ],
             "scripts": [
               "src/assets/jquery/jquery.min.js",
@@ -47,8 +47,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "5mb",
+                  "maximumError": "6mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -64,27 +64,23 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
+              "fileReplacements": [],
               "namedChunks": true
             }
           },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "RMSNodeJS:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "RMSNodeJS:build:production"
-            },
-            "development": {
-              "browserTarget": "RMSNodeJS:build:development"
-            }
-          },
           "defaultConfiguration": "development"
-
         },
+       "serve": {
+  "builder": "@angular-devkit/build-angular:dev-server",
+  "options": {
+    "browserTarget": "RMSNodeJS:build"
+  },
+  "configurations": {
+    "development": {
+      "browserTarget": "RMSNodeJS:build:development"
+    }
+  }
+},
 
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
@@ -99,11 +95,11 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css",
               "src/assets/css/adminlte.min.css",
               "src/assets/css/style.css",
-                "node_modules/sweetalert2/src/sweetalert2.scss"
-
+              "node_modules/sweetalert2/src/sweetalert2.scss"
             ],
             "scripts": [
               "src/assets/jquery/jquery.min.js",

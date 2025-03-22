@@ -79,24 +79,20 @@ export class RegisterComponent implements OnInit {
   fetchDistricts(): void {
     this.apiService.getDistrictList().subscribe((res) => {
       this.districtList = res;
-      console.log(res);
     });
   }
   fetchRoleList(): void {
     this.apiService.GetRoleMasterList().subscribe((res) => {
       this.roleList = res;
-      console.log(res);
     });
   }
   // fetchBranch(): void {
   //   this.apiService.getBranchList().subscribe((res) => {
   //     this.branchList = res;
-  //     console.log(res);
   //   });
   // }
 
   onDistrictChange(did: number): void {
-    debugger;
     if (did) {
       this.apiService.getOfficeList(did).subscribe((data: any[]) => {
         this.officeList = data;
@@ -109,7 +105,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onOfficeChange(officeId: number): void {
-    debugger;
     if (officeId) {
       this.apiService.getBranchListbyID(officeId).subscribe((data: any[]) => {
         this.branchList = data;
@@ -124,14 +119,12 @@ export class RegisterComponent implements OnInit {
   // fetchOffice(): void {
   //   this.apiService.getOfficeList().subscribe((res) => {
   //     this.officeList = res;
-  //     console.log(res);
   //   });
   // }
 
   submit(): void {
-    debugger;
+
     let user = this.form?.getRawValue();
-    console.log(user);
 
     if (
       user.dcode == '' ||
@@ -144,7 +137,6 @@ export class RegisterComponent implements OnInit {
     ) {
       Swal.fire('Error', 'Please Enter all the Details', 'error');
     } else {
-      console.log(user);
       this.apiService.RegisterPost(user).subscribe(
         (response) => {
           const token = response.user.token;

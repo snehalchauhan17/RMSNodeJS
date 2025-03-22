@@ -1,5 +1,6 @@
 export const environment = {
-  production: true,
+  production: false,
   title: 'Production Environment Heading',
-  apiURL: 'https://apiexample.com',
+ //apiURL: 'http://stagingrms.gujarat.gov.in/rms',
+  apiURL: 'http://localhost:3000',
 };
