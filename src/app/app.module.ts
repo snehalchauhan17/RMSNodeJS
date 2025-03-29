@@ -31,6 +31,17 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list'; // For mat-nav-list
 import { MatIconModule } from '@angular/material/icon'; // For mat-icon
 import { AuthService } from './auth.service';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+// Import PrimeNG modules
+import { ButtonModule } from 'primeng/button';
+import { MatCardModule } from '@angular/material/card';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +54,7 @@ import { AuthService } from './auth.service';
     RecordListComponent,
     ChangePasswordComponent,
     OfficeMasterComponent,
-    OfficeListComponent,
+    OfficeListComponent
     
   ],
   imports: [
@@ -64,11 +75,19 @@ import { AuthService } from './auth.service';
     MatSidenavModule,
     MatListModule,  // ✅ Add this for mat-nav-list
     MatIconModule,  // ✅ Add this for mat-icon
+    MatGridListModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatCardModule ,
+    ButtonModule
+    
   ],
   providers: [
     AuthService,
     provideAnimationsAsync(),
-   { provide: ErrorpageComponent, useClass: GlobalErrorHandler }
+   { provide: ErrorpageComponent, useClass: GlobalErrorHandler },
+   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true,}
   ],
   bootstrap: [AppComponent],
 })

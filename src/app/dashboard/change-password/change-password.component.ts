@@ -67,7 +67,7 @@ export class ChangePasswordComponent {
 
    
     const { oldPassword, newPassword } = this.ChangeForm.value;
-   const token = sessionStorage.getItem('codedtoken'); // Assuming the token is stored in localStorage
+   const token = sessionStorage.getItem('token'); // Assuming the token is stored in localStorage
   //  const token = this.authService.decodeToken(token);
     if (!token) {
       this.error = 'User not authenticated. Please log in again.';

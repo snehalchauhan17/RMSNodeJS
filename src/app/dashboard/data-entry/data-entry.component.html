@@ -20,7 +20,10 @@
     </div>
     <div class="form-group col-md-4">
       <label for="date">શાખામાં રેકોર્ડ જમા કરાવ્યા તારીખ</label>
-      <input type="date" class="form-control" id="IssueDate" formControlName="IssueDate" required>
+      <input type="date" class="form-control" id="IssueDate" 
+      formControlName="IssueDate" required 
+      onkeydown="return false;">
+      <!-- <input type="date" class="form-control" id="IssueDate" formControlName="IssueDate" required> -->
     </div>
   </div>
   <div class="form-row">
@@ -76,7 +79,9 @@
     </div>
 <div class="form-group col-md-4">
   <label for="inputCity">હુકમ ની તારીખ</label>
-  <input type="date" class="form-control" id="IssueDate" formControlName="HukamDate" required>
+  <input type="date" class="form-control" id="HukamDate" 
+  formControlName="HukamDate" required 
+  onkeydown="return false;">
 </div>
   </div>
   <div class="form-row">

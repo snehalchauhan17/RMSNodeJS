@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-
+debugger;
     this.roleId = this.authService.getRole();
     this.UserName = sessionStorage.getItem('username') || '';
     this.getUserName();
@@ -53,32 +53,57 @@ export class DashboardComponent implements OnInit {
     });
   }
   getUserName() {
+
     if (this.UserName && this.roleId) {
-      // Fetch both userlist and rolelist
-      this.apiService.GetUserName().subscribe((userList) => {
-        const user = userList.find((user) => user.username === this.UserName);
-        if (user) {
-          this.name = user.name;
-        }
+      this.apiService.GetUserName().subscribe({
+        next: (userList) => {
+          const user = userList.find((user) => user.username === this.UserName);
+          if (user) {
+            this.name = user.name;
+     
+          } else {
+            console.warn("User not found in the list.");
+          }
+        },
+        error: (err) => {
+          console.error("Error fetching users:", err);
+        },
       });
-
-      this.apiService.GetRoleMasterList().subscribe((roleList) => {
-
-        const role = roleList.find((role) => role.RoleId === this.roleId);
-        if (role) {
-          this.RoleName = role.RoleName;
-        }
+  
+      this.apiService.GetRoleMasterList().subscribe({
+        next: (roleList) => {
+          const role = roleList.find((role) => role.RoleId === this.roleId);
+          if (role) {
+            this.RoleName = role.RoleName;
+    
+          } else {
+            console.warn("Role not found in the list.");
+          }
+        },
+        error: (err) => {
+          console.error("Error fetching roles:", err);
+        },
       });
     }
+    // if (this.UserName && this.roleId) {
+    //   // Fetch both userlist and rolelist
+    //   this.apiService.GetUserName().subscribe((userList) => {
+    //     const user = userList.find((user) => user.username === this.UserName);
+    //     if (user) {
+    //       this.name = user.name;
+   
+    //     }
+    //   });
+
+    //   this.apiService.GetRoleMasterList().subscribe((roleList) => {
+
+    //     const role = roleList.find((role) => role.RoleId === this.roleId);
+    //     if (role) {
+    //       this.RoleName = role.RoleName;
+  
+    //     }
+    //   });
+    // }
   }
 
-  // onNavigateToNewComponent() {
-  //   // this.showDataEntry = !this.showDataEntry;
-  //   //     this.showRecordList = false;
-  //   this.router.navigate(['/dashboard/dataentry']);
-  // }
-  // onNavigateToRecordList() {
-  //   this.showRecordList = !this.showRecordList;
-  //   this.showDataEntry = false;
-  // }
 }

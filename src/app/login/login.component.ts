@@ -12,7 +12,8 @@ import { Emitters } from '../emitters/emitter';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  form: FormGroup;
+  form!: FormGroup;
+  isLoading = false;
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -37,47 +38,69 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void {
-
-    let user = this.form?.getRawValue();
-    if (user.username == '' || user.password == '') {
-      Swal.fire('Error', 'Please Enter all the Details', 'error');
-    } else {
-
-
-      // Call API to log in
-      this.apiService.LoginPost(user).subscribe(
-        (response) => {
-
-          // On success, navigate to dashboard
-          const token = response.user.token; // Assuming token is returned in the response
-          // Decode the JWT token to extract RoleId
-          const decodedToken = this.authService.decodeToken(token);
-          const roleId = decodedToken?.RoleId;
-             const dcode = decodedToken?.dcode;
-                const officeId = decodedToken?.officeId;
-                   const branchId = decodedToken?.branchId;
-
-          this.authService.login(
-            user.username,
-            decodedToken,
-            roleId,
-            dcode,
-            officeId,
-            branchId
-          );
-
-          Swal.fire('Success', response.message, 'success');
-          // Navigate to dashboard and reload page
-          this.router.navigate(['/dashboard']).then(() => {
-            window.location.reload();
-          });
-        },
-
-        (err) => {
-          Swal.fire('Error', err.error.message, 'error');
-        }
-      );
+    if (this.form.invalid) {
+      Swal.fire("Error", "Please enter valid credentials.", "error");
+      return;
     }
+    this.isLoading = true;
+  // 🔹 Encrypt the credentials before sending
+  const encryptedData = this.authService.encryptData(this.form.value);
+
+    this.apiService.LoginPost({ data: encryptedData }).subscribe({
+      next: (response) => {
+     
+        if (response && response.accessToken && response.user && response.refreshToken) {
+          this.authService.authenticateUser(response.user, response.accessToken,response.refreshToken); // ✅ Store user details
+    
+        // ✅ Store refresh token in localStorage (only if using it manually)
+        localStorage.setItem("refreshToken", response.refreshToken);
+
+          Swal.fire("Success", "Login successful!", "success");
+          this.router.navigate(["/dashboard"]).then(() => window.location.reload());
+        } else {
+          throw new Error("Invalid response from server");
+        }
+      },
+      error: (err) => {
+        Swal.fire("Error", err.error.message, "error");
+      }
+    });
+}
+  //  // let user = this.form?.getRawValue();
+  //   if (user.username == '' || user.password == '') {
+  //     Swal.fire('Error', 'Please Enter all the Details', 'error');
+  //   } else {
+
+
+  //     this.apiService.LoginPost(user).subscribe(
+  //       (response) => {
+ 
+      
+  //         // if (!response || !response.user || !response.user.token) {
+  //         //   console.error("Login failed: No token received", response);
+  //         //   Swal.fire('Error', 'Login failed: No token received', 'error');
+  //         //   return;
+  //         // }
+      
+  //         const token = response.user.token.toString(); // Ensure token is valid
+  //         const roleId = response.user.RoleId ?? '';
+      
+  //         // ✅ Decode the token to verify it
+  //         const decodedToken = this.authService.decodeToken(token);
+  
+      
+  //         this.authService.login(user.username, token, roleId, user.dcode, user.officeId, user.branchId);
+  //         Swal.fire('Success', 'Login successful', 'success');
+  //         this.router.navigate(['/dashboard']).then(() => {
+  //           window.location.reload();
+  //         });
+  //       },
+  //       (err) => {
+  //         console.error("Login API Error:", err);
+  //         Swal.fire('Error', err.error?.message || 'Login failed', 'error');
+  //       }
+  //     );
+  //   }
     //    else {
   
     //  //   sessionStorage.setItem('username',user.username);
@@ -93,7 +116,7 @@ export class LoginComponent implements OnInit {
 
     //     );
     //   }
-  }
+
 
 
 }

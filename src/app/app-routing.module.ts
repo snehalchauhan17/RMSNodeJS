@@ -11,6 +11,8 @@ import {BranchmasterComponent} from './dashboard/branchmaster/branchmaster.compo
 import { OfficeMasterComponent } from './dashboard/office-master/office-master.component';
 import { OfficeListComponent } from './dashboard/office-list/office-list.component';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
+import { AuthGuard } from './guards/auth.guard';
+
 const routes: Routes = [
   // { path: '', component: LoginComponent },
   { path: '', component: HomeComponent },
@@ -25,12 +27,30 @@ const routes: Routes = [
       { path: 'recordlist', component: RecordListComponent },
       { path: 'dataentry', component: DataEntryComponent },
       { path: 'changepassword', component: ChangePasswordComponent },
-      { path: 'branchmaster', component: BranchmasterComponent },
+      { path: 'branchmaster', 
+        component: BranchmasterComponent,
+        canActivate: [AuthGuard], 
+        data: { roles: [1] } // Only roleId = 1 (Admin) can access
+      },
 
-      { path: 'dataentry/:_id', component: DataEntryComponent },
-      { path: 'OfficeList', component: OfficeListComponent },
-      { path: 'OfficeMaster', component: OfficeMasterComponent },
-      { path: 'OfficeMaster/:_id', component: OfficeMasterComponent },
+      { path: 'dataentry/:_id', component: DataEntryComponent,
+        canActivate: [AuthGuard], 
+        data: { roles: [1] } // Only roleId = 1 (Admin) can access
+       },
+      { path: 'OfficeList', component: OfficeListComponent ,
+        canActivate: [AuthGuard], 
+        data: { roles: [1] } // Only roleId = 1 (Admin) can access
+
+      },
+      { path: 'OfficeMaster', component: OfficeMasterComponent,
+        canActivate: [AuthGuard], 
+        data: { roles: [1] } // Only roleId = 1 (Admin) can access
+
+       },
+      { path: 'OfficeMaster/:_id', component: OfficeMasterComponent,
+        canActivate: [AuthGuard], 
+        data: { roles: [1] } // Only roleId = 1 (Admin) can access
+       },
       // ... other child routes
     ],
   },

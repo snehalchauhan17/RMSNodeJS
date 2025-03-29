@@ -1,0 +1,4 @@
+.disable-manual-input {
+    pointer-events: none; /* Disables manual input */
+    background-color: #f8f9fa; /* Light gray background to indicate non-editable */
+  }

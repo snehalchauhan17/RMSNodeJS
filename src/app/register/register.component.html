@@ -26,7 +26,10 @@
         </a>
       </div>
       <div class="card-body" [@fadeInOut]  style="max-width: 100%; padding: 20px;">
-        <form [formGroup]="form" (submit)="submit()">
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    
           <div class="form-group row">
             <label for="dcode" class="col-sm-3 col-form-label">જિલ્લા</label>
             <div class="col-sm-9">
@@ -165,7 +168,8 @@
             <div class="col-12">
               <div class="col-6 offset-3">
                 <button class="btn btn-block btn-bg" type="submit"
-                  style="background-color: rgba(0, 0, 0, 0.5); color: white;">સબમિટ</button>
+                  style="background-color: rgba(0, 0, 0, 0.5); color: white;">   {{ isLoading ? "Registering..." : "સબમિટ" }}
+                </button>
               </div>
             </div>
           </div>

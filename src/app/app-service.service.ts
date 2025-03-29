@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -15,14 +16,46 @@ export class AppServiceService {
   currentFormData = this.formData.asObservable();
 
 
-  
+ 
   GetRoleMasterList(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/api/RoleList`).pipe(
+    return this.http.get<any[]>(`${this.apiUrl}/api/RoleList`,  { withCredentials: true } // ✅ Ensures cookies are sent
+    ).pipe(
       catchError((error) => {
         console.error('Error:', error);
         return throwError(error);
       })
     );
+  }
+  getDistrictList(): Observable<any[]> {
+
+    return this.http.get<any[]>(`${this.apiUrl}/api/DistrictList`,  { withCredentials: true }).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
+  getOfficeList(did: number): Observable<any[]> {
+
+    return this.http
+      .get<any[]>(`${this.apiUrl}/api/OfficeListbyId/${did}`,  { withCredentials: true })
+      .pipe(
+        catchError((error) => {
+          console.error('Error:', error);
+          return throwError(error);
+        })
+      );
+  }
+  getBranchListbyID(officeId: number): Observable<any[]> {
+
+    return this.http
+      .get<any[]>(`${this.apiUrl}/api/BranchListbyID/${officeId}`,  { withCredentials: true })
+      .pipe(
+        catchError((error) => {
+          console.error('Error:', error);
+          return throwError(error);
+        })
+      );
   }
   //To Register
   RegisterPost(user: any): Observable<any> {
@@ -40,6 +73,7 @@ export class AppServiceService {
   LoginPost(user: any): Observable<any> {
     return this.http
       .post<any>(`${this.apiUrl}/api/login`, user, {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
         withCredentials: true,
       })
       .pipe(
@@ -49,7 +83,6 @@ export class AppServiceService {
         })
       );
   }
-
   LogoutPost() {
     return this.http
       .post<any>(
@@ -66,17 +99,23 @@ export class AppServiceService {
         })
       );
   }
-
-
   changePassword(token: string, oldPassword: string, newPassword: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/api/ChangePassword`, { token, oldPassword, newPassword });
   }
   //To get Data of Registered User
   GetUserName(): Observable<any[]> {
+    // const token = sessionStorage.getItem("token");
+    // if (!token) {
+    //   console.error("No token found! User may not be logged in.");
+    //   return throwError(() => new Error("Unauthorized: No token found"));
+    // }
+  
+    // const headers = new HttpHeaders({
+    //   Authorization: `Bearer ${token}`,
+    // });
+   
     return this.http
-      .get<any[]>(`${this.apiUrl}/api/UserDetailList`, {
-        withCredentials: true,
-      })
+      .get<any[]>(`${this.apiUrl}/api/UserDetailList`)
       .pipe(
         catchError((error) => {
           console.error('Error:', error);
@@ -84,9 +123,37 @@ export class AppServiceService {
         })
       );
   }
-
-
+  getTalukaFromDistrict(): Observable<any[]> {
+    
+    return this.http.get<any[]>(`${this.apiUrl}/api/TalukaListFromDist`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
+  getVillageListbyID(dcode: number, TCode: number): Observable<any[]> {
+   
+    return this.http
+      .get<any[]>(`${this.apiUrl}/api/VillageListbyID/${dcode}/${TCode}`)
+      .pipe(
+        catchError((error) => {
+          console.error('Error:', error);
+          return throwError(error);
+        })
+      );
+  }
+  getBranchList(): Observable<any[]> {
+   
+    return this.http.get<any[]>(`${this.apiUrl}/api/BranchList`).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );
+  }
   getRecord(): Observable<any[]> {
+  
     return this.http.get<any[]>(`${this.apiUrl}/api/RecordList`).pipe(
       catchError((error) => {
         console.error('Error:', error);
@@ -107,9 +174,7 @@ export class AppServiceService {
         })
       );
   }
-  //   generatePDF() {
-  //   return this.http.get(`${this.apiUrl}/api/generatepdf`, { responseType: 'blob' });
-  // }
+
   generatePDF(searchPayload: any): Observable<Blob> {
     return this.http.get<Blob>(`${this.apiUrl}/api/generatepdf`, {
       params: searchPayload,
@@ -193,27 +258,6 @@ export class AppServiceService {
         })
       );
   }
-  getDistrictList(): Observable<any[]> {
-
-    return this.http.get<any[]>(`${this.apiUrl}/api/DistrictList`).pipe(
-      catchError((error) => {
-        console.error('Error:', error);
-        return throwError(error);
-      })
-    );
-  }
-  getOfficeList(did: number): Observable<any[]> {
-
-    return this.http
-      .get<any[]>(`${this.apiUrl}/api/OfficeListbyId/${did}`)
-      .pipe(
-        catchError((error) => {
-          console.error('Error:', error);
-          return throwError(error);
-        })
-      );
-  }
-
   // getAllOfficeMasterList(): Observable<any[]> {
 
   //   return this.http.get<any[]>(`${this.apiUrl}/api/AllOfficeList`).pipe(
@@ -232,47 +276,6 @@ export class AppServiceService {
         return throwError(error);
       })
     );
-  }
-
-  getTalukaFromDistrict(): Observable<any[]> {
-
-    return this.http.get<any[]>(`${this.apiUrl}/api/TalukaListFromDist`).pipe(
-      catchError((error) => {
-        console.error('Error:', error);
-        return throwError(error);
-      })
-    );
-  }
-  getBranchList(): Observable<any[]> {
-
-    return this.http.get<any[]>(`${this.apiUrl}/api/BranchList`).pipe(
-      catchError((error) => {
-        console.error('Error:', error);
-        return throwError(error);
-      })
-    );
-  }
-  getBranchListbyID(officeId: number): Observable<any[]> {
-
-    return this.http
-      .get<any[]>(`${this.apiUrl}/api/BranchListbyID/${officeId}`)
-      .pipe(
-        catchError((error) => {
-          console.error('Error:', error);
-          return throwError(error);
-        })
-      );
-  }
-  getVillageListbyID(dcode: number, TCode: number): Observable<any[]> {
-
-    return this.http
-      .get<any[]>(`${this.apiUrl}/api/VillageListbyID/${dcode}/${TCode}`)
-      .pipe(
-        catchError((error) => {
-          console.error('Error:', error);
-          return throwError(error);
-        })
-      );
   }
   BranchEntryPost(branchmaster: any): Observable<any> {
   

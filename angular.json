@@ -33,7 +33,8 @@
             ],
             "scripts": [
               "src/assets/jquery/jquery.min.js",
-              "src/assets/js/adminlte.js"
+              "src/assets/js/adminlte.js",
+              "src/assets/js/hide-jquery.js"
             ]
           },
           "configurations": {
@@ -77,7 +78,8 @@
   },
   "configurations": {
     "development": {
-      "browserTarget": "RMSNodeJS:build:development"
+      "browserTarget": "RMSNodeJS:build:development",
+     "outputHashing": "all"
     }
   }
 },
